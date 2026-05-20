@@ -606,15 +606,21 @@ function selectExamForConfig(examId) {
     if (examId === 0) {
         titleEl.innerHTML = '<i class="fa-solid fa-file-invoice"></i> Config: LSM Trees, NoSQL & DB Concepts';
         state.currentSession.title = "Exam 1: LSM Trees, NoSQL, and Database Concepts";
-        maxQs = examData[0].questions.length; // 40
+        maxQs = examData[0].questions.length;
     } else if (examId === 1) {
         titleEl.innerHTML = '<i class="fa-solid fa-file-invoice"></i> Config: Replication & Distributed Systems';
         state.currentSession.title = "Exam 2: Replication and Distributed Systems";
-        maxQs = examData[1].questions.length; // 34
+        maxQs = examData[1].questions.length;
+    } else if (examId === 2) {
+        titleEl.innerHTML = '<i class="fa-solid fa-table-columns"></i> Config: Comparisons & Deep Analysis';
+        state.currentSession.title = "Exam 3: Comparisons & Deep Analysis";
+        maxQs = examData[2].questions.length;
     } else {
         titleEl.innerHTML = '<i class="fa-solid fa-shuffle"></i> Config: Syllabus Master Simulator';
         state.currentSession.title = "Combined Chapters 1-5 Master Mock";
-        maxQs = examData[0].questions.length + examData[1].questions.length; // 74
+        let total = 0;
+        examData.forEach(e => total += e.questions.length);
+        maxQs = total;
     }
     
     // Populate dropdown options based on question counts
@@ -637,9 +643,13 @@ function updateSessionBrief() {
     
     let qCount = 0;
     if (limitVal === 'all') {
-        if (state.currentSession.examId === 0) qCount = 40;
-        else if (state.currentSession.examId === 1) qCount = 34;
-        else qCount = 74;
+        if (state.currentSession.examId === 'custom') {
+            let total = 0;
+            examData.forEach(e => total += e.questions.length);
+            qCount = total;
+        } else {
+            qCount = examData[state.currentSession.examId]?.questions?.length || 0;
+        }
     } else {
         qCount = parseInt(limitVal);
     }
@@ -672,11 +682,13 @@ function buildSessionQuestions() {
         pool = [...examData[0].questions];
     } else if (examId === 1) {
         pool = [...examData[1].questions];
+    } else if (examId === 2) {
+        pool = [...examData[2].questions];
     } else {
-        // Combined syllabus pool, tagged with source exam titles
-        const exam1Pool = examData[0].questions.map(q => ({...q, sourceTitle: "Exam 1"}));
-        const exam2Pool = examData[1].questions.map(q => ({...q, sourceTitle: "Exam 2"}));
-        pool = [...exam1Pool, ...exam2Pool];
+        // Combined syllabus pool
+        examData.forEach(exam => {
+            exam.questions.forEach(q => pool.push({...q, sourceTitle: exam.title.split(':')[0]}));
+        });
     }
     
     // Shuffle the question pool for randomized custom review, or if custom mock is chosen
@@ -869,16 +881,76 @@ function loadQuestion(index) {
     document.getElementById('total-qs-count').textContent = state.currentSession.questionsCount;
     
     // Set question text content
+    const qType = q.type || 'mcq';
     let qPrefix = q.sourceTitle ? `[${q.sourceTitle}] ` : "";
-    textEl.textContent = `${qPrefix}${q.question}`;
+    textEl.textContent = `${qPrefix}${q.followUpQuestion || q.question}`;
     
     // Load options
     const optionsContainer = document.getElementById('active-options-list');
     optionsContainer.innerHTML = '';
     
-    const userSelectedLetter = state.currentSession.userResponses[index];
-    const hasAlreadyChecked = state.currentSession.mode === 'practice' && userSelectedLetter !== undefined;
+    // Render comparison table if present
+    if (qType === 'comparison' && q.comparisonData) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'comparison-table-wrapper';
+        const table = document.createElement('table');
+        table.className = 'comparison-table';
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+        q.comparisonData.headers.forEach(h => {
+            const th = document.createElement('th');
+            th.textContent = h;
+            headRow.appendChild(th);
+        });
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+        const tbody = document.createElement('tbody');
+        q.comparisonData.rows.forEach(row => {
+            const tr = document.createElement('tr');
+            row.forEach(cell => {
+                const td = document.createElement('td');
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+        table.appendChild(tbody);
+        wrapper.appendChild(table);
+        optionsContainer.appendChild(wrapper);
+        
+        // Show the follow-up question text
+        if (q.followUpQuestion) {
+            textEl.textContent = `${qPrefix}${q.followUpQuestion}`;
+        }
+    }
     
+    // Render essay question
+    if (qType === 'essay') {
+        const textarea = document.createElement('textarea');
+        textarea.className = 'essay-answer-area';
+        textarea.placeholder = 'Write your answer here... Think about the key concepts and provide a structured response.';
+        textarea.id = 'essay-response';
+        textarea.value = state.currentSession.userResponses[index] || '';
+        textarea.addEventListener('input', (e) => {
+            state.currentSession.userResponses[index] = e.target.value;
+            const wc = document.getElementById('essay-word-counter');
+            if (wc) wc.textContent = `${e.target.value.trim().split(/\s+/).filter(Boolean).length} words`;
+            updateSidebarIndicators();
+        });
+        optionsContainer.appendChild(textarea);
+        const wordCount = document.createElement('div');
+        wordCount.className = 'essay-word-count';
+        wordCount.id = 'essay-word-counter';
+        const currentWords = (state.currentSession.userResponses[index] || '').trim().split(/\s+/).filter(Boolean).length;
+        wordCount.textContent = `${currentWords} words`;
+        optionsContainer.appendChild(wordCount);
+    }
+    
+    const userSelectedLetter = state.currentSession.userResponses[index];
+    const hasAlreadyChecked = state.currentSession.mode === 'practice' && userSelectedLetter !== undefined && qType !== 'essay';
+    
+    // Only render MCQ options if question has options (not pure essay)
+    if (q.options && q.options.length > 0) {
     q.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn animate-fade-in';
@@ -925,13 +997,26 @@ function loadQuestion(index) {
         
         optionsContainer.appendChild(btn);
     });
+    } // end if q.options
     
     // Display control buttons based on practice vs exam mode
     const checkBtn = document.getElementById('btn-check-answer');
     const explanationBox = document.getElementById('practice-explanation-box');
     
     if (state.currentSession.mode === 'practice') {
-        if (userSelectedLetter === undefined) {
+        const qType = q.type || 'mcq';
+        if (qType === 'essay') {
+            // For essays, show check button that reveals model answer
+            checkBtn.style.display = 'inline-flex';
+            checkBtn.disabled = false;
+            if (userSelectedLetter) {
+                // Already revealed
+                checkBtn.style.display = 'none';
+                showExplanationBox(index);
+            } else {
+                explanationBox.style.display = 'none';
+            }
+        } else if (userSelectedLetter === undefined) {
             // Unanswered, show Check Answer button if selection is made
             checkBtn.style.display = 'inline-flex';
             checkBtn.disabled = true; // disabled until an option is clicked
@@ -1014,7 +1099,17 @@ function selectOption(letter) {
 function triggerCheckAnswer() {
     const index = state.currentQuestionIndex;
     const q = state.currentSession.questions[index];
+    const qType = q.type || 'mcq';
     const userAns = state.currentSession.userResponses[index];
+    
+    // For essay questions, just mark as reviewed and show model answer
+    if (qType === 'essay') {
+        state.currentSession.userResponses[index] = state.currentSession.userResponses[index] || '(reviewed)';
+        document.getElementById('btn-check-answer').style.display = 'none';
+        showExplanationBox(index);
+        updateSidebarIndicators();
+        return;
+    }
     
     if (userAns === undefined) return;
     
@@ -1061,8 +1156,17 @@ function showExplanationBox(index) {
     badge.textContent = isCorrect ? "Correct" : "Incorrect";
     badge.className = isCorrect ? "exp-badge correct" : "exp-badge incorrect";
     
-    // Load textbook context explanation
-    body.textContent = getExplanation(q.question);
+    // For essay questions, show model answer
+    const qType = q.type || 'mcq';
+    if (qType === 'essay' && q.modelAnswer) {
+        badge.textContent = 'Model Answer';
+        badge.className = 'exp-badge correct';
+        // Render model answer with markdown-like formatting
+        const formatted = q.modelAnswer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+        body.innerHTML = formatted;
+    } else {
+        body.textContent = getExplanation(q);
+    }
     
     expBox.style.display = 'block';
 }
@@ -1137,7 +1241,6 @@ function jumpToQuestion(idx) {
 function triggerSubmitExamConfirmation() {
     playSound('click');
     
-    // Count remaining unanswered questions
     let unanswered = 0;
     for (let i = 0; i < state.currentSession.questionsCount; i++) {
         if (state.currentSession.userResponses[i] === undefined) {
@@ -1145,19 +1248,27 @@ function triggerSubmitExamConfirmation() {
         }
     }
     
-    let message = "Are you ready to submit your exam responses? You will get a detailed performance scorecard with topic-by-topic breakdowns.";
+    let message = "You will receive a detailed performance scorecard with topic-by-topic breakdowns.";
     if (unanswered > 0) {
-        message = `Warning: You have ${unanswered} unanswered question${unanswered === 1 ? '' : 's'} remaining in this session. Are you sure you want to submit now?`;
+        message = `You have <strong>${unanswered}</strong> unanswered question${unanswered === 1 ? '' : 's'} remaining. Are you sure you want to submit now?`;
     }
     
-    if (confirm(message)) {
-        submitExamSession();
-    }
+    const modal = document.getElementById('submit-modal');
+    document.getElementById('submit-modal-text').innerHTML = message;
+    modal.classList.add('active');
+}
+
+function hideSubmitModal() {
+    document.getElementById('submit-modal').classList.remove('active');
+}
+
+function confirmSubmitFromModal() {
+    hideSubmitModal();
+    submitExamSession();
 }
 
 function autoSubmitExam() {
-    // Timed out, force complete
-    alert("Time limit reached! Your exam responses are being submitted automatically.");
+    showToast('Time limit reached! Submitting automatically...', 'warning', 4000);
     submitExamSession();
 }
 
@@ -1384,7 +1495,7 @@ function renderReviewList(breakdown, filter = 'all') {
         expTitle.textContent = "Textbook Insight";
         
         const expText = document.createElement('p');
-        expText.textContent = getExplanation(item.questionText);
+        expText.textContent = getExplanation(item);
         
         expSection.appendChild(expTitle);
         expSection.appendChild(expText);
@@ -1501,17 +1612,32 @@ function renderPerformanceHistory() {
 }
 
 function clearPerformanceHistory() {
-    if (confirm("Are you sure you want to permanently delete all your performance history and learning logs? This action cannot be undone.")) {
-        playSound('incorrect');
-        state.history = [];
-        localStorage.removeItem(STORAGE_KEY_HISTORY);
-        
-        // Reset metrics
-        updateDashboardMetrics();
-        renderPerformanceHistory();
-        
-        alert("Performance history cleared successfully.");
+    // Use a simple two-click guard instead of native confirm
+    const btn = document.getElementById('btn-clear-history');
+    if (!btn.dataset.confirmPending) {
+        btn.dataset.confirmPending = 'true';
+        btn.innerHTML = '<i class="fa-solid fa-exclamation-triangle"></i> Click Again to Confirm';
+        btn.classList.add('btn-red');
+        btn.classList.remove('btn-outline');
+        setTimeout(() => {
+            delete btn.dataset.confirmPending;
+            btn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Clear Performance History';
+            btn.classList.remove('btn-red');
+            btn.classList.add('btn-outline');
+        }, 3000);
+        return;
     }
+    
+    delete btn.dataset.confirmPending;
+    playSound('incorrect');
+    state.history = [];
+    localStorage.removeItem(STORAGE_KEY_HISTORY);
+    updateDashboardMetrics();
+    renderPerformanceHistory();
+    btn.innerHTML = '<i class="fa-solid fa-trash-can"></i> Clear Performance History';
+    btn.classList.remove('btn-red');
+    btn.classList.add('btn-outline');
+    showToast('Performance history cleared successfully.', 'success');
 }
 
 // ==========================================
@@ -1529,6 +1655,15 @@ function setupEventListeners() {
     // Subject Course Enter
     document.getElementById('btn-enter-adv-web').addEventListener('click', () => navigateTo('view-subject-hub'));
     
+    // Chapter summary accordion toggles
+    document.querySelectorAll('.syllabus-item[data-chapter]').forEach(item => {
+        item.addEventListener('click', (e) => {
+            // Don't toggle if clicking a link inside
+            if (e.target.closest('a')) return;
+            item.classList.toggle('expanded');
+        });
+    });
+    
     // Back navigation buttons
     document.getElementById('btn-back-to-dashboard').addEventListener('click', () => navigateTo('view-dashboard'));
     document.getElementById('btn-back-to-hub').addEventListener('click', () => navigateTo('view-subject-hub'));
@@ -1536,6 +1671,7 @@ function setupEventListeners() {
     // Core Course Exams Triggers
     document.getElementById('btn-start-exam-1').addEventListener('click', () => selectExamForConfig(0));
     document.getElementById('btn-start-exam-2').addEventListener('click', () => selectExamForConfig(1));
+    document.getElementById('btn-start-exam-3').addEventListener('click', () => selectExamForConfig(2));
     document.getElementById('btn-start-custom-exam').addEventListener('click', () => selectExamForConfig('custom'));
     
     // Exam Setup Configuration listeners
@@ -1573,6 +1709,10 @@ function setupEventListeners() {
     // Modals confirm boxes
     document.getElementById('btn-cancel-exit').addEventListener('click', hideAbandonModal);
     document.getElementById('btn-confirm-exit').addEventListener('click', confirmAbandonRunner);
+    
+    // Submit modal
+    document.getElementById('btn-cancel-submit').addEventListener('click', hideSubmitModal);
+    document.getElementById('btn-confirm-submit').addEventListener('click', confirmSubmitFromModal);
     
     // Theme & Sound Header toggles
     document.getElementById('btn-toggle-theme').addEventListener('click', toggleTheme);
@@ -1623,16 +1763,59 @@ function confirmAbandonRunner() {
     navigateTo('view-subject-hub');
 }
 
+// ==========================================
+// 13. KEYBOARD SHORTCUTS
+// ==========================================
+function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Only active during exam runner
+        if (state.activeView !== 'view-exam-runner') return;
+        // Don't intercept if typing in textarea
+        if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
+        
+        switch (e.key) {
+            case 'ArrowRight':
+                e.preventDefault();
+                handleNextQuestion();
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                handlePrevQuestion();
+                break;
+            case 'Enter':
+                e.preventDefault();
+                if (state.currentSession.mode === 'practice') {
+                    const checkBtn = document.getElementById('btn-check-answer');
+                    if (checkBtn && checkBtn.style.display !== 'none' && !checkBtn.disabled) {
+                        triggerCheckAnswer();
+                    }
+                }
+                break;
+            case 'f':
+            case 'F':
+                if (!e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    toggleFlagActive();
+                }
+                break;
+            case '1': case '2': case '3': case '4':
+                if (!e.ctrlKey && !e.metaKey) {
+                    const letters = ['A', 'B', 'C', 'D'];
+                    const idx = parseInt(e.key) - 1;
+                    if (idx < state.currentSession.questions[state.currentQuestionIndex]?.options?.length) {
+                        selectOption(letters[idx]);
+                    }
+                }
+                break;
+        }
+    });
+}
+
 // Window load init
 window.addEventListener('DOMContentLoaded', () => {
-    // Load config states from localStorage
     loadLocalStorage();
-    
-    // Setup listeners
     setupEventListeners();
-    
-    // Initialize Dashboard UI summaries
+    setupKeyboardShortcuts();
     updateDashboardMetrics();
-    
-    console.log("PrepVerse Exam Engine loaded successfully. Ready for study sessions!");
+    console.log("basmaja Exam Engine loaded. Ready for study sessions!");
 });

@@ -1,0 +1,51 @@
+h 1 summary:
+Many applications today are Data-Intensive; Focus on data volume and complexity rather than
+CPU power.
+Many applications need to:
+ Database: To store Data.
+ Caches: To remember expensive operations and speed up read.
+ Search Indexes: To allow users to search by keywords.
+ Stream processing: To send messages asynchronous.
+ Batch processing: To analysis large amount of accumulated Data.
+In this chapter we will start to achieve Reliable, Scalable and Maintainable data system.
+Reliability
+The system should continue to work correctly even when things go wrong
+Fault Failure
+is one component deviating from its
+specification
+When the whole system stops providing service
+to user
+Types of Fault:
+ Hardware: Hard disks crashing or power outages. We handle this with redundancy
+(RAID, backup).
+ Software: Bugs that cause crashes, like linux leap second bug.
+ Human Errors: Mistakes by operators, which are leading cause of outages.
+How to handle human errors? (To make system reliable):
+ Minimize opportunities for error: Through well-designed APIs and admin interfaces.
+ Provide Sandbox: Non-Production environment to test safely.
+ Testing: Automated unit and integration tests.
+ Quick Recovery: Easy rollbacks of configuration and code.
+2. Scalability
+Dealing with growth in data or traffic volume. If the load doubles, how can we handle it?
+ Describe Load: We use Load Parameters to discuss scalability:
+o Requests per second to a web server.
+o Ratio of reads to writes in DB.
+ Describe Performance: In online systems, we care about Response Time (how long a
+request waits to be handled).
+ Percentiles: We don't use average but use:
+o Median: How long 50% of users wait.
+o Tail Latencies (p99): It is very important because they affect the most valuable
+customers who have the most data.
+3. Maintainability
+Make it easy for people to work on productively over time. It has 3 main principles:
+ Operability: Make routine tasks easy for Operations Team so they can focus on high-
+value activities. Includes good monitoring and automation.
+ Simplicity: Managing complexity by using Abstraction to hide complex details.
+ Evolvability : Making it easy to change the system to user needs (Adapt to change
+requirements easily).
+Summary
+Concepts Principle Goal
+Scalability Load Parameters, Percentiles Keep performance good as load increase.
+Simplicity Abstraction Hide complexity from implementation.
+Operability Monitoring & Automation Ease routine tasks for operation team.
+Evolvability Agility & Flexibility Adapt to change requirement easily.

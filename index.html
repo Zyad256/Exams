@@ -97,8 +97,8 @@
                         <p class="subject-description">Mastering Chapters 1 to 5: Database concepts, NoSQL storage structures, LSM Trees, SSTables, and Distributed Replication systems.</p>
                         
                         <div class="subject-meta">
-                            <span class="meta-item"><i class="fa-solid fa-file-invoice"></i> 2 Main Exams</span>
-                            <span class="meta-item"><i class="fa-solid fa-question-circle"></i> 74 Total Questions</span>
+                            <span class="meta-item"><i class="fa-solid fa-file-invoice"></i> 3 Exams + Simulator</span>
+                            <span class="meta-item"><i class="fa-solid fa-question-circle"></i> 82 Total Questions</span>
                         </div>
 
                         <!-- Progress Bar inside Card -->
@@ -141,39 +141,125 @@
                     <p class="card-subtitle">Exams strictly focus on the core foundational concepts of the first 5 chapters:</p>
                     
                     <ul class="syllabus-list">
-                        <li class="syllabus-item active">
+                        <li class="syllabus-item active" data-chapter="1">
                             <div class="ch-badge">Ch 1</div>
                             <div class="ch-info">
-                                <h4>Reliable, Scalable, & Maintainable Applications</h4>
+                                <h4>Reliable, Scalable, & Maintainable Applications <i class="fa-solid fa-chevron-down ch-toggle"></i></h4>
                                 <p>Hardware/software faults, load parameters, and latency vs. throughput trade-offs.</p>
                             </div>
+                            <div class="ch-summary-panel">
+                                <div class="ch-summary-content">
+                                    <h5><i class="fa-solid fa-bookmark"></i> Reliability</h5>
+                                    <p>The system should continue to work correctly even when things go wrong. <strong>Faults</strong> (one component deviating) vs <strong>Failures</strong> (whole system stops).</p>
+                                    <ul>
+                                        <li><strong>Hardware faults:</strong> Hard disks crashing, power outages → handle with redundancy (RAID, backup)</li>
+                                        <li><strong>Software faults:</strong> Bugs causing crashes (e.g., Linux leap second bug)</li>
+                                        <li><strong>Human errors:</strong> Leading cause of outages → minimize with well-designed APIs, sandbox environments, automated testing, and quick rollback</li>
+                                    </ul>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Scalability</h5>
+                                    <p>Dealing with growth. Use <strong>Load Parameters</strong> (requests/sec, read/write ratio). Measure with <strong>Percentiles</strong> — median (p50) and tail latencies (p99) matter more than averages.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Maintainability</h5>
+                                    <ul>
+                                        <li><strong>Operability:</strong> Easy routine tasks, good monitoring & automation</li>
+                                        <li><strong>Simplicity:</strong> Use abstraction to hide complexity</li>
+                                        <li><strong>Evolvability:</strong> Easy to adapt to changing requirements</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </li>
-                        <li class="syllabus-item active">
+                        <li class="syllabus-item active" data-chapter="2">
                             <div class="ch-badge">Ch 2</div>
                             <div class="ch-info">
-                                <h4>Data Models & Query Languages</h4>
+                                <h4>Data Models & Query Languages <i class="fa-solid fa-chevron-down ch-toggle"></i></h4>
                                 <p>Comparing Relational, Document, NoSQL, and Graph schemas for complex relationships.</p>
                             </div>
+                            <div class="ch-summary-panel">
+                                <div class="ch-summary-content">
+                                    <h5><i class="fa-solid fa-bookmark"></i> 4 Layers of Abstraction</h5>
+                                    <p>Application Developer → Storage Representation → Database Software → Hardware Engineers</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Relational (SQL)</h5>
+                                    <p>Data in tables/tuples. <strong>Impedance Mismatch:</strong> disconnect between OOP code and relational tables. ORMs reduce but can't eliminate this.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Document (NoSQL)</h5>
+                                    <p><strong>Schema-on-Read</strong> (implicit, like dynamic typing) vs <strong>Schema-on-Write</strong> (explicit, like static typing). Good data locality but poor join support.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Graph Model</h5>
+                                    <p>For highly interconnected data. <strong>Property Graph</strong> (Neo4j, Cypher), <strong>Triple-Store</strong> (SPARQL), <strong>Datalog</strong>.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Declarative vs Imperative</h5>
+                                    <p>Declarative (SQL/CSS) specifies <em>what</em>, not <em>how</em>. Benefits: concise, hides implementation, enables parallel execution.</p>
+                                </div>
+                            </div>
                         </li>
-                        <li class="syllabus-item active">
+                        <li class="syllabus-item active" data-chapter="3">
                             <div class="ch-badge">Ch 3</div>
                             <div class="ch-info">
-                                <h4>Storage & Retrieval</h4>
+                                <h4>Storage & Retrieval <i class="fa-solid fa-chevron-down ch-toggle"></i></h4>
                                 <p>Diving into SSTables, Log-Structured Merge (LSM) Trees, memtables, and Bloom filters.</p>
                             </div>
-                        </li>
-                        <li class="syllabus-item active">
-                            <div class="ch-badge">Ch 4</div>
-                            <div class="ch-info">
-                                <h4>Encoding & Evolution</h4>
-                                <p>Data evolution systems, schema compatibility (backward/forward), JSON, and XML.</p>
+                            <div class="ch-summary-panel">
+                                <div class="ch-summary-content">
+                                    <h5><i class="fa-solid fa-bookmark"></i> Append-Only Log</h5>
+                                    <p>Write O(1) — fast sequential append. Read O(n) — must scan entire file. Indexes speed up reads but slow writes.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Hash Indexes (Bitcask)</h5>
+                                    <p>In-memory hash map → byte offsets on disk. Uses <strong>compaction & merging</strong>, tombstone deletes, single writer thread. Limitation: all keys must fit in RAM, no range queries.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> SSTables & LSM-Trees</h5>
+                                    <p>Segments sorted by key. <strong>Memtable</strong> (Red-Black/AVL) → flush to SSTable → WAL for crash recovery. Bloom filters prevent wasteful disk reads. Compaction: size-tiered vs leveled.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> B-Trees</h5>
+                                    <p>Fixed-size pages (4KB), branching factor ~hundreds. Page splitting keeps tree balanced at O(log n). WAL (Redo Log) for crash resilience. Latches for concurrency.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> OLTP vs OLAP</h5>
+                                    <p><strong>OLTP:</strong> User-facing, small record lookups, disk seek bottleneck. <strong>OLAP:</strong> Analyst queries, scan millions of records, disk bandwidth bottleneck. Data warehouses use ETL and column-oriented storage.</p>
+                                </div>
                             </div>
                         </li>
-                        <li class="syllabus-item active">
+                        <li class="syllabus-item active" data-chapter="4">
+                            <div class="ch-badge">Ch 4</div>
+                            <div class="ch-info">
+                                <h4>Encoding & Evolution <i class="fa-solid fa-chevron-down ch-toggle"></i></h4>
+                                <p>Data evolution systems, schema compatibility (backward/forward), JSON, and XML.</p>
+                            </div>
+                            <div class="ch-summary-panel">
+                                <div class="ch-summary-content">
+                                    <h5><i class="fa-solid fa-bookmark"></i> Compatibility</h5>
+                                    <p><strong>Backward:</strong> Newer code reads older data (easy). <strong>Forward:</strong> Older code reads newer data (tricky — must ignore unknowns). Both essential for rolling upgrades.</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Encoding Formats</h5>
+                                    <ul>
+                                        <li><strong>Language-specific</strong> (Java Serializable, pickle): Convenient but security risk (RCE), single language lock-in</li>
+                                        <li><strong>JSON/XML:</strong> Human-readable but number ambiguity, no binary support, Base64 adds 33% size</li>
+                                        <li><strong>Protobuf/Thrift:</strong> Use field tags (numbers), compact binary, strong schema evolution</li>
+                                        <li><strong>Avro:</strong> No tags — matches by field name. Most compact. Writer/Reader schema resolution. Great for Hadoop/Kafka</li>
+                                    </ul>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Dataflow Modes</h5>
+                                    <ul>
+                                        <li><strong>Through Databases:</strong> Data outlives code; forward compat critical</li>
+                                        <li><strong>Through Services (REST/RPC):</strong> RPC's "Location Transparency" is a flawed illusion</li>
+                                        <li><strong>Message Passing:</strong> Brokers (Kafka, RabbitMQ) buffer, redeliver, and fan-out</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="syllabus-item active" data-chapter="5">
                             <div class="ch-badge">Ch 5</div>
                             <div class="ch-info">
-                                <h4>Replication & Distributed Nodes</h4>
+                                <h4>Replication & Distributed Nodes <i class="fa-solid fa-chevron-down ch-toggle"></i></h4>
                                 <p>Single-leader, multi-leader, leaderless systems, CAP theorem, quorums, and replication lag.</p>
+                            </div>
+                            <div class="ch-summary-panel">
+                                <div class="ch-summary-content">
+                                    <h5><i class="fa-solid fa-bookmark"></i> Single-Leader</h5>
+                                    <p>One leader accepts writes, followers consume replication log. Sync (guaranteed up-to-date, blocks on crash) vs Async (leader never blocks, data loss risk).</p>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Failover Pitfalls</h5>
+                                    <ul>
+                                        <li><strong>Split Brain:</strong> Two nodes both believe they're leader → data corruption</li>
+                                        <li>Discarding un-replicated writes violates durability</li>
+                                        <li>Short timeouts cause unnecessary failovers</li>
+                                    </ul>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Replication Lag Anomalies</h5>
+                                    <ul>
+                                        <li><strong>Read-after-write:</strong> User sees own writes vanish → read own profile from leader</li>
+                                        <li><strong>Monotonic reads:</strong> Time goes backward → pin user to same replica</li>
+                                        <li><strong>Consistent prefix:</strong> Effect before cause → route causal writes to same partition</li>
+                                    </ul>
+                                    <h5><i class="fa-solid fa-bookmark"></i> Multi-Leader & Leaderless</h5>
+                                    <p><strong>Multi-leader:</strong> Multiple DCs, conflict resolution (LWW, merge, custom). <strong>Leaderless (Dynamo):</strong> Any node accepts writes, quorum w+r>n, sloppy quorums, hinted handoff, version vectors for concurrency.</p>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -216,6 +302,23 @@
                                     <span id="exam2-best-score"><i class="fa-solid fa-trophy"></i> Best: --</span>
                                 </div>
                                 <button class="btn btn-primary" id="btn-start-exam-2">Configure Exam</button>
+                            </div>
+                        </div>
+
+                        <!-- Exam 3 Card: Comparisons & Essays -->
+                        <div class="exam-card card-glow" id="card-exam-3">
+                            <div class="exam-card-header">
+                                <span class="exam-badge badge-orange">Chapters 1-5</span>
+                                <h4 class="exam-card-title">Exam 3: Comparisons & Deep Analysis</h4>
+                            </div>
+                            <p class="exam-card-desc">Comparison tables, follow-up MCQs, and open-ended essay questions requiring deep understanding of storage engines, replication, encoding, and system design tradeoffs.</p>
+                            
+                            <div class="exam-card-footer">
+                                <div class="exam-meta">
+                                    <span><i class="fa-solid fa-table-columns"></i> 5 Comparisons</span>
+                                    <span><i class="fa-solid fa-pen-fancy"></i> 3 Essays</span>
+                                </div>
+                                <button class="btn btn-orange" id="btn-start-exam-3">Configure Exam</button>
                             </div>
                         </div>
 
@@ -646,7 +749,7 @@
     <!-- Footer -->
     <footer class="app-footer">
         <div class="footer-inner">
-            <span class="footer-brand">Prep<span class="text-accent">Verse</span></span>
+            <span class="footer-brand">basmaja</span>
             <span class="footer-copy">&copy; 2026 basmaja Exam Hub.</span>
             <div class="footer-kbd-hints">
                 <kbd>&larr;</kbd><kbd>&rarr;</kbd> Navigate &bull; <kbd>Enter</kbd> Check &bull; <kbd>F</kbd> Flag

@@ -1571,6 +1571,158 @@ const examData = [
                 "explanation": "The book moves from high-level concerns (reliability, scalability) → data models → storage engines → encoding → distributed data/replication."
             }
         ]
+    },
+    {
+        "examId": 2,
+        "title": "Exam 3: Comparisons & Deep Analysis (Chapters 1-5)",
+        "questions": [
+            {
+                "number": 65,
+                "type": "comparison",
+                "question": "Compare B-Trees vs LSM-Trees across the following dimensions:",
+                "comparisonData": {
+                    "headers": ["Aspect", "B-Trees", "LSM-Trees"],
+                    "rows": [
+                        ["Write Performance", "Slower — random in-place page writes", "Faster — sequential append-only writes to memtable then disk"],
+                        ["Read Performance", "Faster — single tree traversal, O(log n)", "Slower — may check memtable + multiple SSTables"],
+                        ["Write Amplification", "Higher — page splits, WAL + page write", "Lower per write but compaction adds background I/O"],
+                        ["Space Amplification", "Lower — no duplicate keys", "Higher — multiple versions until compaction"],
+                        ["Concurrency", "Complex — requires latches on pages", "Simpler — immutable SSTables, only memtable needs locking"],
+                        ["Use Case", "OLTP with balanced read/write", "Write-heavy workloads, time-series, logs"]
+                    ]
+                },
+                "followUpQuestion": "In which scenario would you choose B-Trees over LSM-Trees?",
+                "options": [
+                    {"letter": "A", "text": "Write-heavy logging system with sequential access patterns"},
+                    {"letter": "B", "text": "Transaction processing system requiring strong read consistency and low read latency"},
+                    {"letter": "C", "text": "Time-series database ingesting millions of sensor readings per second"},
+                    {"letter": "D", "text": "A cache layer that mostly handles key-value insertions"}
+                ],
+                "answer": "B",
+                "explanation": "B-Trees provide faster reads since keys exist in exactly one location, making them ideal for OLTP systems where read latency and transaction consistency matter more than raw write throughput."
+            },
+            {
+                "number": 66,
+                "type": "comparison",
+                "question": "Compare Single-Leader vs Multi-Leader vs Leaderless replication:",
+                "comparisonData": {
+                    "headers": ["Aspect", "Single-Leader", "Multi-Leader", "Leaderless"],
+                    "rows": [
+                        ["Write Nodes", "One leader only", "Multiple leaders (one per datacenter)", "Any node accepts writes"],
+                        ["Consistency", "Strong (synchronous) or eventual (async)", "Eventual — conflicts must be resolved", "Eventual — quorum-based guarantees"],
+                        ["Conflict Handling", "No write conflicts (single writer)", "Must detect and resolve conflicts", "Uses version vectors / LWW"],
+                        ["Latency", "Higher for cross-DC writes", "Low local writes per DC", "Low — write to nearest nodes"],
+                        ["Fault Tolerance", "Failover required if leader fails", "Tolerates individual DC failures", "Tolerates individual node failures"],
+                        ["Complexity", "Simplest to implement", "High — conflict resolution logic", "Medium — quorum configuration"]
+                    ]
+                },
+                "followUpQuestion": "A global e-commerce company needs local writes in each datacenter with eventual consistency. Which replication model fits best?",
+                "options": [
+                    {"letter": "A", "text": "Single-leader with synchronous followers"},
+                    {"letter": "B", "text": "Multi-leader replication with one leader per datacenter"},
+                    {"letter": "C", "text": "Leaderless replication with sloppy quorums"},
+                    {"letter": "D", "text": "Single-leader with read replicas only"}
+                ],
+                "answer": "B",
+                "explanation": "Multi-leader replication allows each datacenter to have its own leader, enabling low-latency local writes while replicating asynchronously across datacenters. This is ideal for global operations where each region needs autonomous write capability."
+            },
+            {
+                "number": 67,
+                "type": "comparison",
+                "question": "Compare encoding formats: JSON vs Protocol Buffers vs Avro:",
+                "comparisonData": {
+                    "headers": ["Aspect", "JSON", "Protocol Buffers", "Avro"],
+                    "rows": [
+                        ["Format", "Text-based, human-readable", "Binary with field tags", "Binary with separate schema"],
+                        ["Schema", "No enforced schema", "Required .proto schema with field tags", "Required schema (writer + reader)"],
+                        ["Size", "Larger — field names repeated", "Compact — numeric tags", "Most compact — no field identifiers in data"],
+                        ["Compatibility", "Flexible but fragile", "Strong backward/forward via tags", "Strong — schema resolution at read time"],
+                        ["Schema Evolution", "Add fields freely, no guarantees", "Add optional fields with new tag numbers", "Add fields with defaults, uses schema registry"],
+                        ["Best For", "APIs, config files, debugging", "Internal microservice RPC", "Big data pipelines, Hadoop, Kafka"]
+                    ]
+                },
+                "followUpQuestion": "A startup expects frequent schema changes and needs both backward and forward compatibility. Which encoding is most suitable?",
+                "options": [
+                    {"letter": "A", "text": "Raw JSON with no schema validation"},
+                    {"letter": "B", "text": "XML with DTD definitions"},
+                    {"letter": "C", "text": "Avro with a schema registry"},
+                    {"letter": "D", "text": "CSV with header rows"}
+                ],
+                "answer": "C",
+                "explanation": "Avro with a schema registry provides the best support for frequent schema evolution with both backward and forward compatibility. The schema registry ensures all readers and writers can negotiate compatible schemas dynamically."
+            },
+            {
+                "number": 68,
+                "type": "comparison",
+                "question": "Compare OLTP vs OLAP workloads:",
+                "comparisonData": {
+                    "headers": ["Aspect", "OLTP", "OLAP"],
+                    "rows": [
+                        ["Read Pattern", "Small number of records per query (point lookups)", "Aggregate over large number of records"],
+                        ["Write Pattern", "Random-access, low-latency inserts/updates", "Bulk import (ETL) or event stream"],
+                        ["Users", "Many end users / web apps", "Few internal analysts"],
+                        ["Data Size", "GB to TB", "TB to PB"],
+                        ["Storage", "Row-oriented (B-Trees)", "Column-oriented"],
+                        ["Example", "User checkout, account update", "Monthly revenue report, trend analysis"]
+                    ]
+                },
+                "followUpQuestion": "Why do data warehouses typically use column-oriented storage instead of row-oriented?",
+                "options": [
+                    {"letter": "A", "text": "Column stores are easier to implement"},
+                    {"letter": "B", "text": "Analytical queries typically scan only a few columns across millions of rows, and column storage enables loading just those columns"},
+                    {"letter": "C", "text": "Column stores provide better write performance"},
+                    {"letter": "D", "text": "Row stores cannot handle large datasets"}
+                ],
+                "answer": "B",
+                "explanation": "Analytical queries typically aggregate a few columns across millions of rows. Column-oriented storage stores each column contiguously, allowing the query engine to read only the needed columns, dramatically reducing I/O compared to loading entire rows."
+            },
+            {
+                "number": 69,
+                "type": "essay",
+                "question": "Explain how an LSM-Tree handles a write operation from start to finish. Include the role of the WAL, memtable, SSTables, and compaction in your answer.",
+                "modelAnswer": "When a write arrives at an LSM-Tree storage engine, it follows these steps:\n\n1. **Write-Ahead Log (WAL):** The write is first appended to an on-disk append-only log (WAL) for crash recovery. If the system crashes before the memtable is flushed, the WAL can reconstruct recent writes.\n\n2. **Memtable:** The write is then inserted into an in-memory balanced tree structure called a memtable (typically a red-black tree or AVL tree). This keeps keys sorted in memory for fast writes and lookups.\n\n3. **Flush to SSTable:** When the memtable exceeds a size threshold (typically a few MB), it is frozen and written to disk as an immutable Sorted String Table (SSTable). A new empty memtable takes over for incoming writes. The SSTable stores keys in sorted order.\n\n4. **Compaction:** Over time, multiple SSTables accumulate on disk. Background compaction merges these files, discarding deleted keys (tombstones) and old versions, keeping only the latest value for each key. This is similar to mergesort.\n\n5. **Reads:** To read a key, the system first checks the memtable, then the most recent SSTable, then older ones. Bloom filters help avoid unnecessary disk reads for non-existent keys.\n\nThis design makes writes very fast (sequential I/O) at the cost of potentially slower reads (checking multiple SSTables).",
+                "explanation": "LSM-Trees optimize writes through sequential appends: WAL ensures durability, memtable provides fast in-memory sorting, SSTables persist sorted data immutably to disk, and compaction reclaims space by merging and deduplicating."
+            },
+            {
+                "number": 70,
+                "type": "essay",
+                "question": "Describe the CAP theorem and explain why it forces a tradeoff during network partitions. Provide a real-world example of a system choosing availability over consistency.",
+                "modelAnswer": "The CAP theorem (Brewer's theorem) states that in a distributed data system, you can guarantee only two out of three properties simultaneously:\n\n- **Consistency (C):** Every read receives the most recent write or an error.\n- **Availability (A):** Every request receives a non-error response (though it may not be the most recent write).\n- **Partition Tolerance (P):** The system continues operating despite network partitions (dropped/delayed messages between nodes).\n\n**Why the tradeoff exists:** Network partitions are inevitable in distributed systems. When a partition occurs, the system must choose:\n- **CP (Consistency over Availability):** Refuse to respond if data might be stale. Example: a banking system that blocks transactions during a partition to prevent double-spending.\n- **AP (Availability over Consistency):** Continue responding with potentially stale data. Example: a social media feed that shows slightly outdated posts rather than displaying an error.\n\n**Real-world example:** Amazon's DynamoDB/Cassandra-style systems choose AP — during a partition, all nodes continue accepting writes using quorum-based consistency. Conflicts are resolved later using last-write-wins (LWW) or vector clocks. This ensures the shopping cart remains available even during network issues, accepting the risk of minor inconsistencies that are reconciled later.",
+                "explanation": "The CAP theorem acknowledges that network partitions are unavoidable, so distributed systems must choose between consistency (blocking until data is synchronized) or availability (serving possibly stale data). Most modern systems choose AP with eventual consistency."
+            },
+            {
+                "number": 71,
+                "type": "essay",
+                "question": "Compare and contrast forward compatibility and backward compatibility in the context of data encoding (Chapter 4). Why are both important for rolling upgrades?",
+                "modelAnswer": "**Backward Compatibility:** Newer code can read data written by older code. This is relatively easy to achieve — new code knows about old formats and can handle missing fields by using defaults.\n\n**Forward Compatibility:** Older code can read data written by newer code. This is trickier — the old code must gracefully ignore unknown fields added by the new version without crashing or corrupting data.\n\n**Why both matter for rolling upgrades:**\nIn a large deployment, you cannot upgrade all servers simultaneously. During a rolling upgrade:\n- Some servers run the NEW version, some still run the OLD version\n- New servers write data with new fields → old servers must read it (forward compatibility)\n- Old servers still have data in old format → new servers must read it (backward compatibility)\n\nProtocol Buffers and Avro handle this through field tags and schema evolution rules: new optional fields are ignored by old readers (forward compat), and missing fields get default values for new readers (backward compat).\n\nWithout both forms of compatibility, rolling upgrades would require downtime to upgrade all nodes atomically.",
+                "explanation": "Both compatibility directions are essential for zero-downtime rolling deployments where old and new code versions coexist temporarily, reading and writing data in potentially different schema versions."
+            },
+            {
+                "number": 72,
+                "type": "comparison",
+                "question": "Compare Hash Indexes vs SSTable/LSM-Tree Indexes vs B-Tree Indexes:",
+                "comparisonData": {
+                    "headers": ["Aspect", "Hash Index", "SSTable/LSM-Tree", "B-Tree"],
+                    "rows": [
+                        ["Structure", "In-memory hash map → byte offsets", "Sorted on-disk segments + memtable", "Balanced tree of fixed-size pages"],
+                        ["Range Queries", "Not supported", "Efficient — keys sorted", "Efficient — keys sorted in pages"],
+                        ["Write Speed", "Fast (append-only)", "Very fast (sequential writes)", "Moderate (random page writes)"],
+                        ["Read Speed", "O(1) lookups", "O(log n) + check multiple SSTables", "O(log n) single tree traversal"],
+                        ["Memory Usage", "Must fit in RAM", "Sparse index in RAM", "Some pages cached in RAM"],
+                        ["Crash Recovery", "Rebuild from log", "WAL + immutable SSTables", "WAL + in-place page updates"]
+                    ]
+                },
+                "followUpQuestion": "A system needs to support both exact-key lookups and range scans with very high write throughput. Which index is best?",
+                "options": [
+                    {"letter": "A", "text": "Hash index — fastest lookups"},
+                    {"letter": "B", "text": "B-Tree — balanced performance"},
+                    {"letter": "C", "text": "LSM-Tree/SSTable index — sorted keys with fast sequential writes"},
+                    {"letter": "D", "text": "No index — full table scan"}
+                ],
+                "answer": "C",
+                "explanation": "LSM-Trees provide both sorted keys (enabling range scans) and sequential write patterns (enabling high write throughput). Hash indexes cannot do range queries, and B-Trees have slower write performance due to random I/O."
+            }
+        ]
     }
 ];
 

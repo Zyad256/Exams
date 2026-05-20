@@ -1,0 +1,123 @@
+ch 4 summary:
+1. Context of Evolution & Compatibility
+ The Reality: Applications change inevitably (new fields, schema updates).
+ Rolling Upgrades (Staged Rollout): Deploying a new version to a few nodes at a time
+without downtime. This means old and new versions of code/data co-exist
+simultaneously.
+ Compatibility Types:
+o Backward Compatibility: Newer code can read data written by older code (Easy
+to achieve).
+o Forward Compatibility: Older code can read data written by newer code
+(Tricker; requires ignoring unknown additions).
+2. Two Data Representations
+1. In-Memory: Objects, structs, lists, pointers optimized for CPU access.
+2. On-Disk / Network: Self-contained sequence of bytes (Pointers make no sense here).
+ Definitions:
+o Encoding (Serialization/Marshalling): In-memory structure $\rightarrow$ Byte
+sequence.
+o Decoding (Deserialization/Unmarshalling): Byte sequence $\rightarrow$ In-
+memory structure.
+3. Language-Specific Formats (e.g., Java Serializable, Python pickle)
+ Pros: Convenient for quick, transient setups.
+ Cons (Exam Pitfalls):
+o Tied to one specific programming language.
+o Security Vulnerability: Decoding can instantiate arbitrary classes, leading to
+Remote Code Execution (RCE).
+o Versioning, compatibility, and efficiency (CPU/size) are usually bad
+afterthoughts.
+4. Textual Formats (JSON, XML, CSV)
+ Pros: Widespread, human-readable, excellent web browser/interchange support.
+ Cons:
+o Number Ambiguity: JSON doesn't distinguish integers from floats and loses
+precision for numbers $> 2^{53}$ (Twitter API passes tweet IDs as strings to fix
+this).
+o No Binary String Support: Raw bytes must be encoded into text using Base64,
+which hacks the structure and increases data size by 33%.
+o Optional schemas (XML Schema / JSON Schema) are complicated; CSV has no
+schema at all (vague escaping rules).
+5. Binary Encodings without Schemas (e.g., MessagePack, BSON)
+ Concept: Extends datatypes (distinguishes floats/integers) but retains JSON/XML data
+models.
+ The Catch: Since they are schemaless, they must include all field names as text
+strings inside the encoded data (e.g., storing the actual string "userName"). This limits
+space savings.
+6. Binary Encodings with Schemas (Thrift & Protocol Buffers)
+ Concept: Require an Interface Definition Language (IDL) schema and code generation
+tools for compile-time type checking.
+ Mechanics: They omit field names entirely from the byte stream. Instead, they use Field
+Tags (numbers like 1, 2, 3 mapped in the schema) as compact aliases.
+ Thrift Formats: Has BinaryProtocol and CompactProtocol (the latter uses variable-
+length integers and bit packing to save space).
+ Schema Evolution Rules:
+o Forward compatibility: Old code ignores unrecognized field tags via datatype
+size metadata annotations.
+o Backward compatibility: New fields added must be optional or have default
+values (never required), so reading old data doesn't trigger runtime failures.
+o Removed fields must be optional; their tags can never be reused.
+7. Apache Avro
+ Concept: Started for Hadoop. Uses a schema but completely lacks tag numbers. It is
+the most compact binary encoding (just values concatenated together).
+ The Mechanism: * Writer’s Schema: The schema version the encoding process used.
+o Reader’s Schema: The schema version the decoding process expects.
+o Resolution: The Avro library looks at both schemas side-by-side and translates
+fields by matching their literal names.
+ Evolution Rules: You can only add/remove a field that has a default value. To allow
+null, you must explicitly use a Union Type (union { null, long }), preventing
+unexpected null pointer bugs.
+ How Reader finds Writer's Schema:
+1. Large Files (Hadoop): Include the schema once at the beginning of the file
+container.
+2. Databases: Include a tiny schema version number at the start of each record.
+3. Network (RPC): Negotiate the schema version upon connection setup.
+ Dynamic Generation: Highly friendly to relational database dumps. Column names
+automatically map to Avro field names without needing hand-assigned tags. Works
+perfectly with dynamic languages (Pig/Python) without requiring explicit code
+generation.
+8. Summary of Schema Merits
+ Compact (omits field names).
+ Acts as up-to-date documentation.
+ Allows static type checking via code generation.
+ Enables verification of backward/forward compatibility before deployment.
+9. Modes of Dataflow
+A. Dataflow Through Databases
+ Concept: Writing data is sending a message to your future self.
+ Snag: Forward compatibility is critical because older code might read a row modified by
+newer code. If the older code updates and re-saves the row, it must preserve unknown
+fields to avoid data loss.
+ Principle: Data outlives code (5-year-old records exist in historical schemas while code
+upgrades in minutes).
+B. Dataflow Through Services (REST and RPC)
+ Web Services: Client/Server communication over HTTP. Includes REST (Design
+philosophy leveraging HTTP features, simple data formats like JSON) and SOAP (XML-
+based contract using WSDL, highly complex, depends on heavy IDE tooling).
+ The Flaws of RPC (Remote Procedure Call): Tries to make remote network requests
+look like local function calls (Location Transparency). This abstraction is
+fundamentally flawed because:
+o Network requests are unpredictable (drops, slowness) and can timeout without a
+result.
+o Retrying failed requests can duplicate execution unless Idempotence is
+implemented.
+o Latency is wildly variable.
+o Large objects or complex pointers cannot be passed efficiently.
+o Translating types across different languages can cause precision loss.
+ Modern RPC (gRPC, Finagle): Explicitly handles network realities using
+futures/promises for async failures and streams for continuous data exchange. REST is
+preferred for public APIs; RPC is used for internal, single-datacenter service
+communication.
+C. Message-Passing Dataflow (Asynchronous)
+ Message Brokers (e.g., Kafka, RabbitMQ): Senders publish to named queues/topics
+asynchronously via a broker instead of direct connections.
+ Broker Advantages: Acts as a buffer, automatically redelivers crashed messages,
+decouples sender from recipient IP, and allows fan-out to multiple consumers.
+ Distributed Actor Frameworks (e.g., Akka, Orleans, Erlang OTP): Scales
+concurrency across multiple nodes using asynchronous message passing. Inherently
+expects message drops, making location transparency work better than in classic RPC.
+Rolling upgrades still require explicit Avro/Protobuf compatibility tuning over default
+language serialization.
+10. Core Summary Checklist for the Exam
+ Language Encodings: Bad for long-term/cross-language use; security risk (RCE).
+ Protobuf/Thrift: Use numerical Field Tags.
+ Avro: Uses Writer/Reader schema resolution by field name; no tags.
+ OLTP vs. OLAP data formats: Databases require forward/backward compatibility;
+archival storage uses immutable column formats (Parquet) via Avro containers.
+ RPC Flaw Keyword: Location Transparency is a flawed illusion
