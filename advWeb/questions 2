@@ -1,0 +1,831 @@
+Multiple Choice Questions: Designing
+Data-Intensive Applications
+(Chapters 1-5)
+Chapter 1: Reliable, Scalable, and
+Maintainable Applications
+Q1. What are the three main concerns of data-intensive
+applications?
+A. Speed, cost, security
+B. Reliability, scalability, maintainability
+C. Consistency, availability, partition tolerance
+D. Performance, durability, availability
+Answer: B
+Explanation: Chapter 1 defines these three pillars. Reliability = working
+correctly through faults. Scalability = coping with increased load.
+Maintainability = enabling productive work by different people over time.
+Q2. Which of the following is NOT a standard building
+block for data-intensive applications?
+A. Database
+B. Cache
+C. Load balancer
+D. Stream processing
+Answer: C
+Explanation: The standard building blocks are databases, caches, search
+indexes, stream processing, and batch processing. Load balancers are
+infrastructure, not a data building block.
+Q3. What is the difference between a fault and a failure?
+A. They are the same thing
+B. A fault is a component deviating from spec; a failure is the system not
+serving the user
+C. A failure is a component deviating; a fault is the system being down
+D. Faults are hardware; failures are software
+Answer: B
+Explanation: A fault is one component not working as expected. A failure
+is when the entire system stops providing the required service. Fault
+tolerance aims to prevent faults from becoming failures.
+Q4. Which type of fault causes the most outages in
+practice?
+A. Hardware faults
+B. Software errors
+C. Human errors
+D. Network partitions
+Answer: C
+Explanation: Despite redundancy for hardware and testing for software,
+human errors (misconfiguration, deployment mistakes) are the largest
+cause of outages.
+Q5. Why is the average response time often misleading?
+A. It's hard to calculate
+B. A few slow requests can make the average look fine while many users
+suffer
+C. It doesn't include network time
+D. It's always higher than the median
+Answer: B
+Explanation: The average hides outliers. Using percentiles (p50, p95, p99)
+shows the distribution better.
+Q6. In the Twitter example, what is the fan-out problem?
+A. Too many users following the same account
+B. A single tweet write must be distributed to millions of followers' timelines
+C. Too many concurrent writes to the database
+D. Slow search queries
+Answer: B
+Explanation: When a user tweets, it must appear in all followers' home
+timelines. For celebrities, this means one write becomes millions of writes.
+Q7. Which approach does Twitter use for celebrity
+accounts?
+A. Always pre-compute timelines
+B. Always query on-demand
+C. Hybrid: pre-compute for most users, on-demand for celebrities with many
+followers
+D. Only use cache
+Answer: C
+Explanation: Pre-computing timelines for celebrities would create
+excessive write amplification. They use a hybrid approach.
+Q8. What is accidental complexity?
+A. Complexity inherent in the problem
+B. Complexity arising from implementation details, not the problem itself
+C. Complexity from security requirements
+D. Complexity from scaling requirements
+Answer: B
+Explanation: Accidental complexity comes from implementation artifacts
+like tight coupling, tangled dependencies, and inconsistent naming, not
+from the actual problem being solved.
+Q9. What are the three principles of maintainability?
+A. Reliability, availability, serviceability
+B. Operability, simplicity, evolvability
+C. Performance, security, usability
+D. Testability, deployability, monitorability
+Answer: B
+Explanation: Operability (easy ops), Simplicity (manage complexity),
+Evolvability (easy change).
+Q10. What is the difference between vertical and
+horizontal scaling?
+A. Vertical = more machines; Horizontal = bigger machine
+B. Vertical = bigger machine; Horizontal = more machines
+C. Both mean adding more machines
+D. Both mean upgrading CPU
+Answer: B
+Explanation: Vertical scaling = more powerful single machine. Horizontal
+scaling = distributing across multiple machines.
+Chapter 2: Data Models and Query Languages
+Q11. What is the impedance mismatch?
+A. Mismatch between CPU and memory speed
+B. Awkward translation between OOP objects and relational tables
+C. Difference between synchronous and async operations
+D. Mismatch between storage and network speed
+Answer: B
+Explanation: Impedance mismatch is the disconnect between object-
+oriented code (nested objects, inheritance) and relational databases (flat
+tables with rows/columns).
+Q12. Which data model is best for data with complex
+many-to-many relationships?
+A. Document model
+B. Relational model
+C. Graph model
+D. Key-value model
+Answer: C
+Explanation: Graph models excel at many-to-many relationships where
+connections are as important as the data itself.
+Q13. What is normalization in database design?
+A. Making data denormalized for performance
+B. Removing duplicate data by storing IDs instead of full values
+C. Creating indexes for faster queries
+D. Splitting tables across multiple servers
+Answer: B
+Explanation: Normalization replaces repeated values with IDs pointing to a
+canonical definition, ensuring consistency and a single source of truth.
+Q14. What is the key difference between declarative and
+imperative query languages?
+A. Declarative specifies what result to produce; imperative specifies how to
+compute it
+B. Declarative is faster
+C. Imperative is always SQL
+D. There is no real difference
+Answer: A
+Explanation: Declarative (SQL) says what you want; the query optimizer
+figures out how. Imperative spells out exact steps.
+Q15. What does a MapReduce job consist of?
+A. Map and Collect phases
+B. Map and Reduce phases
+C. Sort and Search phases
+D. Read and Write phases
+Answer: B
+Explanation: Map extracts relevant data; Reduce aggregates it.
+Q16. Which of the following is a declarative query
+language?
+A. JavaScript
+B. Java
+C. Cypher
+D. Assembly
+Answer: C
+Explanation: Cypher (Neo4j) is declarative — you specify patterns, not
+traversal algorithms.
+Q17. What is a property graph?
+A. A graph where edges have no direction
+B. A graph with vertices and edges that can have properties (key-value
+pairs)
+C. Only vertices have properties
+D. A graph stored in a relational database
+Answer: B
+Explanation: In property graphs, both vertices and edges can have
+properties.
+Q18. When should you consider a document database?
+A. Data has complex many-to-many relationships
+B. Data is self-contained with one-to-many tree structures
+C. You need ACID transactions across many records
+D. You need complex joins
+Answer: B
+Explanation: Document databases are good for document-like self-
+contained data with one-to-many structures and flexible schema.
+Q19. What is SPARQL?
+A. A SQL extension for graph queries
+B. A query language for RDF triple-stores
+C. A protocol for stream processing
+D. A MapReduce implementation
+Answer: B
+Explanation: SPARQL is a query language for RDF triple-stores, used in
+Semantic Web applications.
+Q20. In the context of query languages, what is Datalog?
+A. A NoSQL database
+B. A foundation for query languages using rules and predicates
+C. A binary encoding format
+D. A replication protocol
+Answer: B
+Explanation: Datalog is a declarative logic programming language that
+serves as the foundation for many query languages, using rules to define
+new predicates from existing facts.
+Chapter 3: Storage and Retrieval
+Q21. What is a hash index?
+A. An index that stores values in sorted order
+B. An in-memory hash map where keys map to byte offsets in a data file
+C. An index that supports range queries
+D. A B-Tree variant
+Answer: B
+Explanation: Hash indexes use an in-memory hash map mapping keys to
+byte offsets in an append-only log file.
+Q22. What is a major limitation of hash indexes?
+A. They don't support point lookups
+B. They must fit entirely in memory
+C. They are slow for writes
+D. They can't handle duplicate keys
+Answer: B
+Explanation: The hash map must fit in RAM. Also, range queries are
+inefficient since keys aren't ordered.
+Q23. What advantage do SSTables have over unsorted
+log files with hash indexes?
+A. Keys are sorted, enabling efficient merging and sparse indexes
+B. They are always smaller
+C. They don't need compaction
+D. They support in-place updates
+Answer: A
+Explanation: SSTables store keys in sorted order, allowing efficient
+mergesort-style merging and sparse in-memory indexes with binary search.
+Q24. How does an LSM-Tree handle writes?
+A. Write directly to disk
+B. Write to an in-memory memtable, then flush to disk as SSTable
+C. Write to a B-Tree
+D. Write to a hash table
+Answer: B
+Explanation: Writes go to an in-memory balanced tree (memtable). When
+full, it's flushed to disk as an immutable SSTable.
+Q25. What is a write-ahead log (WAL) used for?
+A. Speeding up reads
+B. Crash recovery by recording writes before applying them
+C. Compressing data
+D. Indexing data
+Answer: B
+Explanation: WAL is an append-only log of all writes, used to restore the
+database to a consistent state after a crash.
+Q26. Which is better for write-heavy workloads — B-Trees
+or LSM-Trees?
+A. B-Trees
+B. LSM-Trees
+C. Both are equal
+D. Neither
+Answer: B
+Explanation: LSM-Trees are append-only with sequential disk I/O, making
+writes much faster than B-Trees' in-place page updates.
+
+Q27. What is the difference between OLTP and OLAP?
+A. OLTP is for analytics; OLAP is for transactions
+B. OLTP handles day-to-day transactions; OLAP handles analytical queries
+C. They are the same thing
+D. OLTP uses column stores; OLAP uses row stores
+Answer: B
+Explanation: OLTP: small random access, many users, point queries. OLAP:
+large scans, aggregations, few users.
+Q28. What is column-oriented storage?
+A. Storing entire rows together
+B. Storing each column's values contiguously
+C. A type of B-Tree
+D. An in-memory database
+Answer: B
+Explanation: Column stores group values from the same column together,
+enabling loading only needed columns for analytical queries.
+Q29. What is a data cube (OLAP cube)?
+A. A 3D visualization of data
+B. Pre-computed aggregation grouped by multiple dimensions
+C. A type of NoSQL database
+D. A hardware storage device
+Answer: B
+Explanation: Data cubes pre-compute aggregates (e.g., total sales by
+date, product, store) for fast query responses.
+Q30. What is a Bloom filter used for in LSM-Trees?
+A. Compressing SSTables
+B. Quickly checking if a key might exist without reading disk
+C. Sorting data in memtable
+D. Encrypting data
+Answer: B
+Explanation: Bloom filters provide a fast probabilistic check for key
+existence, avoiding unnecessary disk reads for non-existent keys.
+Chapter 4: Encoding and Evolution
+Q31. What is backward compatibility?
+A. Old code can read data written by new code
+B. New code can read data written by old code
+C. Data can be read across different programming languages
+D. Data can be read by different database versions
+Answer: B
+Explanation: Backward compatibility = new code can read old data.
+Forward compatibility = old code can read new data.
+Q32. How do Thrift and Protocol Buffers identify fields in
+encoded data?
+A. Using field names
+B. Using field tag numbers
+C. Using field positions
+D. Using field hashes
+Answer: B
+Explanation: Both use numeric field tags instead of names for compact
+encoding. Tags cannot be changed after deployment.
+Q33. What happens if you change a field's tag number in
+Protocol Buffers?
+A. Nothing — it's fine
+B. All existing encoded data becomes invalid
+C. Performance improves
+D. The field becomes required
+Answer: B
+Explanation: Encoded data uses tag numbers to identify fields. Changing a
+tag breaks all data encoded with the old schema.
+Q34. What is unique about Avro's approach to schema
+evolution?
+A. It uses tag numbers like Protobuf
+B. It resolves writer's schema and reader's schema at read time, matching
+fields by name
+C. It doesn't support schema evolution
+D. It requires identical schemas on both ends
+Answer: B
+Explanation: Avro matches fields by name between writer and reader
+schemas at read time, without requiring tag numbers.
+Q35. What is required to add a field in Avro while
+maintaining compatibility?
+A. It must have a default value
+B. It must have a unique tag number
+C. It must be marked required
+D. It must be added at the end
+Answer: A
+Explanation: New fields in Avro need default values so old readers can fill
+them in, and old writers can have them filled in by new readers.
+Q36. Why is Avro better suited for dynamically
+generated schemas than Thrift or Protobuf?
+A. It's faster
+B. It doesn't need tag numbers, so schemas can be auto-generated (e.g.,
+from database tables)
+C. It supports more data types
+D. It uses JSON for encoding
+Answer: B
+Explanation: Without tag numbers, Avro schemas can be generated
+automatically from database schemas without manual tag assignment.
+Q37. Which is NOT a valid mode of dataflow discussed in
+Chapter 4?
+A. Via databases
+B. Via service calls (REST/RPC)
+C. Via file system (NFS)
+D. Via asynchronous message passing
+Answer: C
+Explanation: The three modes are: databases, service calls (REST/RPC),
+and asynchronous message passing (message brokers/actors).
+Q38. What is the "data outlives code" problem?
+A. Code is slower than data transfer
+B. Old data persists in original encoding long after code has changed
+C. Data files are too large for the code
+D. Code crashes when reading old data
+Answer: B
+Explanation: Data in databases may have been written years ago and still
+exists in its original encoding, even after many code deployments.
+Q39. Why is RPC fundamentally different from a local
+function call?
+A. Network latency is unpredictable
+B. Timeouts may leave the caller unsure if operation completed
+C. Retries can cause duplicate operations
+D. All of the above
+Answer: D
+Explanation: Network calls introduce unpredictability, timeouts, variable
+latency, the need for encoding, and idempotence concerns — all absent
+from local calls.
+Q40. What advantage does a message broker provide
+over direct RPC?
+A. Lower latency
+B. Acts as buffer if recipient is unavailable; decouples sender from recipient
+C. Guarantees exactly-once delivery
+D. No network needed
+Answer: B
+Explanation: Message brokers buffer messages during outages, auto-
+redeliver, hide IP details, and decouple producers from consumers.
+Chapter 5: Replication
+Q41. What are the three main replication algorithms
+discussed?
+A. Active, passive, hybrid
+B. Single-leader, multi-leader, leaderless
+C. Synchronous, asynchronous, semi-synchronous
+D. Horizontal, vertical, diagonal
+Answer: B
+Explanation: The three approaches are: single-leader (one write node),
+multi-leader (multiple write nodes), and leaderless (any node accepts
+writes).
+Q42. In leader-based replication, where can writes be
+sent?
+A. Any replica
+B. Only the leader
+C. Only followers
+D. Any node in the cluster
+Answer: B
+Explanation: Only the leader accepts writes. Followers are read-only from
+the client's perspective.
+Q43. What is semi-synchronous replication?
+A. All followers are synchronous
+B. One follower is synchronous; others are asynchronous
+C. Replication happens every few seconds
+D. Only half the data is replicated
+Answer: B
+Explanation: Semi-sync ensures at least one follower has up-to-date data
+(leader + one sync follower), balancing durability with performance.
+Q44. What is the risk of fully asynchronous replication?
+A. Reads are always stale
+B. Writes confirmed to client may be lost if leader fails
+C. Followers can't serve reads
+D. Network bandwidth is wasted
+Answer: B
+Explanation: With async replication, if the leader crashes before
+replicating, acknowledged writes are lost.
+Q45. Which replication log method is most tightly
+coupled to the storage engine?
+A. Statement-based
+B. WAL shipping
+C. Logical (row-based)
+D. Trigger-based
+Answer: B
+Explanation: WAL shipping sends the storage engine's physical log, tightly
+coupling leader and follower to the same DB version.
+Q46. Which of these is NOT a problem caused by
+replication lag?
+A. Read-after-write inconsistency
+B. Monotonic read violation
+C. Consistent prefix violation
+D. Network partition
+Answer: D
+Explanation: Network partition is a cause, not a symptom of replication
+lag. The three anomalies are read-after-write, monotonic reads, and
+consistent prefix reads.
+Q47. What guarantee does read-after-write consistency
+provide?
+A. All users see all writes immediately
+B. A user always sees their own submitted writes
+C. Reads never return stale data
+D. Writes are immediately visible to all users
+Answer: B
+Explanation: Read-after-write (read-your-writes) guarantees a user sees
+what they themselves submitted, but makes no promises about other users'
+writes.
+Q48. What is the simplest way to achieve monotonic
+reads?
+A. Read from the leader every time
+B. Route each user to the same replica consistently
+C. Use synchronous replication
+D. Disable caching
+Answer: B
+Explanation: By hashing user ID to choose a replica, users see a consistent
+view without time going backward.
+Q49. When is multi-leader replication most appropriate?
+A. Single-datacenter deployment
+B. Multi-datacenter operation with local writes
+C. When strong consistency is required
+D. When there is no network between nodes
+Answer: B
+Explanation: Multi-leader is useful for multi-datacenter setups where each
+location has its own leader for low-latency local writes.
+Q50. What is the biggest downside of multi-leader
+replication?
+A. Poor read scalability
+B. Write conflicts that must be resolved
+C. No failover mechanism
+D. Requires more hardware
+Answer: B
+Explanation: Concurrent writes on different leaders to the same data
+create conflicts that need resolution, adding complexity.
+Q51. What does the quorum condition w + r > n
+guarantee?
+A. Strong consistency
+B. At least one node in the read set has the latest write
+C. No data loss
+D. Linearizability
+Answer: B
+Explanation: With w + r > n, the read set must overlap with the write set,
+ensuring at least one node returns the latest value.
+Q52. What is read repair in leaderless replication?
+A. A background process that fixes stale data
+B. The client detects stale replicas during reads and writes the newer value
+back
+C. A logging mechanism
+D. A type of index
+Answer: B
+Explanation: When a client reads from multiple replicas and finds a stale
+value, it writes the newer value back to that replica.
+Q53. What is a sloppy quorum?
+A. A quorum that doesn't require a majority
+B. When w + r ≤ n
+C. Accepting writes from nodes outside the designated n home nodes
+during network issues
+D. A quorum that uses timestamps
+Answer: C
+Explanation: Sloppy quorums accept writes on any available node when
+the designated n home nodes are unreachable.
+Q54. What is "last write wins" (LWW) and why is it
+dangerous?
+A. Wins the last write; safe for all workloads
+B. Keeps the highest-timestamped write; silently discards concurrent writes
+C. Prevents concurrent writes; guarantees no data loss
+D. Resolves conflicts through voting; slow but safe
+Answer: B
+Explanation: LWW picks the highest timestamp and discards others.
+Concurrent writes, even successful ones, are silently lost.
+Q55. What are version vectors used for?
+A. Compressing replicated data
+B. Tracking which version of a key each replica has to detect concurrency
+C. Routing requests to the correct replica
+D. Encrypting data for replication
+Answer: B
+Explanation: Version vectors track per-replica version numbers per key,
+letting the system distinguish overwrites from concurrent writes.
+Cross-Chapter Questions
+Q56. Which storage engine (Ch3) combined with which
+replication method (Ch5) is least suitable for rolling
+upgrades?
+A. LSM-Tree + logical replication
+B. B-Tree + WAL shipping
+C. Hash index + statement replication
+D. Column store + trigger replication
+Answer: B
+Explanation: WAL shipping is tightly coupled to the storage engine
+version. B-Tree WAL format changes between DB versions, preventing
+leader/follower from running different versions.
+Q57. An application needs high write throughput,
+flexible schema, and must scale reads. Which
+combination of choices from chapters 2-5 is most
+appropriate?
+A. Relational + B-Tree + single-leader
+B. Document + LSM-Tree + leaderless
+C. Graph + Hash index + multi-leader
+D. Relational + Column store + WAL shipping
+Answer: B
+Explanation: Document model offers flexible schema (Ch2). LSM-Trees
+excel at write-heavy workloads (Ch3). Leaderless replication scales reads
+and handles node failures (Ch5).
+Q58. What do hash indexes (Ch3) and Avro binary
+encoding (Ch4) have in common?
+A. Both support range queries
+B. Both use field names
+C. Both must fit in memory
+D. Both are efficient for their purpose but have trade-offs: hash indexes
+can't do range queries; Avro needs reader+writer schema resolution
+Answer: D
+Explanation: Both are optimized for specific use cases but have limitations
+— hash indexes lack ordering, Avro requires both schemas at read time.
+Q59. A banking system requires strong consistency and
+strict schema. Which choices from chapters 2-5 align
+best?
+A. Document model + LSM-Tree + leaderless replication
+B. Relational model + B-Tree + single-leader synchronous replication
+C. Graph model + Hash index + multi-leader
+D. Document model + Column store + async single-leader
+Answer: B
+Explanation: Relational provides strict schemas (Ch2). B-Trees offer
+simpler consistency (Ch3). Single-leader with sync replication ensures no
+data loss and strong consistency (Ch5).
+Q60. What is the relationship between schema evolution
+(Ch4) and replication (Ch5)?
+A. No relationship
+B. Schema evolution enables rolling upgrades, which require backward/
+forward compatible replication log formats
+C. Replication prevents schema evolution
+D. Schema evolution only matters for single-node databases
+Answer: B
+Explanation: Rolling upgrades require different nodes to run different
+versions simultaneously. The replication log format must be backward/
+forward compatible (Ch4) for followers running different code versions than
+the leader (Ch5).
+Q61. Twitter's fan-out problem (Ch1) is an example of
+which replication challenge (Ch5)?
+A. Split brain
+B. Write amplification — one tweet becomes many timeline writes
+C. Read repair
+D. Consistent prefix violation
+Answer: B
+Explanation: One write (tweet) fanned out to millions of followers'
+timelines is a classic write amplification scenario.
+Q62. Which consistency model (Ch1) is most relevant to
+the replication lag anomaly where a user sees their
+comment disappear (Ch5)?
+A. Reliability
+B. Maintainability
+C. Monotonic reads
+D. Throughput
+Answer: C
+Explanation: When a user sees data from a fresh replica then from a stale
+replica, the data appears to disappear — a monotonic read violation.
+Q63. The "data outlives code" problem (Ch4) is most
+relevant to which aspect of replication (Ch5)?
+A. Failover
+B. Schema evolution for databases — old data remains in original encoding
+C. Quorum configuration
+D. Multi-leader conflict resolution
+Answer: B
+Explanation: Data written years ago in old formats must be readable by
+current code. This requires backward-compatible encoding (Ch4) and affects
+database replication where old records persist (Ch5).
+Q64. A startup needs to evolve its data schema
+frequently. Which encoding and replication approach
+best supports this?
+A. Thrift + single-leader WAL shipping
+B. Avro + logical (row-based) replication
+C. JSON + trigger-based replication
+D. Protocol Buffers + statement-based replication
+Answer: B
+Explanation: Avro's name-based schema evolution (Ch4) supports
+frequent schema changes without tag management. Logical replication
+(Ch5) allows leader/follower version mismatches.
+Q65. Which of the following correctly orders the
+chapters' progression from most abstract to most
+concrete?
+A. Ch3 (storage) → Ch4 (encoding) → Ch5 (replication) → Ch2 (data models)
+→ Ch1 (design goals)
+B. Ch1 (goals) → Ch2 (models) → Ch3 (storage) → Ch4 (encoding) → Ch5
+(distributed replication)
+C. Ch5 → Ch4 → Ch3 → Ch2 → Ch1
+D. Ch2 → Ch1 → Ch4 → Ch3 → Ch5
+Answer: B
+Explanation: The book moves from high-level concerns (reliability,
+scalability) → data models → storage engines → encoding → distributed
+data/replication.                  
+
+
+
+Questions and Answers: Designing
+Data-Intensive Applications
+(Chapters 4-5)
+Chapter 4: Encoding and Evolution
+Q1: What are backward and forward compatibility in the
+context of data encoding?
+A: - Backward compatibility: Newer code can read data written by older
+code - Forward compatibility: Older code can read data written by newer
+code
+Both are essential for rolling upgrades where different nodes run different
+versions simultaneously.
+Q2: What are the problems with JSON and XML as data
+encoding formats?
+A: - Numbers: JSON doesn't distinguish integers from floating-point; XML/
+CSV can't distinguish numbers from strings at all - Binary strings: Must be
+Base64-encoded, increasing size by ~33% - Schema: Optional and complex
+(XML Schema, JSON Schema); CSV has no schema - Ambiguity: Same data
+can be represented in multiple equivalent ways
+Q3: How do Thrift and Protocol Buffers achieve compact
+encoding?
+A: - They use a schema with field tags (numbers) instead of field names in
+the encoded data - Each field is identified by its tag number and annotated
+with datatype - Unknown fields can be skipped using datatype info -
+Variable-length integers reduce size for small numbers - Field tags are
+critical — they cannot be changed without invalidating existing data
+Q4: How does Avro handle schema evolution differently
+from Thrift and Protocol Buffers?
+A: - Avro uses field names instead of tag numbers - The writer's schema
+and reader's schema are resolved at read time - Fields are matched by
+name; order doesn't matter - Add/remove fields only if they have default
+values - Renaming is backward compatible but not forward compatible - No
+tag numbers means Avro is friendlier to dynamically generated schemas
+(e.g., dumping a relational DB to a file)
+Q5: How is the writer's schema communicated to the
+reader in Avro?
+A: - Large files: Schema stored once at the beginning of the file (object
+container file) - Databases: Version number stored with each record;
+schema versions kept in a separate table - Network connections: Schema
+negotiated at connection setup time
+Q6: What are the advantages of schema-driven binary
+encodings over text formats?
+A: - More compact (omit field names) - Schema serves as documentation
+(always up-to-date since required for decoding) - Schema compatibility can
+be checked before deployment - Code generation enables compile-time
+type checking in statically typed languages
+Q7: What is the "data outlives code" problem?
+A: Data stored in a database may have been written years ago by long-
+gone versions of the application code. When deploying new versions, old
+data persists in its original encoding. This means: - Backward compatibility
+is essential (new code must read old data) - Schema evolution allows the
+database to appear as if encoded with a single schema - Migration/rewriting
+of old data is expensive and avoided when possible
+Q8: What are the problems with remote procedure calls
+(RPC) compared to local function calls?
+A: - Network unpredictability: Requests may be lost, timeouts, variable
+latency - Extra failure modes: Timeouts where you don't know if request
+was processed - Idempotence needed: Retries may cause duplicate
+operations - Latency: Much slower and more variable than local calls -
+Parameter encoding: References/pointers don't work across network -
+Language differences: Type systems may not match between client and
+server
+Q9: Compare REST and SOAP for web services.
+A:
+Aspect REST SOAP
+Philosophy Design principles on
+HTTP XML-based protocol
+Data format JSON (typically) XML
+Tooling Minimal (curl, browser) Heavy (WSDL, code gen,
+IDEs)
+Human-
+readable Yes No
+Popularity Dominant for public APIs Mostly legacy enterprise
+Q10: What are the advantages of using a message
+broker over direct RPC?
+A: - Acts as buffer if recipient is unavailable (improves reliability) -
+Automatically redelivers messages after crashes - Sender doesn't need to
+know recipient's IP/port - One message can be sent to multiple consumers -
+Logically decouples sender from recipient
+Q11: How does the actor model handle distributed
+communication differently from RPC?
+A: - Actors already assume messages may be lost, even within a single
+process - Location transparency works better — local and remote
+communication use the same model - Messages are always asynchronous
+and one-way - Still requires forward/backward compatibility for rolling
+upgrades
+Chapter 5: Replication
+Q12: What are the three main reasons for replicating
+data?
+A: 1. Latency: Keep data geographically close to users 2. Availability:
+Continue working when parts of the system fail 3. Scalability: Scale out
+read throughput with many replicas
+Q13: How does leader-based replication work?
+A: 1. One node is the leader (accepts writes) 2. Other nodes are followers
+(read-only) 3. Leader sends data changes to followers via replication log 4.
+Reads can be served by leader or followers 5. Writes only go to leader
+Q14: Compare synchronous and asynchronous
+replication.
+A: - Synchronous: Leader waits for follower acknowledgment. Guarantees
+data durability but blocks if follower is down. Performance impact. -
+Asynchronous: Leader doesn't wait. Faster and continues even if followers
+lag or fail. Risk of data loss if leader fails. - Semi-synchronous: One
+follower is synchronous; others are async. Balance of safety and
+performance.
+Q15: What steps are involved in setting up a new
+follower?
+A: 1. Take a consistent snapshot of the leader (without downtime) 2. Copy
+snapshot to the new follower node 3. Follower connects to leader and
+requests all changes since snapshot (using log position) 4. Once caught up,
+follower continues processing ongoing changes
+Q16: What are the risks and challenges of automatic
+failover?
+A: - Lost writes: New leader may not have all writes from old leader if
+async - Split brain: Two nodes both think they're leader (data corruption
+risk) - Primary key conflicts: GitHub incident where reused keys exposed
+private data - Wrong timeout: Too short causes unnecessary failovers; too
+long increases recovery time - System overload: Unnecessary failover can
+worsen existing load/network problems
+Q17: Compare the four methods of implementing
+replication logs.
+A: - Statement-based: Log SQL. Compact but breaks with
+nondeterministic functions (NOW(), RAND()). - WAL shipping: Send storage
+engine's write-ahead log. Tightly coupled — leader and follower must run
+same DB version. - Logical (row-based): Log row changes. Decoupled
+from storage; different versions can coexist. Good for CDC (change data
+capture). - Trigger-based: Application-level replication. Most flexible but
+higher overhead and more bugs.
+Q18: What three consistency guarantees address
+problems with replication lag?
+A: - Read-after-write: User sees their own submitted data immediately.
+Solutions: read from leader, track timestamps, monitor lag. - Monotonic
+reads: User doesn't see time go backward (data appearing then
+disappearing). Solution: route user to same replica. - Consistent prefix
+reads: Causally related writes appear in correct order. Solution: keep
+causally related data on same partition.
+Q19: When is multi-leader replication useful?
+A: 1. Multi-datacenter operation: Each datacenter has a leader; writes
+are local (low latency); async replication between datacenters 2. Clients
+with offline operation: Each device is a leader locally (calendar apps) 3.
+Collaborative editing: User clients as leaders with small change units
+(Google Docs)
+Q20: How can write conflicts be handled in multi-leader
+replication?
+A: - Conflict avoidance: Route all writes for a record through the same
+leader - Last write wins (LWW): Timestamp-based, but loses data -
+Merge values: Concatenate or combine conflicting values - Custom
+resolution: Application code on write or on read - Automatic: CRDTs,
+operational transformation, mergeable data structures
+Q21: What are the different multi-leader replication
+topologies?
+A: - All-to-all: Every leader sends writes to every other leader. Fault-
+tolerant but writes can overtake each other (causality issues). - Circular:
+Each node passes to one other. Single point of failure. - Star/Tree: Root
+node forwards to all others. Single point of failure.
+Q22: How does leaderless (Dynamo-style) replication
+work?
+A: - Any replica can accept writes from clients - Clients write to all replicas
+in parallel - Read repair: Client detects stale replicas during reads and
+fixes them - Anti-entropy: Background process syncs differences between
+replicas - No failover needed — just keep reading/writing to available nodes
+Q23: Explain the quorum condition (w + r > n) and its
+trade-offs.
+A: - n = number of replicas - w = minimum nodes that must confirm a write
+- r = minimum nodes that must respond to a read - Quorum condition: w
++ r > n guarantees at least one overlapping node has latest data - Typical:
+n=3, w=2, r=2 (tolerates 1 node failure) - Trade-offs: Higher w/r =
+stronger consistency but lower availability. Lower w/r = higher availability
+but more stale reads.
+Q24: What are the limitations of quorum consistency?
+A: Even with w + r > n, stale reads can occur when: - Sloppy quorums are
+used (writes may go to non-home nodes) - Concurrent writes occur (no clear
+ordering) - A write partially fails (some replicas succeed, write reported as
+failed) - A node with new data fails and recovers from a stale replica -
+Timing edge cases between reads and writes
+Q25: What is the "last write wins" (LWW) conflict
+resolution, and why is it dangerous?
+A: LWW attaches a timestamp to each write and keeps only the highest-
+timestamped value.
+Danger: Concurrent writes are silently discarded, even if they were all
+acknowledged to clients as successful. This violates durability expectations.
+LWW is only safe if each key is written exactly once and never updated
+(e.g., using UUID keys).
+Q26: What are version vectors and how do they detect
+concurrent writes?
+A: - Each replica maintains a version number per key - When a client reads,
+it receives all current values plus version numbers - When writing, the client
+sends back the version numbers from its last read - The server can then
+determine which writes are concurrent (and keep siblings) vs. which
+overwrite previous values - Merging siblings is the application's
+responsibility (or use CRDTs)
+Q27: What are sloppy quorums and hinted handoff?
+A: - Sloppy quorum: When the designated n replicas for a key are
+unreachable, accept writes on any available node instead - Hinted
+handoff: Once network issues resolve, temporary writes are forwarded to
+their "home" nodes - Trade-off: Increases write availability but weakens
+quorum guarantees
+Cross-Chapter Questions
+Q28: How do the encoding concerns of Chapter 4 relate
+to replication in Chapter 5?
+A: - Rolling upgrades (Chapter 5) require backward and forward
+compatibility (Chapter 4) - Replication logs carry encoded data — the
+encoding format affects compatibility between leader and followers running
+different versions - Logical (row-based) replication is preferred because it's
+decoupled from storage engine version, allowing version-mismatched
+leader/follower upgrades - WAL shipping (Chapter 5) is tightly coupled —
+leader and follower must be same version, preventing rolling upgrades
+Q29: How does storage engine choice (Chapter 3) affect
+replication (Chapter 5)?
+A: - B-Trees (WAL shipping): Replication log is the write-ahead log. Tight
+coupling — leader and follower must match versions. - LSM-Trees: SSTables
+are immutable, making replication and backup simpler. - Logical
+replication works independently of storage engine, allowing different
+engines or versions on leader and followers. - Write/read amplification
+affects replication throughput and lag.
+Q30: How does data model choice (Chapter 2) affect
+replication complexity?
+A: - Relational models: Well-defined schemas make logical replication
+straightforward (row-based logs with clear column definitions) - Document
+models: Flexible schema creates challenges for replication — different
+documents may have different fields - Graph models: Complex
+relationships make conflict resolution harder in multi-leader setups -
+Schema evolution (Chapter 4) is easier with flexible document models but
+harder to reason about consistency in replicated systems
