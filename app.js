@@ -160,6 +160,23 @@ function playSound(type) {
 }
 
 // ==========================================
+// 2b. TOAST NOTIFICATION SYSTEM
+// ==========================================
+function showToast(message, type = 'info', duration = 3000) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icons = { success: 'fa-circle-check', error: 'fa-circle-xmark', warning: 'fa-triangle-exclamation', info: 'fa-circle-info' };
+    toast.innerHTML = `<div class="toast-icon"><i class="fa-solid ${icons[type] || icons.info}"></i></div><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('toast-out');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// ==========================================
 // 3. EXPLANATIONS DATABASE & GENERATION
 // ==========================================
 // High quality explanations database for all first 5 chapters
@@ -242,14 +259,19 @@ const explanations = {
     "Why are vector clocks used": "Vector clocks track the causal history of updates across multiple database replicas, allowing the system to identify concurrent write conflicts accurately without relying on absolute wall-clock time."
 };
 
-function getExplanation(questionText) {
-    // Try to find a matching explanation from the keys
+function getExplanation(questionObj) {
+    // Use built-in explanation from question data if available
+    if (questionObj && questionObj.explanation) {
+        return questionObj.explanation;
+    }
+    // Fallback: try to find a matching explanation from the hardcoded keys
+    const questionText = typeof questionObj === 'string' ? questionObj : (questionObj?.question || '');
     for (let key in explanations) {
         if (questionText.toLowerCase().includes(key.toLowerCase())) {
             return explanations[key];
         }
     }
-    return "In data-intensive systems, strict tradeoffs exist between write speeds, read latencies, network partition handling, and consistency levels. Designing reliable database clusters requires understanding immutable logs, indices, and replication protocols.";
+    return "In data-intensive systems, strict tradeoffs exist between write speeds, read latencies, network partition handling, and consistency levels.";
 }
 
 // ==========================================
@@ -461,23 +483,32 @@ function toggleSound() {
 // 7. STATS AND PROGRESS METRICS
 // ==========================================
 function updateDashboardMetrics() {
+    // Dashboard stats bar elements
+    const dashAttempts = document.getElementById('dash-total-attempts');
+    const dashAvg = document.getElementById('dash-avg-score');
+    const dashStreak = document.getElementById('dash-streak');
+    const dashBest = document.getElementById('dash-best-score');
+    
+    // Legacy elements (safety)
     const attemptsEl = document.getElementById('stat-total-attempts');
     const scoreEl = document.getElementById('stat-avg-score');
     const completedEl = document.getElementById('stat-completed-exams');
     const streakEl = document.getElementById('stat-streak');
     
     // Streak display
-    if (streakEl) {
-        streakEl.textContent = `${state.streak} ${state.streak === 1 ? 'Day' : 'Days'}`;
-    }
+    const streakText = `${state.streak} ${state.streak === 1 ? 'Day' : 'Days'}`;
+    if (streakEl) streakEl.textContent = streakText;
+    if (dashStreak) dashStreak.textContent = streakText;
     
     if (state.history.length === 0) {
         if (attemptsEl) attemptsEl.textContent = '0';
         if (scoreEl) scoreEl.textContent = '0%';
         if (completedEl) completedEl.textContent = '0';
+        if (dashAttempts) dashAttempts.textContent = '0';
+        if (dashAvg) dashAvg.textContent = '0%';
+        if (dashBest) dashBest.textContent = '--';
         updateRadialProgress(0, 'hero-progress-bar', 'hero-progress-percent');
         
-        // Reset Course best scores
         const exam1BestEl = document.getElementById('exam1-best-score');
         const exam2BestEl = document.getElementById('exam2-best-score');
         if (exam1BestEl) exam1BestEl.innerHTML = '<i class="fa-solid fa-trophy"></i> Best: --';
@@ -485,22 +516,23 @@ function updateDashboardMetrics() {
         return;
     }
     
-    // Compute total attempts and completions
     if (attemptsEl) attemptsEl.textContent = state.history.length;
     if (completedEl) completedEl.textContent = state.history.filter(h => h.isCompleted).length;
+    if (dashAttempts) dashAttempts.textContent = state.history.length;
     
-    // Average score calculation
     let totalPercent = 0;
+    let globalBest = 0;
     state.history.forEach(item => {
         totalPercent += item.scorePercent;
+        if (item.scorePercent > globalBest) globalBest = item.scorePercent;
     });
     const avgScore = Math.round(totalPercent / state.history.length);
     if (scoreEl) scoreEl.textContent = `${avgScore}%`;
+    if (dashAvg) dashAvg.textContent = `${avgScore}%`;
+    if (dashBest) dashBest.textContent = `${globalBest}%`;
     
-    // Best Score Per Exam Card
     let exam1Best = -1;
     let exam2Best = -1;
-    
     state.history.forEach(item => {
         if (item.examId === 0 && item.scorePercent > exam1Best) exam1Best = item.scorePercent;
         if (item.examId === 1 && item.scorePercent > exam2Best) exam2Best = item.scorePercent;
@@ -515,8 +547,6 @@ function updateDashboardMetrics() {
         exam2BestEl.innerHTML = `<i class="fa-solid fa-trophy text-accent"></i> Best: <strong>${exam2Best}%</strong>`;
     }
     
-    // Syllabus mastery: percentage of total unique questions scored correct at least once
-    // A beautiful professional tracking system!
     const syllabusPercent = computeSyllabusMasteryPercent();
     updateRadialProgress(syllabusPercent, 'hero-progress-bar', 'hero-progress-percent');
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrepVerse | Advanced Data-Intensive Systems Exam Hub</title>
+    <title>basmaja Exam Hub</title>
     <!-- Google Fonts for premium typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
                     <i class="fa-solid fa-graduation-cap logo-icon"></i>
                 </div>
                 <div class="logo-text">
-                    <span class="logo-brand">Prep<span class="text-accent">Verse</span></span>
+                    <span class="logo-brand">basmaja</span>
                     <span class="logo-subtitle">Exam Hub</span>
                 </div>
             </div>
@@ -57,6 +57,26 @@
         
         <!-- SECTION 1: DASHBOARD -->
         <section id="view-dashboard" class="app-view active">
+
+            <!-- Quick Stats Bar -->
+            <div class="dash-stats-bar">
+                <div class="dash-stat-chip">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <div><span class="chip-val" id="dash-total-attempts">0</span><span class="chip-label">Attempts</span></div>
+                </div>
+                <div class="dash-stat-chip">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <div><span class="chip-val" id="dash-avg-score">0%</span><span class="chip-label">Avg Score</span></div>
+                </div>
+                <div class="dash-stat-chip">
+                    <i class="fa-solid fa-fire"></i>
+                    <div><span class="chip-val" id="dash-streak">1 Day</span><span class="chip-label">Streak</span></div>
+                </div>
+                <div class="dash-stat-chip">
+                    <i class="fa-solid fa-trophy"></i>
+                    <div><span class="chip-val" id="dash-best-score">--</span><span class="chip-label">Best</span></div>
+                </div>
+            </div>
 
             <!-- Subject Section Title -->
             <div class="section-header-row">
@@ -98,39 +118,7 @@
                     </div>
                 </div>
 
-                <!-- Locked/Future Subjects -->
-               
 
-                <!-- Locked/Future Subjects 2 -->
-                <div class="subject-card locked">
-                    <div class="subject-tag locked-tag"><i class="fa-solid fa-lock"></i> LOCKED</div>
-                    <div class="subject-card-body">
-                        <div class="subject-icon-bg">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <h3 class="subject-name">Machine Learning</h3>
-                        <p class="subject-description">Supervised learning architectures, neural networks, predictive pipeline designs, and machine learning infrastructure models.</p>
-                        
-                        <div class="subject-meta">
-                            <span class="meta-item"><i class="fa-solid fa-file-invoice"></i> Coming Soon</span>
-                        </div>
-
-                        <!-- Progress Bar inside Card -->
-                        <div class="subject-progress-container">
-                            <div class="progress-info">
-                                <span>Chapters Completed</span>
-                                <span class="progress-ratio">0%</span>
-                            </div>
-                            <div class="progress-track">
-                                <div class="progress-fill" style="width: 0%;"></div>
-                            </div>
-                        </div>
-
-                        <button class="btn btn-secondary btn-full-width" disabled>
-                            Subject Locked
-                        </button>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -638,6 +626,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Submit Confirmation Modal -->
+    <div class="modal-overlay" id="submit-modal">
+        <div class="modal-content card animate-scale-in">
+            <div class="modal-icon-header orange"><i class="fa-solid fa-paper-plane"></i></div>
+            <h3 class="modal-title">Submit Exam?</h3>
+            <p class="modal-body-text" id="submit-modal-text">Are you ready to submit your exam?</p>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="btn-cancel-submit">Keep Working</button>
+                <button class="btn btn-primary" id="btn-confirm-submit">Submit Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="footer-inner">
+            <span class="footer-brand">Prep<span class="text-accent">Verse</span></span>
+            <span class="footer-copy">&copy; 2026 basmaja Exam Hub.</span>
+            <div class="footer-kbd-hints">
+                <kbd>&larr;</kbd><kbd>&rarr;</kbd> Navigate &bull; <kbd>Enter</kbd> Check &bull; <kbd>F</kbd> Flag
+            </div>
+        </div>
+    </footer>
 
     <!-- App Scripts -->
     <script type="module" src="app.js"></script>
