@@ -165,6 +165,7 @@ export default function SubjectHub() {
         exam1: examData.find(exam => exam.examId === 0)?.questions.length || 0,
         exam2: examData.find(exam => exam.examId === 1)?.questions.length || 0,
         exam3: examData.find(exam => exam.examId === 2)?.questions.length || 0,
+        exam4: examData.find(exam => exam.examId === 3)?.questions.length || 0,
         total: examData.reduce((sum, exam) => sum + exam.questions.length, 0)
     };
 
@@ -325,6 +326,20 @@ export default function SubjectHub() {
                                         <span><i className="fa-solid fa-table-columns"></i> {examCounts.exam3} Deep Questions</span>
                                     </div>
                                     <button className="btn btn-orange" onClick={() => handleConfigureExam(2)}>Configure Exam</button>
+                                </div>
+                            </div>
+
+                            <div className="exam-card card-glow">
+                                <div className="exam-card-header">
+                                    <span className="exam-badge badge-green">Chapters 1-5</span>
+                                    <h4 className="exam-card-title">Exam 4: Comprehensive MCQ Review</h4>
+                                </div>
+                                <p className="exam-card-desc">40 fresh MCQ questions spanning all 5 chapters — tombstones, CRDTs, star schemas, actor models, and more...</p>
+                                <div className="exam-card-footer">
+                                    <div className="exam-meta">
+                                        <span><i className="fa-solid fa-question-circle"></i> {examCounts.exam4} Questions</span>
+                                    </div>
+                                    <button className="btn btn-primary" onClick={() => handleConfigureExam(3)}>Configure Exam</button>
                                 </div>
                             </div>
 

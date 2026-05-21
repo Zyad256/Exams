@@ -1968,6 +1968,492 @@ export const examData = [
                 "explanation": "This prompt checks whether you can connect storage engines, analytics workloads, encoding evolution, and replication trade-offs instead of memorizing a single chapter."
             }
         ]
+    },
+    {
+        "examId": 3,
+        "title": "Exam 4: Comprehensive MCQ Review (Chapters 1-5)",
+        "questions": [
+            {
+                "number": 101,
+                "question": "What type of applications does the book 'Designing Data-Intensive Applications' primarily focus on?",
+                "options": [
+                    {"letter": "A", "text": "CPU-intensive scientific computing applications"},
+                    {"letter": "B", "text": "Mobile game development frameworks"},
+                    {"letter": "C", "text": "Data-intensive applications where data volume and complexity are the main challenges"},
+                    {"letter": "D", "text": "Embedded systems and IoT firmware"}
+                ],
+                "answer": "C",
+                "explanation": "The book focuses on data-intensive applications where the primary bottleneck is data volume, complexity, and the speed at which it changes — not raw CPU power."
+            },
+            {
+                "number": 102,
+                "question": "In a data-intensive system, what role does a cache play?",
+                "options": [
+                    {"letter": "A", "text": "It remembers the results of expensive operations to speed up subsequent reads"},
+                    {"letter": "B", "text": "It permanently stores data instead of using a database"},
+                    {"letter": "C", "text": "It encrypts data before sending it over the network"},
+                    {"letter": "D", "text": "It compresses data to reduce storage costs"}
+                ],
+                "answer": "A",
+                "explanation": "Caches store the results of expensive computations or frequently accessed data so future requests can be served faster without re-computing or re-fetching."
+            },
+            {
+                "number": 103,
+                "question": "A system is described as 'fault-tolerant'. What does this mean?",
+                "options": [
+                    {"letter": "A", "text": "The system has eliminated all possible sources of faults"},
+                    {"letter": "B", "text": "The system guarantees zero downtime under every scenario"},
+                    {"letter": "C", "text": "The system can automatically fix any software bug"},
+                    {"letter": "D", "text": "The system prevents faults in individual components from escalating into system-wide failures"}
+                ],
+                "answer": "D",
+                "explanation": "Fault tolerance means the system anticipates component faults and is designed so that individual component failures do not cause the whole system to stop serving users."
+            },
+            {
+                "number": 104,
+                "question": "Which of the following is NOT a recommended strategy for reducing human errors in data systems?",
+                "options": [
+                    {"letter": "A", "text": "Providing sandbox environments for safe experimentation"},
+                    {"letter": "B", "text": "Removing all automated testing to rely on manual QA only"},
+                    {"letter": "C", "text": "Designing clear, well-structured APIs and admin interfaces"},
+                    {"letter": "D", "text": "Enabling quick rollback of configuration and code changes"}
+                ],
+                "answer": "B",
+                "explanation": "The book recommends automated testing as a key strategy to reduce human errors. Removing it in favor of manual-only QA would increase the chance of mistakes reaching production."
+            },
+            {
+                "number": 105,
+                "question": "What does 'elastic' scaling mean?",
+                "options": [
+                    {"letter": "A", "text": "Manually adding servers when an operations team predicts load increases"},
+                    {"letter": "B", "text": "Using only vertical scaling to handle growth"},
+                    {"letter": "C", "text": "Reducing the number of servers permanently after a traffic spike"},
+                    {"letter": "D", "text": "Automatically detecting load increases and adding computing resources without human intervention"}
+                ],
+                "answer": "D",
+                "explanation": "Elastic scaling systems automatically allocate more resources in response to detected load increases, as opposed to manual scaling where a human must provision resources."
+            },
+            {
+                "number": 106,
+                "question": "Why are p99 tail latencies particularly important from a business perspective?",
+                "options": [
+                    {"letter": "A", "text": "They represent the fastest 1% of requests"},
+                    {"letter": "B", "text": "They are the easiest metric to calculate in a distributed system"},
+                    {"letter": "C", "text": "They often affect the most valuable customers who have the most data and activity"},
+                    {"letter": "D", "text": "They only matter for offline batch processing workloads"}
+                ],
+                "answer": "C",
+                "explanation": "Customers with the most data and highest activity tend to experience tail latencies. These are often the most valuable customers, so their experience is especially important for the business."
+            },
+            {
+                "number": 107,
+                "question": "How does batch processing differ from stream processing in a data system?",
+                "options": [
+                    {"letter": "A", "text": "Batch processing handles real-time messages; stream processing handles accumulated data"},
+                    {"letter": "B", "text": "They are identical in function and differ only in name"},
+                    {"letter": "C", "text": "Batch processing is always faster than stream processing"},
+                    {"letter": "D", "text": "Batch processing analyzes large amounts of accumulated data periodically; stream processing sends and handles messages asynchronously in near real-time"}
+                ],
+                "answer": "D",
+                "explanation": "Batch processing works on large accumulated datasets (e.g., Hadoop jobs), while stream processing handles messages as they arrive in near real-time (e.g., Kafka consumers)."
+            },
+            {
+                "number": 108,
+                "question": "What does 'schema-on-read' mean in the context of document databases?",
+                "options": [
+                    {"letter": "A", "text": "The database enforces a strict schema whenever data is written"},
+                    {"letter": "B", "text": "The data structure is implicit and only interpreted when the data is read, similar to dynamic typing"},
+                    {"letter": "C", "text": "The schema is permanently locked after database creation"},
+                    {"letter": "D", "text": "The schema is stored in a separate relational database"}
+                ],
+                "answer": "B",
+                "explanation": "Schema-on-read means the data has an implicit structure that is only enforced when reading, like dynamic type checking. In contrast, schema-on-write (relational) enforces structure at write time."
+            },
+            {
+                "number": 109,
+                "question": "What is 'polyglot persistence'?",
+                "options": [
+                    {"letter": "A", "text": "Storing all data in a single relational database for simplicity"},
+                    {"letter": "B", "text": "Translating data between different human languages"},
+                    {"letter": "C", "text": "Using different types of datastores alongside each other based on specific use cases"},
+                    {"letter": "D", "text": "Using only NoSQL databases for all storage needs"}
+                ],
+                "answer": "C",
+                "explanation": "Polyglot persistence means choosing the best datastore for each use case — for example, using a relational DB for transactions, a document DB for flexible content, and a graph DB for social connections."
+            },
+            {
+                "number": 110,
+                "question": "What is a key limitation of data locality in document databases?",
+                "options": [
+                    {"letter": "A", "text": "Documents cannot contain any nested structures"},
+                    {"letter": "B", "text": "Data locality only works with graph databases"},
+                    {"letter": "C", "text": "Documents are always stored across multiple servers"},
+                    {"letter": "D", "text": "The entire document must be loaded even for small reads, and updates rewrite the whole document"}
+                ],
+                "answer": "D",
+                "explanation": "While storing related data together provides locality for full-document reads, it becomes wasteful when you only need a small field. Updates to any part require rewriting the entire document, so documents should be kept small."
+            },
+            {
+                "number": 111,
+                "question": "In a triple-store data model, how is information represented?",
+                "options": [
+                    {"letter": "A", "text": "As (Subject, Predicate, Object) statements"},
+                    {"letter": "B", "text": "As tables with rows and columns"},
+                    {"letter": "C", "text": "As key-value pairs in a hash map"},
+                    {"letter": "D", "text": "As fixed-size B-Tree pages"}
+                ],
+                "answer": "A",
+                "explanation": "Triple-stores represent all information as three-part statements: (Subject, Predicate, Object). For example, (Jim, likes, bananas). SPARQL is the query language for this model."
+            },
+            {
+                "number": 112,
+                "question": "Why must MapReduce functions be 'pure' (no side effects)?",
+                "options": [
+                    {"letter": "A", "text": "Pure functions run faster than impure functions"},
+                    {"letter": "B", "text": "They allow safe reruns on failure without corrupting data or producing duplicate effects"},
+                    {"letter": "C", "text": "The database engine cannot parse impure functions"},
+                    {"letter": "D", "text": "Pure functions are required by JavaScript syntax"}
+                ],
+                "answer": "B",
+                "explanation": "Pure functions with no side effects can be safely retried if a node fails mid-execution, because re-running them produces the same result without duplicating writes or sending extra messages."
+            },
+            {
+                "number": 113,
+                "question": "Why did MongoDB introduce the aggregation pipeline?",
+                "options": [
+                    {"letter": "A", "text": "To replace B-Tree indexes with LSM-Trees"},
+                    {"letter": "B", "text": "To enable real-time video streaming from the database"},
+                    {"letter": "C", "text": "To provide a declarative alternative to the complex coordinated MapReduce JavaScript"},
+                    {"letter": "D", "text": "To add SQL support to MongoDB"}
+                ],
+                "answer": "C",
+                "explanation": "Writing coordinated MapReduce JavaScript was difficult. MongoDB's aggregation pipeline provides a declarative approach (essentially NoSQL reinventing SQL in disguise) that is easier to write and optimize."
+            },
+            {
+                "number": 114,
+                "question": "In graph data models, what makes them more flexible than relational models for evolving data?",
+                "options": [
+                    {"letter": "A", "text": "They enforce rigid schema restrictions on all data types"},
+                    {"letter": "B", "text": "They require all vertices to have the same properties"},
+                    {"letter": "C", "text": "They store heterogeneous data without rigid schema restrictions, making them highly evolvable"},
+                    {"letter": "D", "text": "They do not support any form of indexing"}
+                ],
+                "answer": "C",
+                "explanation": "Graph models can store different types of objects (heterogeneous data) as vertices with varied properties and freely add new relationship types as edges — no rigid migration needed."
+            },
+            {
+                "number": 115,
+                "question": "What is a tombstone record in an append-only storage engine?",
+                "options": [
+                    {"letter": "A", "text": "A compressed backup of deleted data stored for auditing"},
+                    {"letter": "B", "text": "A record that marks the database as having reached its capacity"},
+                    {"letter": "C", "text": "A special deletion marker that tells the merging process to discard all older values for that key"},
+                    {"letter": "D", "text": "A metadata record storing database configuration"}
+                ],
+                "answer": "C",
+                "explanation": "Since append-only logs cannot modify existing records, deletes are handled by appending a tombstone — a special marker that signals the compaction/merging process to discard all previous values for that key."
+            },
+            {
+                "number": 116,
+                "question": "What data structure is typically used for the memtable in an LSM-Tree?",
+                "options": [
+                    {"letter": "A", "text": "A singly linked list"},
+                    {"letter": "B", "text": "An unordered hash table"},
+                    {"letter": "C", "text": "A doubly-linked queue"},
+                    {"letter": "D", "text": "A balanced binary search tree such as a Red-Black tree or AVL tree"}
+                ],
+                "answer": "D",
+                "explanation": "The memtable uses a self-balancing tree (Red-Black or AVL) to maintain keys in sorted order in memory, so when flushed to disk it produces a properly sorted SSTable segment."
+            },
+            {
+                "number": 117,
+                "question": "What is the 'branching factor' of a B-Tree?",
+                "options": [
+                    {"letter": "A", "text": "The total number of keys stored in the entire tree"},
+                    {"letter": "B", "text": "The number of child page references in each page, typically several hundred"},
+                    {"letter": "C", "text": "The maximum depth the tree can reach"},
+                    {"letter": "D", "text": "The size of each individual key in bytes"}
+                ],
+                "answer": "B",
+                "explanation": "The branching factor is the number of child pointers per page. A higher branching factor means fewer levels in the tree, reducing the number of disk seeks needed for lookups."
+            },
+            {
+                "number": 118,
+                "question": "What happens when a B-Tree page becomes full during an insertion?",
+                "options": [
+                    {"letter": "A", "text": "The write is rejected and the client receives an error"},
+                    {"letter": "B", "text": "The entire tree is rebuilt from scratch"},
+                    {"letter": "C", "text": "The page splits into two half-full pages, and the parent page reference is updated"},
+                    {"letter": "D", "text": "The oldest key is automatically deleted to make room"}
+                ],
+                "answer": "C",
+                "explanation": "Page splitting divides a full page into two new pages each roughly half full, then updates the parent to point to both. This keeps the tree balanced at O(log n) depth."
+            },
+            {
+                "number": 119,
+                "question": "In a data warehouse, what is a star schema?",
+                "options": [
+                    {"letter": "A", "text": "A schema where all tables are connected in a circular chain"},
+                    {"letter": "B", "text": "A schema optimized for OLTP with heavy normalization"},
+                    {"letter": "C", "text": "A central fact table surrounded by multiple dimension tables that provide context"},
+                    {"letter": "D", "text": "A schema that only stores aggregate pre-computed data"}
+                ],
+                "answer": "C",
+                "explanation": "Star schemas have a central fact table (e.g., sales transactions) with foreign keys pointing to surrounding dimension tables (e.g., date, product, store, customer) that provide context for analysis."
+            },
+            {
+                "number": 120,
+                "question": "What is 'write amplification' and why does it matter for storage engines?",
+                "options": [
+                    {"letter": "A", "text": "Writing data to multiple geographic regions for disaster recovery"},
+                    {"letter": "B", "text": "Amplifying the signal strength of disk write heads"},
+                    {"letter": "C", "text": "A single logical write causing multiple physical writes to disk, wearing out SSDs and consuming I/O bandwidth"},
+                    {"letter": "D", "text": "Writing less data than the application requested"}
+                ],
+                "answer": "C",
+                "explanation": "Write amplification means one application write results in multiple writes to the storage medium (e.g., writing to WAL then updating a B-Tree page). This affects SSD lifespan and I/O performance."
+            },
+            {
+                "number": 121,
+                "question": "Why do B-Trees use latches (lightweight locks)?",
+                "options": [
+                    {"letter": "A", "text": "To compress data before writing to disk"},
+                    {"letter": "B", "text": "To protect the tree structure from corruption when multiple threads access or modify pages concurrently"},
+                    {"letter": "C", "text": "To speed up sequential reads across leaf pages"},
+                    {"letter": "D", "text": "To encrypt data stored in individual pages"}
+                ],
+                "answer": "B",
+                "explanation": "B-Trees support in-place updates, so concurrent access by multiple threads could corrupt the tree structure. Latches provide fine-grained locking to ensure thread safety."
+            },
+            {
+                "number": 122,
+                "question": "What advantage do sibling pointers in B-Tree leaf pages provide?",
+                "options": [
+                    {"letter": "A", "text": "They allow direct links between adjacent leaf pages for fast sequential range scanning"},
+                    {"letter": "B", "text": "They link every leaf page to the root page"},
+                    {"letter": "C", "text": "They store backup copies of each page's data"},
+                    {"letter": "D", "text": "They enable compression of interior pages"}
+                ],
+                "answer": "A",
+                "explanation": "Sibling pointers let the database scan a range of keys by jumping directly from one leaf page to the next, without backtracking up to parent pages for each sequential read."
+            },
+            {
+                "number": 123,
+                "question": "What is encoding (also called serialization or marshalling)?",
+                "options": [
+                    {"letter": "A", "text": "Encrypting data so unauthorized users cannot read it"},
+                    {"letter": "B", "text": "Compressing files to reduce their size on disk"},
+                    {"letter": "C", "text": "Converting code from one programming language to another"},
+                    {"letter": "D", "text": "Translating in-memory data structures into a self-contained byte sequence suitable for storage or network transmission"}
+                ],
+                "answer": "D",
+                "explanation": "Encoding (serialization) converts in-memory objects, structs, and pointers into a byte sequence that can be written to disk or sent over the network. Decoding reverses this process."
+            },
+            {
+                "number": 124,
+                "question": "What is the main problem with representing numbers in JSON?",
+                "options": [
+                    {"letter": "A", "text": "JSON does not support numbers at all"},
+                    {"letter": "B", "text": "JSON numbers are always stored as strings internally"},
+                    {"letter": "C", "text": "JSON does not distinguish between integers and floating-point numbers, causing ambiguity"},
+                    {"letter": "D", "text": "JSON limits all numbers to a maximum of 255"}
+                ],
+                "answer": "C",
+                "explanation": "JSON has a single 'number' type with no distinction between integers and floats. This causes problems like JavaScript parsing large integers incorrectly due to IEEE 754 floating-point precision limits."
+            },
+            {
+                "number": 125,
+                "question": "Why does using Base64 to encode binary data in JSON or XML increase the payload size?",
+                "options": [
+                    {"letter": "A", "text": "Base64 adds cryptographic signatures to every byte"},
+                    {"letter": "B", "text": "Base64 encoding increases the data size by approximately 33%"},
+                    {"letter": "C", "text": "Base64 converts each byte into exactly four bytes"},
+                    {"letter": "D", "text": "Base64 requires a separate schema file alongside the data"}
+                ],
+                "answer": "B",
+                "explanation": "Base64 represents 3 bytes of binary data as 4 ASCII characters, resulting in roughly a 33% size increase. This is the cost of encoding binary data within text-based formats."
+            },
+            {
+                "number": 126,
+                "question": "What is the fundamental flaw of 'location transparency' in RPC?",
+                "options": [
+                    {"letter": "A", "text": "It makes local function calls slower"},
+                    {"letter": "B", "text": "It tries to make remote network calls look identical to local function calls, ignoring that networks are unreliable, have variable latency, and can fail silently"},
+                    {"letter": "C", "text": "It encrypts the server's physical location, preventing load balancing"},
+                    {"letter": "D", "text": "It forces all calls to be synchronous"}
+                ],
+                "answer": "B",
+                "explanation": "RPC's location transparency is flawed because remote calls differ fundamentally from local calls: networks can drop packets, latency is unpredictable, timeouts leave the outcome uncertain, and retries risk duplicate operations."
+            },
+            {
+                "number": 127,
+                "question": "In message-passing dataflow, what is the actor model?",
+                "options": [
+                    {"letter": "A", "text": "A synchronous request-response pattern for REST APIs"},
+                    {"letter": "B", "text": "A database replication protocol used by single-leader systems"},
+                    {"letter": "C", "text": "A programming model where each actor has encapsulated local state and communicates exclusively by sending and receiving asynchronous messages"},
+                    {"letter": "D", "text": "A type of message broker like RabbitMQ"}
+                ],
+                "answer": "C",
+                "explanation": "In the actor model (e.g., Akka, Erlang OTP), each actor is a self-contained entity with private state. Actors communicate only through asynchronous messages, providing natural fault isolation and concurrency."
+            },
+            {
+                "number": 128,
+                "question": "What advantages do schema-based binary encodings (Protobuf, Avro) provide over schemaless formats like JSON?",
+                "options": [
+                    {"letter": "A", "text": "They make data human-readable for debugging"},
+                    {"letter": "B", "text": "They are more compact, serve as machine-checked documentation, and allow compatibility verification before deployment"},
+                    {"letter": "C", "text": "They eliminate all network overhead"},
+                    {"letter": "D", "text": "They work without any prior agreement between sender and receiver"}
+                ],
+                "answer": "B",
+                "explanation": "Schema-based formats produce more compact encodings (no repeated field names), the schema acts as always-up-to-date documentation, and compatibility can be checked at deployment time to prevent breaking changes."
+            },
+            {
+                "number": 129,
+                "question": "Why can MessagePack and BSON achieve only modest space savings over plain JSON?",
+                "options": [
+                    {"letter": "A", "text": "They use a different character set for field names"},
+                    {"letter": "B", "text": "They store data as XML internally"},
+                    {"letter": "C", "text": "They still include field names as text strings in the encoded data, limiting how compact they can be"},
+                    {"letter": "D", "text": "They require a schema registry to function"}
+                ],
+                "answer": "C",
+                "explanation": "Unlike Protobuf or Avro which use numeric tags or schema resolution, MessagePack and BSON still embed field name strings in every record, so the space savings over JSON are limited."
+            },
+            {
+                "number": 130,
+                "question": "What are the three core benefits of data replication?",
+                "options": [
+                    {"letter": "A", "text": "Reduced latency (data near users), increased availability (survive failures), and higher read throughput (spread reads across replicas)"},
+                    {"letter": "B", "text": "Lower hardware costs, simpler codebase, and fewer software bugs"},
+                    {"letter": "C", "text": "Faster writes, larger storage capacity, and better data compression"},
+                    {"letter": "D", "text": "Stronger encryption, automated backups, and easier debugging"}
+                ],
+                "answer": "A",
+                "explanation": "Replication keeps copies of data on multiple machines to: 1) reduce latency by serving from nearby nodes, 2) increase availability when nodes fail, and 3) scale read throughput across multiple replicas."
+            },
+            {
+                "number": 131,
+                "question": "What is the correct zero-downtime workflow for adding a new follower in single-leader replication?",
+                "options": [
+                    {"letter": "A", "text": "Stop the leader, copy all data, then restart the leader"},
+                    {"letter": "B", "text": "Delete the old follower and create an entirely new database from scratch"},
+                    {"letter": "C", "text": "Clone the leader's hardware and physically connect it to the network"},
+                    {"letter": "D", "text": "Take a consistent snapshot of the leader, copy it to the new node, then have the follower catch up from the replication log position of the snapshot"}
+                ],
+                "answer": "D",
+                "explanation": "The process is: 1) Take a snapshot of the leader at a known log position, 2) Copy it to the new follower, 3) The follower requests all changes since that snapshot position and applies them to catch up."
+            },
+            {
+                "number": 132,
+                "question": "What is an anti-entropy process in leaderless replication?",
+                "options": [
+                    {"letter": "A", "text": "A process that encrypts all replicated data for security"},
+                    {"letter": "B", "text": "A process that prevents any writes during network partitions"},
+                    {"letter": "C", "text": "A background process that continuously compares data between replicas and copies missing data to keep them in sync"},
+                    {"letter": "D", "text": "A process that removes old replicas from the cluster"}
+                ],
+                "answer": "C",
+                "explanation": "Anti-entropy processes run in the background, continuously scanning replicas for differences and copying missing data. Unlike read repair (which is triggered by reads), anti-entropy proactively ensures convergence."
+            },
+            {
+                "number": 133,
+                "question": "What happens during hinted handoff in a leaderless system?",
+                "options": [
+                    {"letter": "A", "text": "The client is told to retry the write later"},
+                    {"letter": "B", "text": "A node outside the key's designated home nodes temporarily accepts the write and forwards it to the correct home node once it recovers"},
+                    {"letter": "C", "text": "The write is permanently discarded to maintain consistency"},
+                    {"letter": "D", "text": "The leader reassigns the key to a different partition"}
+                ],
+                "answer": "B",
+                "explanation": "With hinted handoff, when a key's designated home node is unreachable, another node temporarily stores the write. Once the home node comes back online, the write is forwarded to it. This improves write availability."
+            },
+            {
+                "number": 134,
+                "question": "What is 'conflict avoidance' as a strategy in multi-leader replication?",
+                "options": [
+                    {"letter": "A", "text": "Using timestamps to order all writes globally across datacenters"},
+                    {"letter": "B", "text": "Preventing all concurrent writes in the entire system"},
+                    {"letter": "C", "text": "Disabling multi-leader replication during peak traffic hours"},
+                    {"letter": "D", "text": "Routing all writes for a particular record through the same leader, so conflicts cannot arise for that record"}
+                ],
+                "answer": "D",
+                "explanation": "The simplest conflict strategy is avoidance: ensure that writes to a given record always go through the same leader (e.g., by routing a user's data to their home datacenter's leader), eliminating the possibility of concurrent conflicting writes."
+            },
+            {
+                "number": 135,
+                "question": "What are CRDTs (Conflict-free Replicated Data Types)?",
+                "options": [
+                    {"letter": "A", "text": "A type of SQL index for fast conflict detection"},
+                    {"letter": "B", "text": "Data structures that can be concurrently modified by multiple replicas and automatically merge into a consistent state without user-defined conflict resolution"},
+                    {"letter": "C", "text": "A special variant of B-Trees designed for distributed systems"},
+                    {"letter": "D", "text": "A message-passing protocol used in actor frameworks"}
+                ],
+                "answer": "B",
+                "explanation": "CRDTs are data structures (sets, counters, sequences) designed so that concurrent modifications from different replicas can always be merged deterministically without conflicts. Examples include G-Counters and OR-Sets."
+            },
+            {
+                "number": 136,
+                "question": "Which multi-leader replication topology is most resilient to individual node failures?",
+                "options": [
+                    {"letter": "A", "text": "Circular topology — each node forwards to the next in a ring"},
+                    {"letter": "B", "text": "Star/tree topology — one central node relays all messages"},
+                    {"letter": "C", "text": "All-to-all topology — every leader sends its writes to every other leader directly"},
+                    {"letter": "D", "text": "Single-leader topology with no followers"}
+                ],
+                "answer": "C",
+                "explanation": "All-to-all topology is the most fault-tolerant because there is no single point of failure. In circular or star topologies, the failure of one node can break the replication chain for all downstream nodes."
+            },
+            {
+                "number": 137,
+                "question": "Why is statement-based replication considered problematic?",
+                "options": [
+                    {"letter": "A", "text": "It uses too much network bandwidth compared to other methods"},
+                    {"letter": "B", "text": "Non-deterministic functions like NOW() or RAND() produce different results on different replicas, causing data divergence"},
+                    {"letter": "C", "text": "It cannot replicate INSERT or DELETE statements"},
+                    {"letter": "D", "text": "It requires all replicas to use the same operating system"}
+                ],
+                "answer": "B",
+                "explanation": "Statement-based replication replays SQL statements on followers. But statements using non-deterministic functions (NOW(), RAND()), auto-incrementing columns, or triggers with side effects will produce different results on different replicas."
+            },
+            {
+                "number": 138,
+                "question": "What advantage does logical (row-based) replication have over physical WAL shipping?",
+                "options": [
+                    {"letter": "A", "text": "It always uses less disk space"},
+                    {"letter": "B", "text": "It is always faster than WAL shipping"},
+                    {"letter": "C", "text": "It decouples the replication format from the storage engine internals, allowing leader and follower to run different database versions"},
+                    {"letter": "D", "text": "It eliminates the need for network connectivity between nodes"}
+                ],
+                "answer": "C",
+                "explanation": "Logical replication describes changes at the row level (insert row X, delete row Y) rather than as physical disk block changes. This allows the leader and followers to run different storage engine versions or even different database software."
+            },
+            {
+                "number": 139,
+                "question": "A user writes a comment, refreshes the page, and the comment is missing. After refreshing again, it reappears. What is the most likely cause?",
+                "options": [
+                    {"letter": "A", "text": "The database is running out of storage space"},
+                    {"letter": "B", "text": "The application has a client-side caching bug"},
+                    {"letter": "C", "text": "Inconsistent read-after-write behavior — the read went to a replica that hadn't yet received the write"},
+                    {"letter": "D", "text": "The comment was automatically deleted by a moderation system"}
+                ],
+                "answer": "C",
+                "explanation": "This is a classic read-after-write consistency violation. The user's write went to the leader, but the subsequent read was served by a follower that hadn't yet received the replicated write. A second refresh hit a more up-to-date replica."
+            },
+            {
+                "number": 140,
+                "question": "What is the 'consistent prefix reads' guarantee designed to prevent?",
+                "options": [
+                    {"letter": "A", "text": "Duplicate writes appearing in the replication log"},
+                    {"letter": "B", "text": "A user seeing an answer to a question before seeing the question itself, violating causal ordering"},
+                    {"letter": "C", "text": "The database running out of disk space during compaction"},
+                    {"letter": "D", "text": "Followers falling too far behind the leader's write position"}
+                ],
+                "answer": "B",
+                "explanation": "Consistent prefix reads ensures that if a sequence of writes happens in a certain causal order (e.g., question then answer), any reader observing both will see them in that same order — never the effect before its cause."
+            }
+        ]
     }
 ];
 
