@@ -131,16 +131,28 @@ export default function ConfigExam() {
                     {/* Right: Info Panel & Confirm */}
                     <div className="config-summary-panel">
                         <div className="summary-illustration">
-                            <i className="fa-solid fa-rocket-launch text-accent" style={{fontSize: '4rem'}}></i>
+                            <i className="fa-solid fa-rocket text-accent"></i>
                         </div>
                         
                         <div className="summary-details">
                             <h4>Session Briefing</h4>
                             <ul className="briefing-list">
-                                <li><i className="fa-solid fa-circle-info"></i> <span>{actualCount}</span> targeted questions.</li>
-                                <li><i className="fa-solid fa-list-check"></i> Bank: <span>{questionTypeCounts.mcq || 0}</span> MCQ, <span>{questionTypeCounts.comparison || 0}</span> comparisons, <span>{questionTypeCounts.essay || 0}</span> essays.</li>
-                                <li><i className="fa-solid fa-clock"></i> Mode: <span>{mode === 'practice' ? 'Practice Mode' : 'Real Exam Simulator'}</span>.</li>
-                                <li><i className="fa-solid fa-shield"></i> Detailed statistics recorded to performance charts.</li>
+                                <li>
+                                    <i className="fa-solid fa-circle-info"></i>
+                                    <span>{actualCount} targeted questions.</span>
+                                </li>
+                                <li>
+                                    <i className="fa-solid fa-list-check"></i>
+                                    <span>Bank: {questionTypeCounts.mcq || 0} MCQ, {questionTypeCounts.comparison || 0} comparisons, {questionTypeCounts.essay || 0} essays.</span>
+                                </li>
+                                <li>
+                                    <i className="fa-solid fa-clock"></i>
+                                    <span>Mode: {mode === 'practice' ? 'Practice Mode' : 'Real Exam Simulator'}.</span>
+                                </li>
+                                <li>
+                                    <i className="fa-solid fa-shield"></i>
+                                    <span>Detailed statistics recorded to performance charts.</span>
+                                </li>
                             </ul>
                         </div>
 

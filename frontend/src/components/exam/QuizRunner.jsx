@@ -336,9 +336,15 @@ export default function QuizRunner() {
                             </button>
                         )}
                         
-                        <button className="btn btn-secondary btn-nav" onClick={handleNext} disabled={currentQuestionIndex === totalQs - 1}>
-                            Next <i className="fa-solid fa-chevron-right"></i>
-                        </button>
+                        {currentQuestionIndex === totalQs - 1 ? (
+                            <button className="btn btn-red btn-nav animate-pulse" onClick={handleSubmitExam}>
+                                Finish <i className="fa-solid fa-circle-check"></i>
+                            </button>
+                        ) : (
+                            <button className="btn btn-secondary btn-nav" onClick={handleNext}>
+                                Next <i className="fa-solid fa-chevron-right"></i>
+                            </button>
+                        )}
                     </div>
                 </div>
 

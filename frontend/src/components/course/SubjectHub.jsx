@@ -11,38 +11,24 @@ const chapters = [
         meta: 'Reliability, scalability, maintainability',
         sections: [
             {
-                heading: 'Data-intensive applications',
-                body: [
-                    'Modern applications are often data-intensive rather than CPU-intensive. They depend on databases, caches, search indexes, stream processing, and batch processing to store, speed up, search, move, and analyze large amounts of data.'
-                ]
-            },
-            {
                 heading: 'Reliability',
-                body: [
-                    'A reliable system continues to work correctly even when things go wrong. A fault is one component deviating from its specification; a failure is when the whole system stops providing service to users.'
-                ],
+                body: 'The system should continue to work correctly even when things go wrong. <strong>Faults</strong> (one component deviating) vs <strong>Failures</strong> (whole system stops).',
                 bullets: [
-                    'Hardware faults include disk crashes and power outages. Redundancy, RAID, and backups help tolerate them.',
-                    'Software faults include bugs that crash services or corrupt behavior.',
-                    'Human errors are a leading cause of outages. Good APIs, sandbox environments, automated tests, and quick rollback reduce the damage.'
+                    '<strong>Hardware faults:</strong> Hard disks crashing, power outages → handle with redundancy (RAID, backup)',
+                    '<strong>Software faults:</strong> Bugs causing crashes (e.g., Linux leap second bug)',
+                    '<strong>Human errors:</strong> Leading cause of outages → minimize with well-designed APIs, sandbox environments, automated testing, and quick rollback'
                 ]
             },
             {
                 heading: 'Scalability',
-                body: [
-                    'Scalability is about dealing with growth in data volume or traffic. To discuss it clearly, describe load with parameters such as requests per second and read/write ratio.',
-                    'Performance should be described with response time and percentiles. Median latency shows the typical user experience, while tail latencies such as p99 matter because they affect the slowest and often most important requests.'
-                ]
+                body: 'Dealing with growth. Use <strong>Load Parameters</strong> (requests/sec, read/write ratio). Measure with <strong>Percentiles</strong> — median (p50) and tail latencies (p99) matter more than averages.'
             },
             {
                 heading: 'Maintainability',
-                body: [
-                    'Maintainability means making the system easy for people to work on productively over time.'
-                ],
                 bullets: [
-                    'Operability: routine operational tasks are easy, with good monitoring and automation.',
-                    'Simplicity: abstraction hides complex implementation details.',
-                    'Evolvability: the system can adapt when requirements change.'
+                    '<strong>Operability:</strong> Easy routine tasks, good monitoring & automation',
+                    '<strong>Simplicity:</strong> Use abstraction to hide complexity',
+                    '<strong>Evolvability:</strong> Easy to adapt to changing requirements'
                 ]
             }
         ]
@@ -55,37 +41,24 @@ const chapters = [
         meta: 'SQL, document models, graph models, query languages',
         sections: [
             {
-                heading: 'Abstraction layers',
-                body: [
-                    'Applications are built through layers of data models. Each layer gives the layer above it a cleaner abstraction and hides complexity below it.'
-                ],
-                bullets: [
-                    'Application developers model the real world as objects, data structures, and APIs.',
-                    'Storage representation expresses those structures as JSON, XML, tables, or graphs.',
-                    'Database software translates those models into bytes in memory, on disk, or over the network.',
-                    'Hardware represents bytes physically as electrical currents, light pulses, or magnetic fields.'
-                ]
+                heading: '4 Layers of Abstraction',
+                body: 'Application Developer → Storage Representation → Database Software → Hardware Engineers'
             },
             {
-                heading: 'Relational model',
-                body: [
-                    'Relational databases organize data into tables made of unordered rows. Their strength is hiding internal storage behind a clean interface.',
-                    'The impedance mismatch is the awkward translation between object-oriented code and relational tables. ORMs reduce boilerplate, but they cannot remove the mismatch completely.'
-                ]
+                heading: 'Relational (SQL)',
+                body: 'Data in tables/tuples. <strong>Impedance Mismatch:</strong> disconnect between OOP code and relational tables. ORMs reduce but can\'t eliminate this.'
             },
             {
-                heading: 'Document model',
-                body: [
-                    'Document databases are useful for flexible schemas, high scalability, specialized queries, and self-contained records. Schema-on-read means the structure is interpreted when data is read; schema-on-write means the database enforces structure when data is written.',
-                    'Documents give good locality because related data can be stored together, but they are weaker for joins and many-to-many relationships. Those joins often move into application code.'
-                ]
+                heading: 'Document (NoSQL)',
+                body: '<strong>Schema-on-Read</strong> (implicit, like dynamic typing) vs <strong>Schema-on-Write</strong> (explicit, like static typing). Good data locality but poor join support.'
             },
             {
-                heading: 'Query languages and graphs',
-                body: [
-                    'Declarative languages such as SQL and CSS describe what result is wanted, not the exact steps to produce it. This makes queries shorter, hides implementation details, and allows database engines to optimize or parallelize execution.',
-                    'Graph models are best when relationships are highly interconnected. Property graphs, triple-stores, SPARQL, Cypher, and Datalog all model networks of vertices, edges, and facts in different ways.'
-                ]
+                heading: 'Graph Model',
+                body: 'For highly interconnected data. <strong>Property Graph</strong> (Neo4j, Cypher), <strong>Triple-Store</strong> (SPARQL), <strong>Datalog</strong>.'
+            },
+            {
+                heading: 'Declarative vs Imperative',
+                body: 'Declarative (SQL/CSS) specifies <em>what</em>, not <em>how</em>. Benefits: concise, hides implementation, enables parallel execution.'
             }
         ]
     },
@@ -97,36 +70,24 @@ const chapters = [
         meta: 'Indexes, LSM trees, B-trees, OLTP vs OLAP',
         sections: [
             {
-                heading: 'Database basics and indexes',
-                body: [
-                    'A database stores data when given it and returns data when asked. Understanding storage internals helps you choose the right engine for transactional or analytical workloads.',
-                    'An append-only log gives excellent write performance because appending is sequential, but terrible read performance without an index. Indexes speed reads, but every index slows writes because it must be updated.'
-                ]
+                heading: 'Append-Only Log',
+                body: 'Write O(1) — fast sequential append. Read O(n) — must scan entire file. Indexes speed up reads but slow writes.'
             },
             {
-                heading: 'Hash indexes',
-                body: [
-                    'A hash index maps keys to byte offsets in an append-only file. It is fast when all keys fit in memory and supports compaction, merging, tombstone deletes, checksums, and concurrent readers over immutable segments.'
-                ],
-                bullets: [
-                    'Strength: simple and very fast point lookups.',
-                    'Limitation: keys must fit in RAM.',
-                    'Limitation: range queries are inefficient.'
-                ]
+                heading: 'Hash Indexes (Bitcask)',
+                body: 'In-memory hash map → byte offsets on disk. Uses <strong>compaction & merging</strong>, tombstone deletes, single writer thread. Limitation: all keys must fit in RAM, no range queries.'
             },
             {
-                heading: 'SSTables and LSM trees',
-                body: [
-                    'SSTables are sorted string tables: immutable segments sorted by key. Writes go into a sorted in-memory memtable, then flush to disk as an SSTable. A write-ahead log protects the memtable after crashes.',
-                    'Reads check the memtable, then newer SSTables, then older SSTables. Bloom filters avoid unnecessary disk reads, and compaction merges files through size-tiered or leveled strategies.'
-                ]
+                heading: 'SSTables & LSM-Trees',
+                body: 'Segments sorted by key. <strong>Memtable</strong> (Red-Black/AVL) → flush to SSTable → WAL for crash recovery. Bloom filters prevent wasteful disk reads. Compaction: size-tiered vs leveled.'
             },
             {
-                heading: 'B-trees and analytics',
-                body: [
-                    'B-trees divide the database into fixed-size pages and keep the tree balanced with page splits. They are the classic relational index structure and usually favor reads over write-heavy workloads.',
-                    'OLTP handles many small user-facing lookups where disk seek time matters. OLAP scans huge datasets for analysis where disk bandwidth matters, often using warehouses, ETL, star schemas, and column-oriented storage.'
-                ]
+                heading: 'B-Trees',
+                body: 'Fixed-size pages (4KB), branching factor ~hundreds. Page splitting keeps tree balanced at O(log n). WAL (Redo Log) for crash resilience. Latches for concurrency.'
+            },
+            {
+                heading: 'OLTP vs OLAP',
+                body: '<strong>OLTP:</strong> User-facing, small record lookups, disk seek bottleneck. <strong>OLAP:</strong> Analyst queries, scan millions of records, disk bandwidth bottleneck. Data warehouses use ETL and column-oriented storage.'
             }
         ]
     },
@@ -138,36 +99,24 @@ const chapters = [
         meta: 'Serialization, compatibility, schemas, services',
         sections: [
             {
-                heading: 'Evolution and compatibility',
-                body: [
-                    'Applications change over time, so old and new code often coexist during rolling upgrades. Backward compatibility means newer code can read old data. Forward compatibility means older code can read newer data by ignoring unknown additions.'
-                ]
+                heading: 'Compatibility',
+                body: '<strong>Backward:</strong> Newer code reads older data (easy). <strong>Forward:</strong> Older code reads newer data (tricky — must ignore unknowns). Both essential for rolling upgrades.'
             },
             {
-                heading: 'Encoding formats',
-                body: [
-                    'Encoding turns in-memory structures into bytes for disk or network use. Decoding turns those bytes back into in-memory data.',
-                    'Language-specific formats such as Java Serializable or Python pickle are convenient, but risky for long-term storage because they are language-tied, insecure, and weak at versioning.'
-                ],
+                heading: 'Encoding Formats',
                 bullets: [
-                    'JSON, XML, and CSV are human-readable but have number ambiguity, weak binary support, and schema limitations.',
-                    'MessagePack and BSON keep JSON-like models but still carry field names.',
-                    'Thrift and Protocol Buffers use schemas and compact field tags.',
-                    'Avro uses writer and reader schemas, matches fields by name, and is very compact.'
+                    '<strong>Language-specific</strong> (Java Serializable, pickle): Convenient but security risk (RCE), single language lock-in',
+                    '<strong>JSON/XML:</strong> Human-readable but number ambiguity, no binary support, Base64 adds 33% size',
+                    '<strong>Protobuf/Thrift:</strong> Use field tags (numbers), compact binary, strong schema evolution',
+                    '<strong>Avro:</strong> No tags — matches by field name. Most compact. Writer/Reader schema resolution. Great for Hadoop/Kafka'
                 ]
             },
             {
-                heading: 'Schema evolution',
-                body: [
-                    'In Protobuf and Thrift, new fields should be optional or have defaults, and removed field tags should not be reused. In Avro, fields can be added or removed when defaults make old and new schemas resolvable.',
-                    'Schemas are valuable because they make data compact, act as documentation, enable static checking, and allow compatibility checks before deployment.'
-                ]
-            },
-            {
-                heading: 'Dataflow modes',
-                body: [
-                    'Through databases, data outlives code, so preserving unknown fields is important. Through services, REST and RPC move data across HTTP or internal networks, but RPC cannot truly behave like a local call because networks are unreliable.',
-                    'Through message passing, brokers such as Kafka or RabbitMQ buffer messages, redeliver after crashes, decouple senders from recipients, and support fan-out.'
+                heading: 'Dataflow Modes',
+                bullets: [
+                    '<strong>Through Databases:</strong> Data outlives code; forward compat critical',
+                    '<strong>Through Services (REST/RPC):</strong> RPC\'s "Location Transparency" is a flawed illusion',
+                    '<strong>Message Passing:</strong> Brokers (Kafka, RabbitMQ) buffer, redeliver, and fan-out'
                 ]
             }
         ]
@@ -180,35 +129,28 @@ const chapters = [
         meta: 'Replication, consistency, failover, quorums',
         sections: [
             {
-                heading: 'Why replication exists',
-                body: [
-                    'Replication keeps copies of the same data on multiple machines. It reduces latency by keeping data near users, increases availability when nodes fail, and improves read throughput by spreading reads across machines.'
-                ]
+                heading: 'Single-Leader',
+                body: 'One leader accepts writes, followers consume replication log. Sync (guaranteed up-to-date, blocks on crash) vs Async (leader never blocks, data loss risk).'
             },
             {
-                heading: 'Single-leader replication',
-                body: [
-                    'In single-leader replication, one leader accepts writes and followers consume the replication log in order. Reads may go to the leader or followers.',
-                    'Synchronous replication keeps a follower up to date but can block writes. Asynchronous replication keeps the leader available but risks losing unreplicated writes if the leader fails.'
-                ],
+                heading: 'Failover Pitfalls',
                 bullets: [
-                    'Follower recovery uses local logs to catch up from the leader.',
-                    'Leader failover detects failure, promotes a follower, and reroutes clients.',
-                    'Pitfalls include split brain, discarded writes, and timeouts that are too short.'
+                    '<strong>Split Brain:</strong> Two nodes both believe they\'re leader → data corruption',
+                    'Discarding un-replicated writes violates durability',
+                    'Short timeouts cause unnecessary failovers'
                 ]
             },
             {
-                heading: 'Replication lag',
-                body: [
-                    'Asynchronous followers may lag behind the leader, creating temporary inconsistencies. Read-after-write consistency makes users see their own updates. Monotonic reads prevent users from going backward in time. Consistent prefix reads preserve causal order.'
+                heading: 'Replication Lag Anomalies',
+                bullets: [
+                    '<strong>Read-after-write:</strong> User sees own writes vanish → read own profile from leader',
+                    '<strong>Monotonic reads:</strong> Time goes backward → pin user to same replica',
+                    '<strong>Consistent prefix:</strong> Effect before cause → route causal writes to same partition'
                 ]
             },
             {
-                heading: 'Multi-leader and leaderless systems',
-                body: [
-                    'Multi-leader replication allows several nodes to accept writes, which helps multi-datacenter and offline use cases but introduces write conflicts. Conflict avoidance, last-write-wins, merging, custom handlers, CRDTs, and operational transformation are possible strategies.',
-                    'Leaderless systems let any replica accept writes. Clients write to several replicas and read from several replicas. A strict quorum uses w + r > n so the read and write sets overlap, but sloppy quorums, hinted handoff, concurrent writes, and clock skew can still produce stale or conflicting values.'
-                ]
+                heading: 'Multi-Leader & Leaderless',
+                body: '<strong>Multi-leader:</strong> Multiple DCs, conflict resolution (LWW, merge, custom). <strong>Leaderless (Dynamo):</strong> Any node accepts writes, quorum w+r>n, sloppy quorums, hinted handoff, version vectors for concurrency.'
             }
         ]
     }
@@ -218,6 +160,7 @@ export default function SubjectHub() {
     const { navigateTo, setCurrentSession } = useExamContext();
     const [selectedChapterId, setSelectedChapterId] = useState(null);
     const selectedChapter = chapters.find(chapter => chapter.id === selectedChapterId);
+    
     const examCounts = {
         exam1: examData.find(exam => exam.examId === 0)?.questions.length || 0,
         exam2: examData.find(exam => exam.examId === 1)?.questions.length || 0,
@@ -226,50 +169,9 @@ export default function SubjectHub() {
     };
 
     const handleConfigureExam = (examId) => {
-        // Just set the examId in current session for the config view to pick up
         setCurrentSession(prev => ({ ...prev, examId }));
         navigateTo('view-exam-config');
     };
-
-    if (selectedChapter) {
-        return (
-            <section id="view-subject-hub" className="app-view active">
-                <article className="chapter-blog-page">
-                    <button className="btn-back" onClick={() => setSelectedChapterId(null)}>
-                        <i className="fa-solid fa-chevron-left"></i> Back to Course Hub
-                    </button>
-
-                    <header className="chapter-blog-hero">
-                        <span className="chapter-blog-kicker">{selectedChapter.badge} Summary</span>
-                        <h1>{selectedChapter.title}</h1>
-                        <p>{selectedChapter.preview}</p>
-                        <div className="chapter-blog-meta">
-                            <span><i className="fa-solid fa-book-open"></i> Advanced Programming Web</span>
-                            <span><i className="fa-solid fa-layer-group"></i> {selectedChapter.meta}</span>
-                        </div>
-                    </header>
-
-                    <div className="chapter-blog-body">
-                        {selectedChapter.sections.map((section) => (
-                            <section className="chapter-blog-section" key={section.heading}>
-                                <h2>{section.heading}</h2>
-                                {section.body?.map((paragraph) => (
-                                    <p key={paragraph}>{paragraph}</p>
-                                ))}
-                                {section.bullets && (
-                                    <ul>
-                                        {section.bullets.map((bullet) => (
-                                            <li key={bullet}>{bullet}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </section>
-                        ))}
-                    </div>
-                </article>
-            </section>
-        );
-    }
 
     return (
         <section id="view-subject-hub" className="app-view active">
@@ -286,95 +188,162 @@ export default function SubjectHub() {
                 {/* Left: Syllabus Map & Chapters Card */}
                 <div className="syllabus-card card">
                     <h3 className="card-title"><i className="fa-solid fa-map-location-dot"></i> Course Syllabus</h3>
-                    <p className="card-subtitle">Exams strictly focus on the core foundational concepts of the first 5 chapters:</p>
+                    <p className="card-subtitle">Select any chapter to read its detailed summary on the right:</p>
                     
                     <ul className="syllabus-list">
                         {chapters.map((chapter) => (
                             <li
-                                className="syllabus-item syllabus-item-link active"
+                                className={`syllabus-item syllabus-item-link ${selectedChapterId === chapter.id ? 'active' : ''}`}
                                 key={chapter.id}
-                                onClick={() => setSelectedChapterId(chapter.id)}
+                                onClick={() => setSelectedChapterId(prev => prev === chapter.id ? null : chapter.id)}
                                 tabIndex="0"
                                 onKeyDown={(event) => {
                                     if (event.key === 'Enter' || event.key === ' ') {
                                         event.preventDefault();
-                                        setSelectedChapterId(chapter.id);
+                                        setSelectedChapterId(prev => prev === chapter.id ? null : chapter.id);
                                     }
                                 }}
+                                style={{
+                                    borderLeft: selectedChapterId === chapter.id ? '4px solid var(--color-accent)' : '1px solid transparent',
+                                    background: selectedChapterId === chapter.id ? 'rgba(255, 255, 255, 0.04)' : ''
+                                }}
                             >
-                                <div className="ch-badge">{chapter.badge}</div>
+                                <div className="ch-badge" style={{
+                                    background: selectedChapterId === chapter.id ? 'rgba(6, 182, 212, 0.15)' : '',
+                                    borderColor: selectedChapterId === chapter.id ? 'var(--color-accent)' : ''
+                                }}>{chapter.badge}</div>
                                 <div className="ch-info">
                                     <h4>{chapter.title}</h4>
                                     <p>{chapter.preview}</p>
                                 </div>
-                                <i className="fa-solid fa-arrow-right ch-open-icon"></i>
+                                <i className="fa-solid fa-arrow-right ch-open-icon" style={{
+                                    transform: selectedChapterId === chapter.id ? 'rotate(90deg)' : 'none',
+                                    color: selectedChapterId === chapter.id ? 'var(--color-accent)' : ''
+                                }}></i>
                             </li>
                         ))}
                     </ul>
+                    {selectedChapterId !== null && (
+                        <button className="btn btn-outline btn-full-width" style={{ marginTop: '1rem' }} onClick={() => setSelectedChapterId(null)}>
+                            <i className="fa-solid fa-circle-question"></i> Show Core Exams
+                        </button>
+                    )}
                 </div>
 
-                {/* Right: Active Exams Panel */}
-                <div className="exams-list-container">
-                    <h3 className="container-title"><i className="fa-solid fa-paper-plane text-accent"></i> Core Course Exams</h3>
-                    
-                    <div className="exams-grid">
-                        <div className="exam-card card-glow">
-                            <div className="exam-card-header">
-                                <span className="exam-badge badge-cyan">Chapters 1-3</span>
-                                <h4 className="exam-card-title">Exam 1: LSM Trees, NoSQL, & DB Concepts</h4>
-                            </div>
-                            <p className="exam-card-desc">Comprehensive test covering read/write amplification, NoSQL models, SSTable immutability...</p>
-                            <div className="exam-card-footer">
-                                <div className="exam-meta">
-                                    <span><i className="fa-solid fa-question-circle"></i> {examCounts.exam1} Questions</span>
-                                </div>
-                                <button className="btn btn-primary" onClick={() => handleConfigureExam(0)}>Configure Exam</button>
-                            </div>
+                {/* Right Column: Dynamic Panel (Exams OR Chapter Blog Summary) */}
+                {selectedChapter ? (
+                    <article className="chapter-blog-page card card-glow animate-fade-in" style={{ padding: '2rem', height: 'fit-content' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
+                            <span className="chapter-blog-kicker" style={{ margin: 0 }}>{selectedChapter.badge} Summary</span>
+                            <button className="btn btn-secondary" onClick={() => setSelectedChapterId(null)}>
+                                <i className="fa-solid fa-chevron-left"></i> Back to Exams
+                            </button>
                         </div>
 
-                        <div className="exam-card card-glow">
-                            <div className="exam-card-header">
-                                <span className="exam-badge badge-purple">Chapter 5</span>
-                                <h4 className="exam-card-title">Exam 2: Replication & Distributed Systems</h4>
+                        <header className="chapter-blog-hero" style={{ paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
+                            <h2 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '0.5rem', lineHeight: '1.2' }}>{selectedChapter.title}</h2>
+                            <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{selectedChapter.preview}</p>
+                            <div className="chapter-blog-meta" style={{ marginTop: '1rem' }}>
+                                <span><i className="fa-solid fa-layer-group"></i> {selectedChapter.meta}</span>
                             </div>
-                            <p className="exam-card-desc">Tests your knowledge of single-leader, multi-leader, and leaderless replication protocols...</p>
-                            <div className="exam-card-footer">
-                                <div className="exam-meta">
-                                    <span><i className="fa-solid fa-question-circle"></i> {examCounts.exam2} Questions</span>
-                                </div>
-                                <button className="btn btn-primary" onClick={() => handleConfigureExam(1)}>Configure Exam</button>
-                            </div>
-                        </div>
+                        </header>
 
-                        <div className="exam-card card-glow">
-                            <div className="exam-card-header">
-                                <span className="exam-badge badge-orange">Chapters 1-5</span>
-                                <h4 className="exam-card-title">Exam 3: Comparisons & Deep Analysis</h4>
-                            </div>
-                            <p className="exam-card-desc">Comparison tables, follow-up MCQs, and open-ended essay questions...</p>
-                            <div className="exam-card-footer">
-                                <div className="exam-meta">
-                                    <span><i className="fa-solid fa-table-columns"></i> {examCounts.exam3} Deep Questions</span>
+                        <div className="chapter-blog-body ch-summary-content" style={{ background: 'transparent', border: 'none', padding: 0 }}>
+                            {selectedChapter.sections.map((section) => (
+                                <div className="chapter-blog-section" key={section.heading} style={{ padding: '1rem 0', borderBottom: '1px solid var(--border-color)' }}>
+                                    <h3 style={{ fontSize: '1.15rem', color: 'var(--color-accent)', marginBottom: '0.6rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 750 }}>
+                                        <i className="fa-solid fa-bookmark" style={{ fontSize: '0.85rem' }}></i> {section.heading}
+                                    </h3>
+                                    {section.body && (
+                                        <p 
+                                            style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '0.5rem' }} 
+                                            dangerouslySetInnerHTML={{ __html: section.body }} 
+                                        />
+                                    )}
+                                    {section.bullets && (
+                                        <ul style={{ listStyle: 'none', paddingLeft: '0.5rem' }}>
+                                            {section.bullets.map((bullet) => (
+                                                <li 
+                                                    key={bullet} 
+                                                    style={{ 
+                                                        fontSize: '0.86rem', 
+                                                        color: 'var(--text-secondary)', 
+                                                        lineHeight: '1.6', 
+                                                        padding: '0.25rem 0 0.25rem 1rem', 
+                                                        position: 'relative' 
+                                                    }} 
+                                                    dangerouslySetInnerHTML={{ __html: bullet }} 
+                                                />
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
-                                <button className="btn btn-orange" onClick={() => handleConfigureExam(2)}>Configure Exam</button>
-                            </div>
+                            ))}
                         </div>
-
-                        <div className="exam-card card-glow">
-                            <div className="exam-card-header">
-                                <span className="exam-badge badge-cyan">Chapters 1-5</span>
-                                <h4 className="exam-card-title">Custom Mock: Mixed Question Bank</h4>
-                            </div>
-                            <p className="exam-card-desc">Randomized practice across all available MCQs, comparisons, and essay review prompts from chapters 1 to 5.</p>
-                            <div className="exam-card-footer">
-                                <div className="exam-meta">
-                                    <span><i className="fa-solid fa-shuffle"></i> {examCounts.total} Total Items</span>
+                    </article>
+                ) : (
+                    <div className="exams-list-container animate-fade-in">
+                        <h3 className="container-title"><i className="fa-solid fa-paper-plane text-accent"></i> Core Course Exams</h3>
+                        
+                        <div className="exams-grid">
+                            <div className="exam-card card-glow">
+                                <div className="exam-card-header">
+                                    <span className="exam-badge badge-cyan">Chapters 1-3</span>
+                                    <h4 className="exam-card-title">Exam 1: LSM Trees, NoSQL, & DB Concepts</h4>
                                 </div>
-                                <button className="btn btn-primary" onClick={() => handleConfigureExam('custom')}>Configure Mock</button>
+                                <p className="exam-card-desc">Comprehensive test covering read/write amplification, NoSQL models, SSTable immutability...</p>
+                                <div className="exam-card-footer">
+                                    <div className="exam-meta">
+                                        <span><i className="fa-solid fa-question-circle"></i> {examCounts.exam1} Questions</span>
+                                    </div>
+                                    <button className="btn btn-primary" onClick={() => handleConfigureExam(0)}>Configure Exam</button>
+                                </div>
+                            </div>
+
+                            <div className="exam-card card-glow">
+                                <div className="exam-card-header">
+                                    <span className="exam-badge badge-purple">Chapter 5</span>
+                                    <h4 className="exam-card-title">Exam 2: Replication & Distributed Systems</h4>
+                                </div>
+                                <p className="exam-card-desc">Tests your knowledge of single-leader, multi-leader, and leaderless replication protocols...</p>
+                                <div className="exam-card-footer">
+                                    <div className="exam-meta">
+                                        <span><i className="fa-solid fa-question-circle"></i> {examCounts.exam2} Questions</span>
+                                    </div>
+                                    <button className="btn btn-primary" onClick={() => handleConfigureExam(1)}>Configure Exam</button>
+                                </div>
+                            </div>
+
+                            <div className="exam-card card-glow">
+                                <div className="exam-card-header">
+                                    <span className="exam-badge badge-orange">Chapters 1-5</span>
+                                    <h4 className="exam-card-title">Exam 3: Comparisons & Deep Analysis</h4>
+                                </div>
+                                <p className="exam-card-desc">Comparison tables, follow-up MCQs, and open-ended essay questions...</p>
+                                <div className="exam-card-footer">
+                                    <div className="exam-meta">
+                                        <span><i className="fa-solid fa-table-columns"></i> {examCounts.exam3} Deep Questions</span>
+                                    </div>
+                                    <button className="btn btn-orange" onClick={() => handleConfigureExam(2)}>Configure Exam</button>
+                                </div>
+                            </div>
+
+                            <div className="exam-card card-glow">
+                                <div className="exam-card-header">
+                                    <span className="exam-badge badge-cyan">Chapters 1-5</span>
+                                    <h4 className="exam-card-title">Custom Mock: Mixed Question Bank</h4>
+                                </div>
+                                <p className="exam-card-desc">Randomized practice across all available MCQs, comparisons, and essay review prompts from chapters 1 to 5.</p>
+                                <div className="exam-card-footer">
+                                    <div className="exam-meta">
+                                        <span><i className="fa-solid fa-shuffle"></i> {examCounts.total} Total Items</span>
+                                    </div>
+                                    <button className="btn btn-primary" onClick={() => handleConfigureExam('custom')}>Configure Mock</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
         </section>
     );
