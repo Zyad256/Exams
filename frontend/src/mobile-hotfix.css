@@ -370,4 +370,84 @@
     height: 32px !important;
     font-size: 0.85rem !important;
   }
+
+  /* History Tables Overflow Safety */
+  .history-container {
+    padding: 1rem !important;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+  }
+  .history-table {
+    min-width: 600px;
+  }
+
+  /* Quiz Results Densification */
+  .results-overview-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.8rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .stat-card {
+    padding: 1rem !important;
+    border-radius: 12px !important;
+  }
+  .stat-icon {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .stat-value {
+    font-size: 1.4rem !important;
+  }
+
+  .result-question-card {
+    padding: 1rem !important;
+    gap: 0.8rem !important;
+  }
+  .rq-prompt {
+    font-size: 0.95rem !important;
+    word-break: break-word;
+  }
+  .answer-bubble {
+    font-size: 0.85rem !important;
+    padding: 0.8rem !important;
+    word-break: break-word;
+  }
+  .rq-answers-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.6rem !important;
+  }
+  .rq-explanation {
+    padding: 0.8rem !important;
+  }
+  .rq-explanation p {
+    font-size: 0.82rem !important;
+  }
+
+  /* Active Quiz Runner Densification */
+  .quiz-layout {
+    gap: 1rem !important;
+  }
+  .question-box {
+    padding: 1rem !important;
+  }
+  .question-text {
+    font-size: 0.95rem !important;
+    margin-bottom: 1rem !important;
+  }
+  .option-btn {
+    min-height: 42px !important;
+    padding: 0.6rem 0.8rem !important;
+    font-size: 0.85rem !important;
+    gap: 0.5rem !important;
+    grid-template-columns: 24px minmax(0, 1fr) !important;
+    border-radius: 8px !important;
+  }
+  .quiz-progress-text {
+    font-size: 0.75rem !important;
+  }
 }
