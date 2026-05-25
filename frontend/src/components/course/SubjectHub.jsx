@@ -146,7 +146,7 @@ export default function SubjectHub() {
                                         </ul>
                                     )}
                                     {section.iframeUrl && (
-                                        <div style={{ position: 'relative', paddingBottom: '60%', height: 0, overflow: 'hidden', marginTop: '1rem', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+                                        <div style={{ position: 'relative', paddingBottom: section.heading?.includes('(MP4)') ? '80%' : '60%', height: 0, overflow: 'hidden', marginTop: '1rem', borderRadius: '8px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
                                             <iframe src={section.iframeUrl} frameBorder="0" width="100%" height="100%" allowFullScreen style={{ position: 'absolute', top: 0, left: 0 }}></iframe>
                                         </div>
                                     )}
