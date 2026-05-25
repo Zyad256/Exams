@@ -5,7 +5,7 @@ export default function Dashboard() {
     const { navigateTo, setActiveSubject } = useExamContext();
     const getUniqueQuestionCount = (subjectKey) => {
         return subjects[subjectKey]?.exams
-            ?.filter(e => typeof e.examId === 'number')
+            ?.filter(e => e.examId !== 'custom')
             ?.reduce((sum, exam) => sum + exam.questions.length, 0) || 0;
     };
 
@@ -69,7 +69,7 @@ export default function Dashboard() {
                         <p className="subject-description">Image processing algorithms, HVS, edge and corner detection, and SIFT feature descriptors.</p>
                         
                         <div className="subject-meta">
-                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.cv.examConfigs?.length || 3} Exams + Quizzes</span>
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.cv.exams?.length || 0} Exams + Quizzes</span>
                             <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {cvUniqueCount} Unique Items</span>
                         </div>
 
