@@ -15,6 +15,7 @@ export default function QuizRunner() {
 
     const [timeLeft, setTimeLeft] = useState(currentSession.timeLimitMinutes * 60);
     const [practiceFeedback, setPracticeFeedback] = useState(null); // { isCorrect: boolean, explanation: string }
+    const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
     const isExamMode = currentSession.mode === 'exam';
     const totalQs = currentSession.questionsCount;
@@ -340,10 +341,15 @@ export default function QuizRunner() {
                 </div>
 
                 {/* Right: Navigator Sidebar */}
-                <div className="quiz-sidebar-navigator card">
+                <div className={`quiz-sidebar-navigator card ${mobileDrawerOpen ? 'drawer-open' : ''}`}>
                     <div className="sidebar-header">
-                        <h4>Navigation Console</h4>
-                        <span className="questions-left-tag">{unansweredCount} Left</span>
+                        <div className="sidebar-header-left">
+                            <h4>Navigation Console</h4>
+                            <span className="questions-left-tag">{unansweredCount} Left</span>
+                        </div>
+                        <button className="mobile-drawer-close btn btn-secondary" onClick={() => setMobileDrawerOpen(false)}>
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
                     </div>
 
                     <div className="runner-header-actions" style={{ marginBottom: '1.5rem' }}>
@@ -373,6 +379,7 @@ export default function QuizRunner() {
                                     onClick={() => {
                                         setPracticeFeedback(null);
                                         setCurrentQuestionIndex(idx);
+                                        setMobileDrawerOpen(false);
                                     }}
                                 >
                                     {idx + 1}
@@ -402,6 +409,19 @@ export default function QuizRunner() {
                     </div>
                 </div>
             </div>
+
+            {/* Mobile Navigation Drawer Components */}
+            <button 
+                className="mobile-fab-btn animate-fade-in" 
+                onClick={() => setMobileDrawerOpen(true)}
+            >
+                <i className="fa-solid fa-compass"></i> Navigate (<span style={{color:'var(--text-secondary)'}}>{unansweredCount}</span>)
+            </button>
+            
+            <div 
+                className={`mobile-drawer-backdrop ${mobileDrawerOpen ? 'active' : ''}`}
+                onClick={() => setMobileDrawerOpen(false)}
+            ></div>
         </section>
     );
 }

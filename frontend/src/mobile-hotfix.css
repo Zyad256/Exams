@@ -222,9 +222,94 @@
     justify-content: center;
   }
 
+  /* Slide-Out Drawer Overrides for Mobile */
+  .mobile-fab-btn {
+    display: flex !important;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: var(--color-primary);
+    color: white;
+    padding: 0.8rem 1.4rem;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border: none;
+    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+    z-index: 900;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+
+  .mobile-drawer-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-drawer-backdrop.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .quiz-sidebar-navigator {
+    position: fixed !important;
+    top: 0 !important;
+    right: -100% !important;
+    width: 85% !important;
+    max-width: 400px;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 20px 0 0 20px !important;
+    z-index: 999 !important;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow-y: auto !important;
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5) !important;
+    margin: 0 !important;
+    order: unset !important;
+  }
+
+  .quiz-sidebar-navigator.drawer-open {
+    right: 0 !important;
+  }
+
+  .mobile-drawer-close {
+    display: flex !important;
+    width: 36px !important;
+    height: 36px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    padding: 0 !important;
+  }
+
+  .sidebar-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
   /* Wrap the config subject split naturally for phones */
   .config-split {
     grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 993px) {
+  .mobile-hub-tabs,
+  .mobile-fab-btn,
+  .mobile-drawer-backdrop,
+  .mobile-drawer-close {
+    display: none !important;
   }
 }
 
