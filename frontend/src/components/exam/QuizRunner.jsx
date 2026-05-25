@@ -182,15 +182,6 @@ export default function QuizRunner() {
                     <span className="timer-value">{isExamMode ? formatTime(timeLeft) : 'Practice (Untimed)'}</span>
                 </div>
 
-                {/* Right: Finish Trigger */}
-                <div className="runner-header-actions">
-                    <button className={`btn ${isFlagged ? 'btn-orange' : 'btn-outline'}`} onClick={toggleFlag}>
-                        <i className={`fa-solid ${isFlagged ? 'fa-flag' : 'fa-regular fa-flag'}`}></i> {isFlagged ? 'Flagged' : 'Flag for Review'}
-                    </button>
-                    <button className="btn btn-red" onClick={handleSubmitExam}>
-                        <i className="fa-solid fa-circle-check"></i> Submit Exam
-                    </button>
-                </div>
             </div>
 
             {/* Quiz Layout: Two columns */}
@@ -353,6 +344,15 @@ export default function QuizRunner() {
                     <div className="sidebar-header">
                         <h4>Navigation Console</h4>
                         <span className="questions-left-tag">{unansweredCount} Left</span>
+                    </div>
+
+                    <div className="runner-header-actions" style={{ marginBottom: '1.5rem' }}>
+                        <button className={`btn ${isFlagged ? 'btn-orange' : 'btn-outline'}`} onClick={toggleFlag}>
+                            <i className={`fa-solid ${isFlagged ? 'fa-flag' : 'fa-regular fa-flag'}`}></i> {isFlagged ? 'Flagged' : 'Flag for Review'}
+                        </button>
+                        <button className="btn btn-red" onClick={handleSubmitExam}>
+                            <i className="fa-solid fa-circle-check"></i> Submit Exam
+                        </button>
                     </div>
 
                     <p className="sidebar-help">Click any grid cell below to jump directly to that question.</p>
