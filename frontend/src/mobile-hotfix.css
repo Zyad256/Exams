@@ -297,3 +297,77 @@
     order: 2;
   }
 }
+
+/* ========================================================
+   Aggressive Mobile Densification (Dashboard & Headers)
+   ======================================================== */
+
+@media (max-width: 560px) {
+  .dashboard-hero {
+    padding: 1.2rem 1rem !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem !important;
+  }
+
+  .hero-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .stats-quick-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .stat-divider {
+    display: none !important;
+  }
+
+  .stat-quick-item {
+    padding: 0.6rem !important;
+    border-radius: 8px !important;
+    gap: 0.2rem !important;
+  }
+
+  .stat-label {
+    font-size: 0.7rem !important;
+    letter-spacing: 0px !important;
+  }
+
+  .stat-value {
+    font-size: 1.15rem !important;
+  }
+
+  /* Compact Header Trims */
+  .nav-links {
+    gap: 0.5rem !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  .nav-item {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.85rem !important;
+    min-height: 0px !important;
+  }
+
+  .header-actions {
+    gap: 0.5rem !important;
+    margin-top: 0.5rem !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .control-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.85rem !important;
+  }
+}
