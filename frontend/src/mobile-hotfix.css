@@ -316,6 +316,28 @@
 
   .header-container {
     padding: 0.6rem 0.5rem !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    gap: 0.8rem !important;
+    align-items: center !important;
+  }
+
+  .logo-section {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0 !important;
+    justify-self: start;
+    width: fit-content;
+  }
+
+  .header-controls {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    display: flex !important;
+    gap: 0.5rem !important;
+    margin-top: 0 !important;
   }
 
   .card,
@@ -407,28 +429,28 @@
 
   /* Compact Header Trims */
   .nav-links {
-    gap: 0.5rem !important;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex !important;
+    gap: 0.6rem !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
   }
 
-  .nav-item {
-    padding: 0.4rem 0.6rem !important;
-    font-size: 0.85rem !important;
+  .nav-link {
+    padding: 0.5rem 0.8rem !important;
+    font-size: 0.86rem !important;
     min-height: 0px !important;
-  }
-
-  .header-actions {
-    gap: 0.5rem !important;
-    margin-top: 0.5rem !important;
-    width: 100% !important;
-    justify-content: center !important;
+    flex: 1;
+    text-align: center;
+    border-radius: 8px !important;
   }
 
   .control-btn {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 0.85rem !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 0.95rem !important;
+    border-radius: 10px !important;
   }
 
   /* History Tables Overflow Safety */
