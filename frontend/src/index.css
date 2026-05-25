@@ -369,7 +369,7 @@ div {
 .brand-tb {
   font-weight: 900;
   font-size: 2.8rem;
-  color: #fff;
+  color: var(--text-primary);
   text-shadow:
     0 0 15px rgba(6, 182, 212, 0.6),
     0 0 30px rgba(6, 182, 212, 0.3);
@@ -412,7 +412,7 @@ div {
 
 .brand-base {
   font-weight: 700;
-  color: #e2e8f0;
+  color: var(--text-primary);
 }
 
 .brand-dot {

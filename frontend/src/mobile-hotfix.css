@@ -473,6 +473,33 @@
     width: fit-content;
   }
 
+  /* Responsive Brand Scaling */
+  .logo-brand {
+    font-size: 1.4rem !important;
+  }
+  .brand-tb {
+    font-size: 1.8rem !important;
+    letter-spacing: -1px !important;
+  }
+  .brand-dot {
+    font-size: 2rem !important;
+  }
+  .brand-m {
+    animation:
+      gradientFlow 3s linear infinite,
+      mBounceSmall 4s infinite alternate ease-in-out !important;
+  }
+
+  @keyframes mBounceSmall {
+    0% {
+      transform: translateY(0px) skewX(-2deg);
+    }
+    100% {
+      transform: translateY(-2px) skewX(-5deg);
+      filter: drop-shadow(0 3px 8px rgba(236, 72, 153, 0.8));
+    }
+  }
+
   .header-controls {
     grid-column: 2;
     grid-row: 1;
