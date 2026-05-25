@@ -303,6 +303,66 @@
    ======================================================== */
 
 @media (max-width: 560px) {
+  body,
+  html {
+    overflow-x: hidden;
+  }
+
+  .app-main-content {
+    padding: 0.6rem 0.4rem !important;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .header-container {
+    padding: 0.6rem 0.5rem !important;
+  }
+
+  .card,
+  .subject-card,
+  .exam-card,
+  .config-container,
+  .syllabus-card {
+    padding: 1rem !important;
+    border-radius: 12px !important;
+  }
+
+  .view-header {
+    margin-bottom: 1.2rem !important;
+    padding: 0 0.5rem !important;
+  }
+
+  .view-title {
+    font-size: 1.35rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .view-subtitle {
+    font-size: 0.85rem !important;
+  }
+
+  .section-title {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  /* Syllabus Items Optimization */
+  .syllabus-item {
+    padding: 0.6rem 0.8rem !important;
+    gap: 0.6rem !important;
+  }
+  .ch-info h4 {
+    font-size: 0.85rem !important;
+  }
+  .subjects-grid {
+    gap: 0.8rem !important;
+  }
+
   .dashboard-hero {
     padding: 1.2rem 1rem !important;
     display: flex;
@@ -311,12 +371,12 @@
   }
 
   .hero-title {
-    font-size: 1.5rem !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 1.4rem !important;
+    margin-bottom: 0.4rem !important;
   }
 
   .hero-subtitle {
-    font-size: 0.85rem !important;
+    font-size: 0.82rem !important;
     margin-bottom: 1rem !important;
   }
 
