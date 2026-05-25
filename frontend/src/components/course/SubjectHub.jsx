@@ -5,6 +5,7 @@ import { subjects } from '../../data/subjects';
 export default function SubjectHub() {
     const { navigateTo, setCurrentSession, activeSubject } = useExamContext();
     const [selectedChapterId, setSelectedChapterId] = useState(null);
+    const [mobileTab, setMobileTab] = useState('exams');
     
     const subjectData = subjects[activeSubject] || subjects.advWeb;
     const { chapters, exams, title, subtitle, icon } = subjectData;
@@ -28,7 +29,23 @@ export default function SubjectHub() {
                 <p className="view-subtitle">{subtitle}</p>
             </div>
 
-            <div className="subject-details-grid">
+            {/* Mobile Tab Switcher */}
+            <div className="mobile-hub-tabs">
+                <button 
+                    className={`hub-tab ${mobileTab === 'exams' ? 'active' : ''}`}
+                    onClick={() => { setMobileTab('exams'); setSelectedChapterId(null); }}
+                >
+                    <i className="fa-solid fa-paper-plane"></i> Exams
+                </button>
+                <button 
+                    className={`hub-tab ${mobileTab === 'syllabus' ? 'active' : ''}`}
+                    onClick={() => setMobileTab('syllabus')}
+                >
+                    <i className="fa-solid fa-book-open"></i> Syllabus
+                </button>
+            </div>
+
+            <div className={`subject-details-grid mobile-view-${mobileTab}`}>
                 
                 {/* Left: Syllabus Map & Chapters Card */}
                 <div className="syllabus-card card">
@@ -40,12 +57,18 @@ export default function SubjectHub() {
                             <li
                                 className={`syllabus-item syllabus-item-link ${selectedChapterId === chapter.id ? 'active' : ''}`}
                                 key={chapter.id}
-                                onClick={() => setSelectedChapterId(prev => prev === chapter.id ? null : chapter.id)}
+                                onClick={() => {
+                                    const nextId = prev => prev === chapter.id ? null : chapter.id;
+                                    setSelectedChapterId(nextId);
+                                    if (nextId) setMobileTab('exams');
+                                }}
                                 tabIndex="0"
                                 onKeyDown={(event) => {
                                     if (event.key === 'Enter' || event.key === ' ') {
                                         event.preventDefault();
-                                        setSelectedChapterId(prev => prev === chapter.id ? null : chapter.id);
+                                        const nextId = prev => prev === chapter.id ? null : chapter.id;
+                                        setSelectedChapterId(nextId);
+                                        if (nextId) setMobileTab('exams');
                                     }
                                 }}
                                 style={{
@@ -80,8 +103,8 @@ export default function SubjectHub() {
                     <article className="chapter-blog-page card card-glow animate-fade-in" style={{ padding: '2rem', height: 'fit-content' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '1rem', borderBottom: '1px solid var(--border-color)' }}>
                             <span className="chapter-blog-kicker" style={{ margin: 0 }}>{selectedChapter.badge} Summary</span>
-                            <button className="btn btn-secondary" onClick={() => setSelectedChapterId(null)}>
-                                <i className="fa-solid fa-chevron-left"></i> Back to Exams
+                            <button className="btn btn-secondary" onClick={() => { setSelectedChapterId(null); setMobileTab('syllabus'); }}>
+                                <i className="fa-solid fa-chevron-left"></i> Back to Syllabus
                             </button>
                         </div>
 

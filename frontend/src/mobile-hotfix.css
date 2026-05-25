@@ -296,6 +296,55 @@
   .syllabus-card {
     order: 2;
   }
+
+  /* Dynamic Tab Switching Masks */
+  .mobile-hub-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.4rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    gap: 0.4rem;
+    border: 1px solid var(--border-color);
+  }
+
+  .hub-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .hub-tab.active {
+    background: var(--bg-card);
+    color: var(--color-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Routing Views natively */
+  .mobile-view-exams .syllabus-card {
+    display: none !important;
+  }
+  .mobile-view-syllabus .exams-list-container,
+  .mobile-view-syllabus .chapter-blog-page {
+    display: none !important;
+  }
+}
+
+@media (min-width: 993px) {
+  .mobile-hub-tabs {
+    display: none !important;
+  }
 }
 
 /* ========================================================
