@@ -184,7 +184,7 @@
 @media (max-width: 992px) {
   .quiz-layout {
     display: flex !important;
-    flex-direction: column-reverse !important;
+    flex-direction: column !important;
     gap: 2rem !important;
   }
 
