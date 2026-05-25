@@ -9,8 +9,10 @@ export default function Header() {
             <div className="header-container">
                 <div className="logo-section" onClick={() => navigateTo('view-dashboard')}>
                     <div className="logo-brand">
-                        <span className="brand-thin">bas</span>
-                        <span className="brand-bold">maja</span>
+                        <span className="brand-tb">b</span>
+                        <span className="brand-thin">as</span>
+                        <span className="brand-m">m</span>
+                        <span className="brand-base">aja</span>
                         <span className="brand-dot">.</span>
                     </div>
                 </div>
