@@ -223,9 +223,9 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1xHP9fOj8d8HjQI0TO_KVoLyO6WddKdQE/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Lecture Presentation (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1rjrn_tPViwK7RcwV8pWHbrWmAnwJ_ZSl/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1C_syKpKE-K3aRi4h42UaGXz9pZN_UoqD/preview",
           },
         ],
       },
@@ -247,9 +247,9 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1HyEjGc8dL7NXe8djHCvRXCh6usR1mC_s/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Presentation (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1_hwUcGUSPBQmRPYmxfa2Nnqac-vZ0axS/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1KDCde7bP_KrxfBATRnH1QcHq33zzH3tk/preview",
           },
         ],
       },
@@ -266,9 +266,9 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1sgh1s8KTw1-_n3fUtlezpPs-6uYe31UY/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Human Vision System (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/12ynr0icOO9EGNoAG8Ps942b5LZuIimIm/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1w436K3NHYbDgLnXOA1ri0ElnXrNFlSGD/preview",
           },
         ],
       },
@@ -291,14 +291,14 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1sxSllHSnIc04qkM5P0Lg5JgEjutAQljY/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Part 1 (With Sound)",
+            heading: "Part 1 Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1njEZLQMgDzyxEmpXaNPwQV9QG5CVVUDt/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1q7AanAdN-OXRcvO5cVmgoxE9bbO8orjm/preview",
           },
           {
-            heading: "Part 2 (With Sound)",
+            heading: "Part 2 Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1WoRhx2Dim6HcA4wgWmzjky0voYGH04cQ/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1App-_sFNLhJj9YZ11XqlkI9m65OpNAEo/preview",
           },
         ],
       },
@@ -320,14 +320,14 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1eZhTu-Vhc_aR7FO2JXIgQg1CqcRaXMwV/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Theory (With Sound)",
+            heading: "Theory Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1yFmIwtE3GBqGkEIFjCLtR-5tWNPKEYuA/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1QXhqIXpi4VifZe55ilhKLA4-UmD_P4se/preview",
           },
           {
-            heading: "Solved Problems (With Sound)",
+            heading: "Solved Problems Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1-vL6OWNT_LNXxM3RvLq4Eeo0ZmQQMwC0/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1efr_vYAofsW2cXVoPUxEiT7O44q3BE6g/preview",
           },
         ],
       },
@@ -344,9 +344,9 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1NqFV1wcmdyxeFOs9DUdlH5TKY1ip8fuh/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Hough Transform (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1NnNDY-2L5KnoUL7zqikx-5CUUfzYfMZh/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1_V396BchpnyrKWx6WfOkT3k5f6fAodJF/preview",
           },
         ],
       },
@@ -363,9 +363,19 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1yl43L6tmVl_b1CwLuQ3qWvQ_AOWRAEye/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Corner Detection (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1iHsWxleZo5ESAp8TxxmuwpsKplig1Piv/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1eU_FdbIkIfDBoHO-si2zFi0LVCEuQF7M/preview",
+          },
+          {
+            heading: "Corner Detection Part 1 Audio (MP4)",
+            iframeUrl:
+              "https://drive.google.com/file/d/1gJcT7QioQSakOJcU3eBusELefW2yL8aA/preview",
+          },
+          {
+            heading: "Corner Detection Part 2 Audio (MP4)",
+            iframeUrl:
+              "https://drive.google.com/file/d/1fpzuIQttEI3Ln7xgZsaMwQQXIJqeJmmu/preview",
           },
         ],
       },
@@ -382,9 +392,9 @@ export const subjects = {
               "https://docs.google.com/presentation/d/1BYxhCxfuzK7yls68aQSzjFOWXp1NaLGk/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "Interest Points & Blobs (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/1qd1Qgyc_vKcfwvR9aVZc9Vk2BiW1zSsJ/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1O73FRP1Tq9CXKz3laKc13arMVGfGafT-/preview",
           },
         ],
       },
@@ -401,9 +411,9 @@ export const subjects = {
               "https://docs.google.com/presentation/d/15YyNd9p9xOz34smhhRtIXjz1RkNe9MM_/embed?start=false&loop=false&delayms=3000",
           },
           {
-            heading: "SIFT (With Sound)",
+            heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
-              "https://docs.google.com/presentation/d/17RTYQ7c7dxG4BX1UyIjmMfR-_XCm7y-P/embed?start=false&loop=false&delayms=3000",
+              "https://drive.google.com/file/d/1tiG_yN5TZNouFMS-MAIiVZw6G9s3zRHV/preview",
           },
         ],
       },
