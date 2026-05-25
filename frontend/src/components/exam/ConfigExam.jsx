@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useExamContext } from '../../context/ExamContext';
-import { examData } from '../../data/questions';
+import { subjects } from '../../data/subjects';
 
 const shuffleQuestions = (questions) => {
     const shuffled = [...questions];
@@ -12,7 +12,7 @@ const shuffleQuestions = (questions) => {
 };
 
 export default function ConfigExam() {
-    const { navigateTo, currentSession, setCurrentSession, setCurrentQuestionIndex } = useExamContext();
+    const { navigateTo, currentSession, setCurrentSession, setCurrentQuestionIndex, activeSubject } = useExamContext();
     
     const [mode, setMode] = useState('practice');
     const [questionCount, setQuestionCount] = useState('all');
@@ -20,16 +20,19 @@ export default function ConfigExam() {
     
     const examId = currentSession.examId !== null ? currentSession.examId : 0;
     const examInfo = useMemo(() => {
+        const subjectData = subjects[activeSubject] || subjects.advWeb;
+        const examData = subjectData.exams;
+
         if (examId === 'custom') {
             return {
                 examId: 'custom',
-                title: 'Custom Mock: Chapters 1-5',
+                title: 'Custom Mock: All Modules',
                 questions: examData.flatMap(exam => exam.questions)
             };
         }
 
         return examData.find(e => e.examId === examId) || examData[0];
-    }, [examId]);
+    }, [examId, activeSubject]);
 
     const totalAvailable = examInfo ? examInfo.questions.length : 0;
     const questionTypeCounts = examInfo.questions.reduce((counts, question) => {

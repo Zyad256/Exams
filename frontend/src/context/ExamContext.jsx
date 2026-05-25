@@ -5,6 +5,7 @@ const ExamContext = createContext();
 export const ExamProvider = ({ children }) => {
     // 1. STATE MANAGEMENT
     const [activeView, setActiveView] = useState('view-dashboard');
+    const [activeSubject, setActiveSubject] = useState('advWeb'); // Added for dynamic course hubs
     const [soundEnabled, setSoundEnabled] = useState(true);
     const [history, setHistory] = useState([]);
     const [streak, setStreak] = useState(1);
@@ -160,6 +161,7 @@ export const ExamProvider = ({ children }) => {
 
     const value = React.useMemo(() => ({
         activeView, navigateTo,
+        activeSubject, setActiveSubject,
         theme, toggleTheme,
         soundEnabled, setSoundEnabled, playSound,
         history, setHistory,
@@ -168,6 +170,7 @@ export const ExamProvider = ({ children }) => {
         currentQuestionIndex, setCurrentQuestionIndex
     }), [
         activeView,
+        activeSubject,
         theme,
         soundEnabled,
         playSound,

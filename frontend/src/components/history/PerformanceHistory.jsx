@@ -2,7 +2,14 @@ import React from 'react';
 import { useExamContext } from '../../context/ExamContext';
 
 export default function PerformanceHistory() {
-    const { history, navigateTo } = useExamContext();
+    const { history, setHistory, navigateTo } = useExamContext();
+
+    const handleClearHistory = () => {
+        if (window.confirm("Are you sure you want to clear your entire exam history? This action cannot be undone.")) {
+            setHistory([]);
+            localStorage.removeItem('prepverse_exam_history_v1');
+        }
+    };
 
     return (
         <section id="view-performance-history" className="app-view active">
@@ -15,6 +22,13 @@ export default function PerformanceHistory() {
             </div>
 
             <div className="history-container card">
+                {history.length > 0 && (
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+                        <button className="btn btn-outline" style={{ borderColor: 'var(--color-error)', color: 'var(--color-error)' }} onClick={handleClearHistory}>
+                            <i className="fa-solid fa-trash-can"></i> Clear History
+                        </button>
+                    </div>
+                )}
                 {history.length === 0 ? (
                     <div className="empty-state">
                         <i className="fa-solid fa-ghost"></i>

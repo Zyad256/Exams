@@ -160,8 +160,8 @@ export default function QuizRunner() {
         setHistory(newHistory);
         localStorage.setItem('prepverse_exam_history_v1', JSON.stringify(newHistory));
 
-        setCurrentSession(prev => ({ ...prev, isCompleted: true, timeElapsedSeconds: timeElapsed }));
-        navigateTo('view-performance-history');
+        setCurrentSession(prev => ({ ...prev, isCompleted: true, timeElapsedSeconds: timeElapsed, score }));
+        navigateTo('view-exam-results');
     };
 
     // Calculate progress percentage

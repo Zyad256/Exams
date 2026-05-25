@@ -1,10 +1,16 @@
 import { useExamContext } from '../../context/ExamContext';
-import { examData } from '../../data/questions';
+import { subjects } from '../../data/subjects';
 
 export default function Dashboard() {
-    const { navigateTo } = useExamContext();
-    const totalQuestionBankItems = examData.reduce((sum, exam) => sum + exam.questions.length, 0);
+    const { navigateTo, setActiveSubject } = useExamContext();
+    const getUniqueQuestionCount = (subjectKey) => {
+        return subjects[subjectKey]?.exams
+            ?.filter(e => typeof e.examId === 'number')
+            ?.reduce((sum, exam) => sum + exam.questions.length, 0) || 0;
+    };
 
+    const advWebUniqueCount = getUniqueQuestionCount('advWeb');
+    const cvUniqueCount = getUniqueQuestionCount('cv');
     return (
         <section id="view-dashboard" className="app-view active">
             {/* Hero Section */}
@@ -76,7 +82,7 @@ export default function Dashboard() {
                         
                         <div className="subject-meta">
                             <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> 3 Exams + Simulator</span>
-                            <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {totalQuestionBankItems} Total Items</span>
+                            <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {advWebUniqueCount} Total Items</span>
                         </div>
 
                         {/* Progress Bar inside Card */}
@@ -90,27 +96,51 @@ export default function Dashboard() {
                             </div>
                         </div>
 
-                        <button className="btn btn-primary btn-full-width" onClick={() => navigateTo('view-subject-hub')}>
+                        <button className="btn btn-primary btn-full-width" onClick={() => {
+                            setActiveSubject('advWeb');
+                            navigateTo('view-subject-hub');
+                        }}>
+                            Enter Course Hub <i className="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                {/* Computer Vision Card (NEW) */}
+                <div className="subject-card active-subject card-glow" id="subject-cv">
+                    <div className="subject-tag">NEW</div>
+                    <div className="subject-card-body">
+                        <div className="subject-icon-bg">
+                            <i className="fa-solid fa-eye"></i>
+                        </div>
+                        <h3 className="subject-name">Computer Vision</h3>
+                        <p className="subject-description">Image processing algorithms, HVS, edge and corner detection, and SIFT feature descriptors.</p>
+                        
+                        <div className="subject-meta">
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.cv.examConfigs?.length || 3} Exams + Quizzes</span>
+                            <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {cvUniqueCount} Unique Items</span>
+                        </div>
+
+                        {/* Progress Bar inside Card */}
+                        <div className="subject-progress-container">
+                            <div className="progress-info">
+                                <span>Chapters Completed (0-8)</span>
+                                <span className="progress-ratio">100%</span>
+                            </div>
+                            <div className="progress-track">
+                                <div className="progress-fill" style={{width: '100%'}}></div>
+                            </div>
+                        </div>
+
+                        <button className="btn btn-primary btn-full-width" onClick={() => {
+                            setActiveSubject('cv');
+                            navigateTo('view-subject-hub');
+                        }}>
                             Enter Course Hub <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
 
                 {/* Coming Soon Cards */}
-                <div className="subject-card locked card-glow">
-                    <div className="subject-tag locked-tag">COMING SOON</div>
-                    <div className="subject-card-body">
-                        <div className="subject-icon-bg">
-                            <i className="fa-solid fa-eye"></i>
-                        </div>
-                        <h3 className="subject-name">Computer Vision</h3>
-                        <p className="subject-description">Image processing algorithms, object detection, segmentation, and advanced facial recognition models.</p>
-                        <button className="btn btn-secondary btn-full-width" disabled>
-                            <i className="fa-solid fa-lock"></i> Locked
-                        </button>
-                    </div>
-                </div>
-
                 <div className="subject-card locked card-glow">
                     <div className="subject-tag locked-tag">COMING SOON</div>
                     <div className="subject-card-body">
