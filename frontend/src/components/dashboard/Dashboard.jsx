@@ -13,54 +13,7 @@ export default function Dashboard() {
     const cvUniqueCount = getUniqueQuestionCount('cv');
     return (
         <section id="view-dashboard" className="app-view active">
-            {/* Hero Section */}
-            <div className="card dashboard-hero card-glow">
-                <div className="hero-content">
-                    <h1 className="hero-title">Welcome back,<br /><span className="text-gradient">Ready to crush it?</span></h1>
-                    <p className="hero-subtitle">Your personalized learning hub. Master data-intensive applications through active recall and deep-dive simulations.</p>
-                    
-                    <div className="stats-quick-grid">
-                        <div className="stat-quick-item">
-                            <span className="stat-label">Exams Taken</span>
-                            <span className="stat-value" id="dash-exams-taken">0</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat-quick-item">
-                            <span className="stat-label">Avg. Score</span>
-                            <span className="stat-value text-accent" id="dash-avg-score">0%</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat-quick-item">
-                            <span className="stat-label">Questions</span>
-                            <span className="stat-value" id="dash-q-answered">0</span>
-                        </div>
-                        <div className="stat-divider"></div>
-                        <div className="stat-quick-item">
-                            <span className="stat-label"><i className="fa-solid fa-fire text-orange"></i> Streak</span>
-                            <span className="stat-value text-orange" id="dash-streak">1</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="hero-graphics">
-                    {/* Progress Ring Visuals */}
-                    <div className="progress-ring-container">
-                        <svg className="progress-ring-svg" width="140" height="140">
-                            <circle cx="70" cy="70" r="60" fill="transparent" stroke="rgba(255,255,255,0.05)" strokeWidth="8"/>
-                            <circle className="progress-ring-bar" cx="70" cy="70" r="60" fill="transparent" stroke="url(#primaryGradient)" strokeWidth="8" strokeDasharray="377" strokeDashoffset="377" strokeLinecap="round" id="dash-progress-ring"/>
-                            <defs>
-                                <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stopColor="var(--color-primary)" />
-                                    <stop offset="100%" stopColor="var(--color-accent)" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div className="progress-ring-text">
-                            <span className="progress-percent" id="dash-progress-text">0%</span>
-                            <span className="progress-sub">Mastery</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
             {/* Subject Section Title */}
             <div className="section-header-row">
