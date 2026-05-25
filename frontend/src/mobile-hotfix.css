@@ -532,4 +532,17 @@
   .quiz-progress-text {
     font-size: 0.75rem !important;
   }
+
+  .runner-header-actions .btn {
+    min-height: 46px !important;
+    height: 46px !important;
+    max-height: 46px !important;
+    flex: none !important;
+    aspect-ratio: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 }
