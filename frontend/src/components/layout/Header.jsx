@@ -8,13 +8,7 @@ export default function Header() {
         <header className="app-header">
             <div className="header-container">
                 <div className="logo-section" onClick={() => navigateTo('view-dashboard')}>
-                    <div className="logo-icon-wrapper">
-                        <i className="fa-solid fa-graduation-cap logo-icon"></i>
-                    </div>
-                    <div className="logo-text">
-                        <span className="logo-brand">basmaja</span>
-                        <span className="logo-subtitle">Exam Hub</span>
-                    </div>
+                    <span className="logo-brand">basmaja</span>
                 </div>
 
                 <nav className="nav-links">
