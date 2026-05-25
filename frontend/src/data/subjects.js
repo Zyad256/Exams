@@ -218,14 +218,14 @@ export const subjects = {
         meta: "Introduction",
         sections: [
           {
-            heading: "Lecture Presentation",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1xHP9fOj8d8HjQI0TO_KVoLyO6WddKdQE/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1C_syKpKE-K3aRi4h42UaGXz9pZN_UoqD/preview",
+          },
+          {
+            heading: "Lecture Presentation",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1xHP9fOj8d8HjQI0TO_KVoLyO6WddKdQE/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
@@ -237,6 +237,11 @@ export const subjects = {
         meta: "Image Processing",
         sections: [
           {
+            heading: "Lecture Audio Recording (MP4)",
+            iframeUrl:
+              "https://drive.google.com/file/d/1KDCde7bP_KrxfBATRnH1QcHq33zzH3tk/preview",
+          },
+          {
             heading: "Part 1",
             iframeUrl:
               "https://docs.google.com/presentation/d/1kkBqXsKOnE1htGHP5pnwB63L8VnBQUF6/embed?start=false&loop=false&delayms=3000",
@@ -245,11 +250,6 @@ export const subjects = {
             heading: "Part 2",
             iframeUrl:
               "https://docs.google.com/presentation/d/1HyEjGc8dL7NXe8djHCvRXCh6usR1mC_s/embed?start=false&loop=false&delayms=3000",
-          },
-          {
-            heading: "Lecture Audio Recording (MP4)",
-            iframeUrl:
-              "https://drive.google.com/file/d/1KDCde7bP_KrxfBATRnH1QcHq33zzH3tk/preview",
           },
         ],
       },
@@ -261,14 +261,14 @@ export const subjects = {
         meta: "HVS",
         sections: [
           {
-            heading: "Human Vision System",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1sgh1s8KTw1-_n3fUtlezpPs-6uYe31UY/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1w436K3NHYbDgLnXOA1ri0ElnXrNFlSGD/preview",
+          },
+          {
+            heading: "Human Vision System",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1sgh1s8KTw1-_n3fUtlezpPs-6uYe31UY/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
@@ -281,16 +281,6 @@ export const subjects = {
         meta: "Properties & Representation",
         sections: [
           {
-            heading: "Part 1",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1gYW3L6y7UE4evmNas4YZHn9nnibn_D2c/embed?start=false&loop=false&delayms=3000",
-          },
-          {
-            heading: "Part 2",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1sxSllHSnIc04qkM5P0Lg5JgEjutAQljY/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Part 1 Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1q7AanAdN-OXRcvO5cVmgoxE9bbO8orjm/preview",
@@ -299,6 +289,16 @@ export const subjects = {
             heading: "Part 2 Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1App-_sFNLhJj9YZ11XqlkI9m65OpNAEo/preview",
+          },
+          {
+            heading: "Part 1",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1gYW3L6y7UE4evmNas4YZHn9nnibn_D2c/embed?start=false&loop=false&delayms=3000",
+          },
+          {
+            heading: "Part 2",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1sxSllHSnIc04qkM5P0Lg5JgEjutAQljY/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
@@ -310,16 +310,6 @@ export const subjects = {
         meta: "Edges",
         sections: [
           {
-            heading: "Theory",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1XW2qw6S_Ds5IjpqmowBi5FacOTyRy9VJ/embed?start=false&loop=false&delayms=3000",
-          },
-          {
-            heading: "Solved Problems",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1eZhTu-Vhc_aR7FO2JXIgQg1CqcRaXMwV/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Theory Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1QXhqIXpi4VifZe55ilhKLA4-UmD_P4se/preview",
@@ -328,6 +318,16 @@ export const subjects = {
             heading: "Solved Problems Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1efr_vYAofsW2cXVoPUxEiT7O44q3BE6g/preview",
+          },
+          {
+            heading: "Theory",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1XW2qw6S_Ds5IjpqmowBi5FacOTyRy9VJ/embed?start=false&loop=false&delayms=3000",
+          },
+          {
+            heading: "Solved Problems",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1eZhTu-Vhc_aR7FO2JXIgQg1CqcRaXMwV/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
@@ -339,14 +339,14 @@ export const subjects = {
         meta: "Hough Transform",
         sections: [
           {
-            heading: "Hough Transform",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1NqFV1wcmdyxeFOs9DUdlH5TKY1ip8fuh/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1_V396BchpnyrKWx6WfOkT3k5f6fAodJF/preview",
+          },
+          {
+            heading: "Hough Transform",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1NqFV1wcmdyxeFOs9DUdlH5TKY1ip8fuh/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
@@ -357,11 +357,6 @@ export const subjects = {
         preview: "Harris corner detector mechanics",
         meta: "Corners",
         sections: [
-          {
-            heading: "Corner Detection",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1yl43L6tmVl_b1CwLuQ3qWvQ_AOWRAEye/embed?start=false&loop=false&delayms=3000",
-          },
           {
             heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
@@ -377,6 +372,11 @@ export const subjects = {
             iframeUrl:
               "https://drive.google.com/file/d/1fpzuIQttEI3Ln7xgZsaMwQQXIJqeJmmu/preview",
           },
+          {
+            heading: "Corner Detection",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1yl43L6tmVl_b1CwLuQ3qWvQ_AOWRAEye/embed?start=false&loop=false&delayms=3000",
+          },
         ],
       },
       {
@@ -387,14 +387,14 @@ export const subjects = {
         meta: "Blobs",
         sections: [
           {
-            heading: "Interest Points & Blobs",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/1BYxhCxfuzK7yls68aQSzjFOWXp1NaLGk/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1O73FRP1Tq9CXKz3laKc13arMVGfGafT-/preview",
+          },
+          {
+            heading: "Interest Points & Blobs",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/1BYxhCxfuzK7yls68aQSzjFOWXp1NaLGk/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
@@ -406,14 +406,14 @@ export const subjects = {
         meta: "SIFT",
         sections: [
           {
-            heading: "SIFT",
-            iframeUrl:
-              "https://docs.google.com/presentation/d/15YyNd9p9xOz34smhhRtIXjz1RkNe9MM_/embed?start=false&loop=false&delayms=3000",
-          },
-          {
             heading: "Lecture Audio Recording (MP4)",
             iframeUrl:
               "https://drive.google.com/file/d/1tiG_yN5TZNouFMS-MAIiVZw6G9s3zRHV/preview",
+          },
+          {
+            heading: "SIFT",
+            iframeUrl:
+              "https://docs.google.com/presentation/d/15YyNd9p9xOz34smhhRtIXjz1RkNe9MM_/embed?start=false&loop=false&delayms=3000",
           },
         ],
       },
