@@ -61,7 +61,7 @@ export default function Dashboard() {
 
                 {/* Computer Vision Card (NEW) */}
                 <div className="subject-card active-subject card-glow" id="subject-cv">
-                    <div className="subject-tag">Active</div>
+                    <div className="subject-tag">ACTIVE</div>
                     <div className="subject-card-body">
                         <div className="subject-icon-bg">
                             <i className="fa-solid fa-eye"></i>
