@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
 const ExamContext = createContext();
 
@@ -6,10 +7,19 @@ export const ExamProvider = ({ children }) => {
     // 1. STATE MANAGEMENT
     const [activeView, setActiveView] = useState('view-dashboard');
     const [activeSubject, setActiveSubject] = useState('advWeb'); // Added for dynamic course hubs
-    const [soundEnabled, setSoundEnabled] = useState(true);
-    const [history, setHistory] = useState([]);
+    const [soundEnabled, setSoundEnabled] = useState(() => {
+        const storedSound = localStorage.getItem('prepverse_sound_preference');
+        return storedSound !== null ? storedSound === 'true' : true;
+    });
+    const [history, setHistory] = useState(() => {
+        const storedHistory = localStorage.getItem('prepverse_exam_history_v1');
+        return storedHistory ? JSON.parse(storedHistory) : [];
+    });
     const [streak, setStreak] = useState(1);
-    const [theme, setTheme] = useState('dark-theme');
+    const [theme, setTheme] = useState(() => {
+        const storedTheme = localStorage.getItem('prepverse_theme_preference');
+        return storedTheme || 'dark-theme';
+    });
 
     // Active exam session variables
     const [currentSession, setCurrentSession] = useState({
@@ -30,30 +40,19 @@ export const ExamProvider = ({ children }) => {
     // Active navigation pointer
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-    // Initial load from localStorage
+    // Sync theme preferences with document body
     useEffect(() => {
-        const storedHistory = localStorage.getItem('prepverse_exam_history_v1');
-        if (storedHistory) setHistory(JSON.parse(storedHistory));
-
-        const storedTheme = localStorage.getItem('prepverse_theme_preference');
-        if (storedTheme) {
-            setTheme(storedTheme);
-            document.body.className = storedTheme;
-        } else {
-            document.body.className = 'dark-theme';
-        }
-
-        const storedSound = localStorage.getItem('prepverse_sound_preference');
-        if (storedSound !== null) setSoundEnabled(storedSound === 'true');
-    }, []);
+        document.body.className = theme;
+    }, [theme]);
 
     // Theme toggle
-    const toggleTheme = () => {
-        const newTheme = theme === 'dark-theme' ? 'light-theme' : 'dark-theme';
-        setTheme(newTheme);
-        document.body.className = newTheme;
-        localStorage.setItem('prepverse_theme_preference', newTheme);
-    };
+    const toggleTheme = useCallback(() => {
+        setTheme((prevTheme) => {
+            const newTheme = prevTheme === 'dark-theme' ? 'light-theme' : 'dark-theme';
+            localStorage.setItem('prepverse_theme_preference', newTheme);
+            return newTheme;
+        });
+    }, []);
 
     // View navigation
     const navigateTo = (viewId) => {
@@ -172,6 +171,7 @@ export const ExamProvider = ({ children }) => {
         activeView,
         activeSubject,
         theme,
+        toggleTheme,
         soundEnabled,
         playSound,
         history,

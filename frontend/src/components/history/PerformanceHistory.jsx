@@ -1,4 +1,3 @@
-import React from 'react';
 import { useExamContext } from '../../context/ExamContext';
 
 export default function PerformanceHistory() {

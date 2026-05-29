@@ -1,5 +1,6 @@
 import { examData as advWebExams } from "./questions";
 import { examData as cvExams } from "./cv-questions";
+import { examData as iotExams } from "./iot-questions";
 
 export const subjects = {
   advWeb: {
@@ -444,5 +445,170 @@ export const subjects = {
         btnColor: "btn-orange",
       },
     ],
+  },
+  iot: {
+    id: "iot",
+    title: "Internet of Things",
+    subtitle: "Embedded systems, sensor networks, wireless protocols, and standards",
+    icon: "fa-network-wired",
+    exams: iotExams,
+    chapters: [
+      {
+        id: 1,
+        badge: "Lec 1",
+        title: "Introduction to IoT",
+        preview: "What is IoT, basic architectural layers, and system characteristics.",
+        meta: "Introduction",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1___7YDs1111nI1ybwZ-hr9dsXtRD87_3/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 2,
+        badge: "Lec 2",
+        title: "Connecting Things: Physical & Link Layers (Part 1)",
+        preview: "Basic electronics, transducer concepts, sensors, and signal formats.",
+        meta: "Electronics & Physical",
+        sections: [
+          {
+            heading: "Lecture Slide (PDF)",
+            iframeUrl: "https://drive.google.com/file/d/1dm9Zcjr0qFI7Aueo5kIilOYYLn_X-43t/preview"
+          }
+        ]
+      },
+      {
+        id: 3,
+        badge: "Lec 3",
+        title: "Connecting Things: Physical & Link Layers (Part 2)",
+        preview: "Antenna fundamentals, gain, bandwidth, receivers, and the superheterodyne model.",
+        meta: "Antennas & Receivers",
+        sections: [
+          {
+            heading: "Lecture Slide (PDF)",
+            iframeUrl: "https://drive.google.com/file/d/1yWpTicri1DPDvkigmajwm7F61HM57KKy/preview"
+          }
+        ]
+      },
+      {
+        id: 4,
+        badge: "Lec 4",
+        title: "Connecting Things & Zigbee Protocol",
+        preview: "Zigbee standards, coordinator startup, mesh topology, and router algorithms.",
+        meta: "Zigbee",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1fJNtg4X30TZy-YPiM95gZNGK2MMAJW-X/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 5,
+        badge: "Lec 5",
+        title: "Bluetooth Technology (Part 1)",
+        preview: "Bluetooth classic protocols, frequency hopping, and master/slave clock offsets.",
+        meta: "Bluetooth Classic",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1QXRqPoxEQ1XB8GrcmUPci_EcWvy6UpSe/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 6,
+        badge: "Lec 6",
+        title: "Bluetooth Technology (Part 2)",
+        preview: "Bluetooth low power modes, sniff, hold, park, and security mechanisms.",
+        meta: "Bluetooth Low Power",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1BplunrQgo_6y0m6cROkbFiKgi5I2OKZZ/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 7,
+        badge: "Lec 7",
+        title: "Wi-Fi Technology",
+        preview: "Wi-Fi standards, licensed/unlicensed bands, and power configurations.",
+        meta: "Wi-Fi",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1CaJTXQkOpDEEsq8jircNmVr8HFJn6SXg/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 8,
+        badge: "Lec 8",
+        title: "MAC Protocols",
+        preview: "Media Access Control mechanisms, channel allocations, and conflict avoidance.",
+        meta: "MAC",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1g3ZZ1-mwH8UYdj1qJeWTHQIQBDRb4NH2/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 9,
+        badge: "Lec 9",
+        title: "Cellular Systems & Licensed LPWANs",
+        preview: "Cellular data integration for IoT nodes, covering LTE-M and NB-IoT carrier networks.",
+        meta: "Cellular & LPWAN",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/182qaRf9ZN8dlHNsdCi_MqCzXBTL0ZoeR/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      },
+      {
+        id: 10,
+        badge: "Lec 10",
+        title: "Visible Light Communication & LoRaWAN",
+        preview: "Optical transmission via Visible Light Comms (VLC) and unlicensed sub-GHz LPWAN (LoRaWAN).",
+        meta: "VLC & LoRaWAN",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://docs.google.com/presentation/d/1BTeCz-UHtv_un7r_Mso4JH4yH1h-hluF/embed?start=false&loop=false&delayms=3000"
+          }
+        ]
+      }
+    ],
+    examConfigs: [
+      {
+        id: 0,
+        badge: "Lectures 1-3",
+        title: "Exam 1: Electronic Communication Systems",
+        desc: "Tests antenna gain, bandwidth, superheterodyne receivers, and preselector band filters...",
+        color: "badge-cyan",
+        btnColor: "btn-primary"
+      },
+      {
+        id: 1,
+        badge: "Lecture 4 & Sheets",
+        title: "Exam 2: IoT Systems & Zigbee Nodes",
+        desc: "Covers licensed/unlicensed bands, LoRaWAN, VLC, and Zigbee network starting protocols...",
+        color: "badge-purple",
+        btnColor: "btn-primary"
+      },
+      {
+        id: 2,
+        badge: "Lectures 5-10",
+        title: "Exam 3: Bluetooth & Wireless Coexistence",
+        desc: "Comprehensive review of Wi-Fi vs BLE vs Zigbee, Bluetooth BR vs LE, and Bluetooth attacks...",
+        color: "badge-orange",
+        btnColor: "btn-orange"
+      }
+    ]
   },
 };

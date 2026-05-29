@@ -11,6 +11,7 @@ export default function Dashboard() {
 
     const advWebUniqueCount = getUniqueQuestionCount('advWeb');
     const cvUniqueCount = getUniqueQuestionCount('cv');
+    const iotUniqueCount = getUniqueQuestionCount('iot');
     return (
         <section id="view-dashboard" className="app-view active">
 
@@ -93,6 +94,41 @@ export default function Dashboard() {
                     </div>
                 </div>
 
+                {/* Internet of Things Card (ACTIVE) */}
+                <div className="subject-card active-subject card-glow" id="subject-iot">
+                    <div className="subject-tag">ACTIVE</div>
+                    <div className="subject-card-body">
+                        <div className="subject-icon-bg">
+                            <i className="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 className="subject-name">Internet of Things</h3>
+                        <p className="subject-description">Mastering embedded systems, wireless communications, Zigbee coordinators, Bluetooth LE power classes, and LPWAN (LoRaWAN, LTE-M) protocols.</p>
+                        
+                        <div className="subject-meta">
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> 3 Exams + Simulator</span>
+                            <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {iotUniqueCount} Total Items</span>
+                        </div>
+
+                        {/* Progress Bar inside Card */}
+                        <div className="subject-progress-container">
+                            <div className="progress-info">
+                                <span>Lectures Completed (1-9)</span>
+                                <span className="progress-ratio">100%</span>
+                            </div>
+                            <div className="progress-track">
+                                <div className="progress-fill" style={{width: '100%'}}></div>
+                            </div>
+                        </div>
+
+                        <button className="btn btn-primary btn-full-width" onClick={() => {
+                            setActiveSubject('iot');
+                            navigateTo('view-subject-hub');
+                        }}>
+                            Enter Course Hub <i className="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
                 {/* Coming Soon Cards */}
                 <div className="subject-card locked card-glow">
                     <div className="subject-tag locked-tag">COMING SOON</div>
@@ -102,20 +138,6 @@ export default function Dashboard() {
                         </div>
                         <h3 className="subject-name">Machine Learning</h3>
                         <p className="subject-description">Supervised learning, deep neural networks, model evaluation, and predictive analytics.</p>
-                        <button className="btn btn-secondary btn-full-width" disabled>
-                            <i className="fa-solid fa-lock"></i> Locked
-                        </button>
-                    </div>
-                </div>
-
-                <div className="subject-card locked card-glow">
-                    <div className="subject-tag locked-tag">COMING SOON</div>
-                    <div className="subject-card-body">
-                        <div className="subject-icon-bg">
-                            <i className="fa-solid fa-network-wired"></i>
-                        </div>
-                        <h3 className="subject-name">Internet of Things</h3>
-                        <p className="subject-description">Embedded systems, sensor networks, edge computing protocols, and real-time data streaming architectures.</p>
                         <button className="btn btn-secondary btn-full-width" disabled>
                             <i className="fa-solid fa-lock"></i> Locked
                         </button>

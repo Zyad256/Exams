@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useExamContext } from '../../context/ExamContext';
 
 export default function QuizRunner() {
@@ -30,6 +30,49 @@ export default function QuizRunner() {
     const isFlagged = currentSession.flaggedQuestions.has(currentQuestionIndex);
     const unansweredCount = totalQs - Object.keys(currentSession.userResponses).length;
 
+    // Helper functions for scoring
+    const calculateScore = () => {
+        let correctCount = 0;
+        currentSession.questions.forEach((q, idx) => {
+            if ((q.type || 'mcq') === 'essay') return;
+            if (currentSession.userResponses[idx] === q.answer) correctCount++;
+        });
+        return correctCount;
+    };
+
+    const getScoreableQuestionCount = () => (
+        currentSession.questions.filter(q => (q.type || 'mcq') !== 'essay').length
+    );
+
+    const handleSubmitExam = () => {
+        // Calculate score and save to history
+        const score = calculateScore();
+        const timeElapsed = isExamMode ? (currentSession.timeLimitMinutes * 60) - timeLeft : Math.floor((Date.now() - currentSession.startTime) / 1000);
+        
+        const record = {
+            examId: currentSession.examId,
+            title: currentSession.title,
+            mode: currentSession.mode,
+            date: new Date().toISOString(),
+            score,
+            total: getScoreableQuestionCount(),
+            timeElapsed
+        };
+
+        const newHistory = [record, ...history];
+        setHistory(newHistory);
+        localStorage.setItem('prepverse_exam_history_v1', JSON.stringify(newHistory));
+
+        setCurrentSession(prev => ({ ...prev, isCompleted: true, timeElapsedSeconds: timeElapsed, score }));
+        navigateTo('view-exam-results');
+    };
+
+    // Encapsulate submission in a Ref to prevent timer interval thrashing
+    const handleSubmitRef = useRef(handleSubmitExam);
+    useEffect(() => {
+        handleSubmitRef.current = handleSubmitExam;
+    });
+
     // Timer Logic for Exam Mode
     useEffect(() => {
         if (!isExamMode || currentSession.isCompleted) return;
@@ -38,7 +81,7 @@ export default function QuizRunner() {
             setTimeLeft((prev) => {
                 if (prev <= 1) {
                     clearInterval(timerId);
-                    handleSubmitExam();
+                    handleSubmitRef.current();
                     return 0;
                 }
                 return prev - 1;
@@ -129,41 +172,7 @@ export default function QuizRunner() {
         });
     };
 
-    const calculateScore = () => {
-        let correctCount = 0;
-        currentSession.questions.forEach((q, idx) => {
-            if ((q.type || 'mcq') === 'essay') return;
-            if (currentSession.userResponses[idx] === q.answer) correctCount++;
-        });
-        return correctCount;
-    };
 
-    const getScoreableQuestionCount = () => (
-        currentSession.questions.filter(q => (q.type || 'mcq') !== 'essay').length
-    );
-
-    const handleSubmitExam = () => {
-        // Calculate score and save to history
-        const score = calculateScore();
-        const timeElapsed = isExamMode ? (currentSession.timeLimitMinutes * 60) - timeLeft : Math.floor((Date.now() - currentSession.startTime) / 1000);
-        
-        const record = {
-            examId: currentSession.examId,
-            title: currentSession.title,
-            mode: currentSession.mode,
-            date: new Date().toISOString(),
-            score,
-            total: getScoreableQuestionCount(),
-            timeElapsed
-        };
-
-        const newHistory = [record, ...history];
-        setHistory(newHistory);
-        localStorage.setItem('prepverse_exam_history_v1', JSON.stringify(newHistory));
-
-        setCurrentSession(prev => ({ ...prev, isCompleted: true, timeElapsedSeconds: timeElapsed, score }));
-        navigateTo('view-exam-results');
-    };
 
     // Calculate progress percentage
     const progressPercent = ((currentQuestionIndex + 1) / totalQs) * 100;
