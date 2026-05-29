@@ -35,7 +35,7 @@ export default function Dashboard() {
                         <p className="subject-description">Mastering Chapters 1 to 5: Database concepts, NoSQL storage structures, LSM Trees, SSTables, and Distributed Replication systems.</p>
                         
                         <div className="subject-meta">
-                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> 3 Exams + Simulator</span>
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.advWeb.exams?.filter(e => typeof e.examId === 'number').length || 0} Exams + Simulator</span>
                             <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {advWebUniqueCount} Total Items</span>
                         </div>
 
@@ -54,7 +54,7 @@ export default function Dashboard() {
                             setActiveSubject('advWeb');
                             navigateTo('view-subject-hub');
                         }}>
-                            Enter Course Hub <i className="fa-solid fa-arrow-right"></i>
+                            Enter Course <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
@@ -70,14 +70,14 @@ export default function Dashboard() {
                         <p className="subject-description">Image processing algorithms, HVS, edge and corner detection, and SIFT feature descriptors.</p>
                         
                         <div className="subject-meta">
-                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.cv.exams?.length || 0} Exams + Quizzes</span>
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.cv.exams?.filter(e => typeof e.examId === 'number').length || 0} Exams + {subjects.cv.exams?.filter(e => typeof e.examId === 'string' && e.examId.startsWith('quiz')).length || 0} Quizzes</span>
                             <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {cvUniqueCount} Unique Items</span>
                         </div>
 
                         {/* Progress Bar inside Card */}
                         <div className="subject-progress-container">
                             <div className="progress-info">
-                                <span>Chapters Completed (0-8)</span>
+                                <span>Lectures Completed (0-8)</span>
                                 <span className="progress-ratio">100%</span>
                             </div>
                             <div className="progress-track">
@@ -89,7 +89,7 @@ export default function Dashboard() {
                             setActiveSubject('cv');
                             navigateTo('view-subject-hub');
                         }}>
-                            Enter Course Hub <i className="fa-solid fa-arrow-right"></i>
+                            Enter Course <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
@@ -105,14 +105,14 @@ export default function Dashboard() {
                         <p className="subject-description">Mastering embedded systems, wireless communications, Zigbee coordinators, Bluetooth LE power classes, and LPWAN (LoRaWAN, LTE-M) protocols.</p>
                         
                         <div className="subject-meta">
-                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> 3 Exams + Simulator</span>
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.iot.exams?.filter(e => typeof e.examId === 'number').length || 0} Exams + {subjects.iot.exams?.filter(e => typeof e.examId === 'string' && e.examId.startsWith('quiz')).length || 0} Quizzes</span>
                             <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {iotUniqueCount} Total Items</span>
                         </div>
 
                         {/* Progress Bar inside Card */}
                         <div className="subject-progress-container">
                             <div className="progress-info">
-                                <span>Lectures Completed (1-9)</span>
+                                <span>Lectures Completed (1-10)</span>
                                 <span className="progress-ratio">100%</span>
                             </div>
                             <div className="progress-track">
@@ -124,7 +124,7 @@ export default function Dashboard() {
                             setActiveSubject('iot');
                             navigateTo('view-subject-hub');
                         }}>
-                            Enter Course Hub <i className="fa-solid fa-arrow-right"></i>
+                            Enter Course <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
