@@ -37,7 +37,7 @@ This project is built from the ground up prioritizing speed and native flexibili
 
 ## 📧 Contact & Lead
 
-- **Project Lead**: Ziad Essam
+- **Project Lead**: Ziad Eltokhy
 - **GitHub**: [Zyad256](https://github.com/Zyad256)
 
 ---
