@@ -1,5 +1,6 @@
 import { useExamContext } from '../../context/ExamContext';
 import { subjects } from '../../data/subjects';
+import RotatingTitle from '../ui/RotatingTitle';
 
 export default function Dashboard() {
     const { navigateTo, setActiveSubject } = useExamContext();
@@ -15,6 +16,7 @@ export default function Dashboard() {
     const mlUniqueCount = getUniqueQuestionCount('ml');
     return (
         <section id="view-dashboard" className="app-view active">
+            <RotatingTitle />
 
 
             {/* Subject Section Title */}

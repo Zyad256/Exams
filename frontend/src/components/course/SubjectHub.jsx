@@ -82,7 +82,13 @@ export default function SubjectHub() {
                                 }}>{chapter.badge}</div>
                                 <div className="ch-info">
                                     <h4>{chapter.title}</h4>
-                                    <p>{chapter.preview}</p>
+                                    <p style={{
+                                        display: '-webkit-box',
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: 'vertical',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis'
+                                    }}>{chapter.preview}</p>
                                 </div>
                                 <i className="fa-solid fa-arrow-right ch-open-icon" style={{
                                     transform: selectedChapterId === chapter.id ? 'rotate(90deg)' : 'none',

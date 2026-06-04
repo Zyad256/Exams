@@ -11,12 +11,13 @@ import PerformanceHistory from './components/history/PerformanceHistory';
 import ConfigExam from './components/exam/ConfigExam';
 import QuizRunner from './components/exam/QuizRunner';
 import QuizResults from './components/exam/QuizResults';
+import Footer from './components/layout/Footer';
 
 function AppContent() {
   const { activeView } = useExamContext();
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <div className="bg-orb orb-1"></div>
       <div className="bg-orb orb-2"></div>
       <div className="bg-orb orb-3"></div>
@@ -24,7 +25,7 @@ function AppContent() {
 
       <Header />
       
-      <main className="app-main-content">
+      <main className="app-main-content" style={{ flex: 1 }}>
         {activeView === 'view-dashboard' && <Dashboard />}
         {activeView === 'view-subject-hub' && <SubjectHub />}
         {activeView === 'view-performance-history' && <PerformanceHistory />}
@@ -32,7 +33,9 @@ function AppContent() {
         {activeView === 'view-exam-runner' && <QuizRunner />}
         {activeView === 'view-exam-results' && <QuizResults />}
       </main>
-    </>
+
+      <Footer />
+    </div>
   );
 }
 

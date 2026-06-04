@@ -197,6 +197,20 @@ export const examData = [
         ],
         "answer": "B",
         "explanation": "Batch gradient descent looks at the entire training dataset (the whole batch of m examples) before making a single parameter update step."
+      },
+      {
+        "number": 16,
+        "type": "essay",
+        "question": "Compare Gradient Descent and the Normal Equation for solving linear regression.",
+        "modelAnswer": "Gradient Descent is an iterative optimization algorithm that scales well to large datasets with many features, but requires tuning the learning rate and running multiple iterations. The Normal Equation is an analytical approach that solves for weights directly in one mathematical step using matrix inversion. It doesn't require a learning rate or iterations, but it becomes computationally very slow when the number of features is very large.",
+        "explanation": "Normal Equation requires calculating the inverse of an (n x n) matrix (O(n^3) time complexity), making Gradient Descent better for datasets with thousands of features."
+      },
+      {
+        "number": 17,
+        "type": "essay",
+        "question": "Explain the difference between Feature Scaling and Mean Normalization.",
+        "modelAnswer": "Feature Scaling involves dividing feature values by the range (or standard deviation) to ensure all features are on a similar scale (e.g., between -1 and 1), which speeds up gradient descent. Mean Normalization goes a step further by subtracting the mean of the feature from every value before scaling, ensuring the resulting data is centered around exactly zero.",
+        "explanation": "Both techniques aim to make gradient descent converge faster by creating more spherical contour plots for the cost function."
       }
     ]
   },
@@ -398,6 +412,20 @@ export const examData = [
         ],
         "answer": "B",
         "explanation": "More data helps an overfitting model because it restricts the model from fitting random noise, forcing it to learn more generalized features."
+      },
+      {
+        "number": 16,
+        "type": "essay",
+        "question": "Compare L1 (Lasso) and L2 (Ridge) Regularization.",
+        "modelAnswer": "L1 Regularization (Lasso) adds a penalty equal to the absolute value of the magnitude of coefficients, which can shrink some weights exactly to zero, effectively performing automatic feature selection. L2 Regularization (Ridge) adds a penalty equal to the square of the magnitude of coefficients, which shrinks weights toward zero but rarely forces them to be exactly zero, keeping all features in the model.",
+        "explanation": "L1 produces sparse models, while L2 is better when you expect all features to have some impact."
+      },
+      {
+        "number": 17,
+        "type": "essay",
+        "question": "Explain the concepts of high bias (underfitting) and high variance (overfitting).",
+        "modelAnswer": "High bias (underfitting) occurs when a model is too simple to capture the underlying patterns in the data, resulting in high errors on both the training and validation sets. High variance (overfitting) occurs when a model is too complex and memorizes the training data (including noise), resulting in extremely low training errors but very high validation errors because it fails to generalize to unseen data.",
+        "explanation": "The ultimate goal is finding the perfect trade-off between bias and variance to minimize the overall generalization error."
       }
     ]
   },
@@ -599,6 +627,20 @@ export const examData = [
         ],
         "answer": "B",
         "explanation": "PCA is sensitive to feature scales and means. Performing mean normalization (mean=0) and feature scaling ensures that features with large ranges do not dominate the principal component directions."
+      },
+      {
+        "number": 16,
+        "type": "essay",
+        "question": "Compare Decision Trees and Random Forests.",
+        "modelAnswer": "A Decision Tree is a single model that splits data based on feature conditions to make predictions; it is highly interpretable but very prone to overfitting (high variance). A Random Forest is an ensemble learning method that builds multiple decision trees on random subsets of data and features, then averages their predictions. This significantly reduces overfitting and improves accuracy, though it sacrifices the easy interpretability of a single tree.",
+        "explanation": "Random Forests use a technique called bagging (Bootstrap Aggregating) combined with random feature selection to ensure individual trees are uncorrelated."
+      },
+      {
+        "number": 17,
+        "type": "essay",
+        "question": "Explain how the K-Means clustering algorithm works step-by-step.",
+        "modelAnswer": "K-Means works through an iterative process: \n1. Initialization: Randomly select K points as the initial cluster centroids.\n2. Assignment: Calculate the distance from each data point to all centroids, and assign each point to the closest centroid.\n3. Update: Calculate the new mean of all points assigned to each cluster and move the centroid to this new mean.\n4. Repeat: Steps 2 and 3 are repeated until the centroids stop moving (convergence).",
+        "explanation": "K-Means is sensitive to the initial random placement of centroids, so it's typically run multiple times (random restarts) to find the global minimum."
       }
     ]
   },

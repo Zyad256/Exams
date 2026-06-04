@@ -1,0 +1,33 @@
+.rotating-title-container {
+  text-align: center;
+  margin: 1rem auto 2.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(236, 72, 153, 0.85));
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(236, 72, 153, 0.25);
+  max-width: 800px;
+  backdrop-filter: blur(12px);
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rotating-title-text {
+  font-size: 1.35rem;
+  color: #ffffff;
+  animation: fadeSlide 4s ease-in-out infinite;
+  margin: 0;
+  direction: rtl;
+  font-weight: 700;
+  line-height: 1.5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes fadeSlide {
+  0% { opacity: 0; transform: translateY(10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
