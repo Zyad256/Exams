@@ -12,6 +12,7 @@ export default function Dashboard() {
     const advWebUniqueCount = getUniqueQuestionCount('advWeb');
     const cvUniqueCount = getUniqueQuestionCount('cv');
     const iotUniqueCount = getUniqueQuestionCount('iot');
+    const mlUniqueCount = getUniqueQuestionCount('ml');
     return (
         <section id="view-dashboard" className="app-view active">
 
@@ -129,17 +130,37 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                {/* Coming Soon Cards */}
-                <div className="subject-card locked card-glow">
-                    <div className="subject-tag locked-tag">COMING SOON</div>
+                {/* Machine Learning Card (ACTIVE) */}
+                <div className="subject-card active-subject card-glow" id="subject-ml">
+                    <div className="subject-tag">ACTIVE</div>
                     <div className="subject-card-body">
                         <div className="subject-icon-bg">
                             <i className="fa-solid fa-brain"></i>
                         </div>
                         <h3 className="subject-name">Machine Learning</h3>
-                        <p className="subject-description">Supervised learning, deep neural networks, model evaluation, and predictive analytics.</p>
-                        <button className="btn btn-secondary btn-full-width" disabled>
-                            <i className="fa-solid fa-lock"></i> Locked
+                        <p className="subject-description">Supervised learning (Linear/Logistic Regression), regularizations, Neural Networks, Decision Trees, Random Forest, and Unsupervised K-Means clustering.</p>
+                        
+                        <div className="subject-meta">
+                            <span className="meta-item"><i className="fa-solid fa-file-invoice"></i> {subjects.ml.exams?.filter(e => typeof e.examId === 'number').length || 0} Exams + {subjects.ml.exams?.filter(e => typeof e.examId === 'string' && e.examId.startsWith('quiz')).length || 0} Quizzes</span>
+                            <span className="meta-item"><i className="fa-solid fa-question-circle"></i> {mlUniqueCount} Total Items</span>
+                        </div>
+
+                        {/* Progress Bar inside Card */}
+                        <div className="subject-progress-container">
+                            <div className="progress-info">
+                                <span>Lectures Completed (1-10)</span>
+                                <span className="progress-ratio">100%</span>
+                            </div>
+                            <div className="progress-track">
+                                <div className="progress-fill" style={{width: '100%'}}></div>
+                            </div>
+                        </div>
+
+                        <button className="btn btn-primary btn-full-width" onClick={() => {
+                            setActiveSubject('ml');
+                            navigateTo('view-subject-hub');
+                        }}>
+                            Enter Course <i className="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>

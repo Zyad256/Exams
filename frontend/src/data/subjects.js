@@ -1,6 +1,7 @@
 import { examData as advWebExams } from "./questions";
 import { examData as cvExams } from "./cv-questions";
 import { examData as iotExams } from "./iot-questions";
+import { examData as mlExams } from "./ml-questions";
 
 export const subjects = {
   advWeb: {
@@ -611,4 +612,190 @@ export const subjects = {
       }
     ]
   },
+  ml: {
+    id: "ml",
+    title: "Machine Learning",
+    subtitle:
+      "Supervised, unsupervised, reinforcement, and generative models",
+    icon: "fa-brain",
+    exams: mlExams,
+    chapters: [
+      {
+        id: 1,
+        badge: "Lec 1",
+        title: "Introduction to Machine Learning",
+        preview: "Course outline, learning paradigms (supervised, unsupervised, reinforcement, generative), and ML vs. stats/AI.",
+        meta: "AI, ML, paradigms, supervised, unsupervised, reinforcement, generative AI",
+        sections: [
+          {
+            heading: "Lecture Video Recording",
+            iframeUrl: "https://drive.google.com/file/d/114lBFF8wV8zt6usnVYGTlrwjngi7kjrR/preview"
+          },
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1kAnHuZ-XVzzONW7f9bKnsJnCqpAk-QmZ/preview"
+          }
+        ]
+      },
+      {
+        id: 2,
+        badge: "Lec 2",
+        title: "Linear Regression & Cost Function",
+        preview: "Univariate linear regression, weights and biases parameters, and cost functions (absolute vs. squared errors, MSE).",
+        meta: "Linear regression, parameters, weights, bias, MSE, cost function",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1sMQJxzt3rS3jfHRgofBl5USe3Vk64Crp/preview"
+          }
+        ]
+      },
+      {
+        id: 3,
+        badge: "Lec 3",
+        title: "Gradient Descent Optimization",
+        preview: "Gradient descent optimization mechanics, learning rate tuning, batch gradient descent, and epochs.",
+        meta: "Gradient descent, learning rate, updates, batch gradient descent, convergence",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1XRv-h3gkjgWr3wuMjR113ccygGFAwcRX/preview"
+          }
+        ]
+      },
+      {
+        id: 4,
+        badge: "Lec 4",
+        title: "Multiple Features & Feature Engineering",
+        preview: "Multivariate regression, feature scaling (mean normalization, max scale), feature engineering, and polynomial regression.",
+        meta: "Multiple features, feature scaling, mean normalization, polynomial regression",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1g4_79dJFWBwH9XdCA7jhPl7zzMMrRiEO/preview"
+          }
+        ]
+      },
+      {
+        id: 5,
+        badge: "Lec 5",
+        title: "Logistic Regression & Decision Boundary",
+        preview: "Logistic regression for classification, sigmoid activation function, decision boundary thresholding, and log loss cost.",
+        meta: "Logistic regression, sigmoid, decision boundary, binary classification, log loss",
+        sections: [
+          {
+            heading: "Lecture Video Recording",
+            iframeUrl: "https://drive.google.com/file/d/19eg3QkhncvN3svLHl_JAXeX-Nx61oY2O/preview"
+          },
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1nIpqGzRbvwm7w1kMxgpylj3JMU6nS-AI/preview"
+          }
+        ]
+      },
+      {
+        id: 6,
+        badge: "Lec 6",
+        title: "Regularization (L1 & L2 Norms)",
+        preview: "Underfitting (bias) and overfitting (variance) diagnostics, L1 Lasso regularization (sparsity), and L2 Ridge regularization.",
+        meta: "Overfitting, underfitting, L1 norm, Lasso, L2 norm, Ridge, lambda parameter",
+        sections: [
+          {
+            heading: "Lecture Video Recording",
+            iframeUrl: "https://drive.google.com/file/d/16qIQ_RidLosHyDEI7bNI9uYDiNMk3v4T/preview"
+          },
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1VLyUiLYnQOWUnFYIF12-LaaekYvAULwx/preview"
+          }
+        ]
+      },
+      {
+        id: 7,
+        badge: "Lec 7",
+        title: "Model Evaluation & Selection",
+        preview: "Train/validation/test splits, model selection, baseline performance comparison, and learning curves.",
+        meta: "Validation set, evaluation, model selection, baseline, learning curves",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/193eY3SyLU9LtNOGmfQOJjAClPiWKFL7G/preview"
+          }
+        ]
+      },
+      {
+        id: 8,
+        badge: "Lec 8",
+        title: "Neural Networks & Optimization",
+        preview: "Perceptron limits, Multi-Layer Perceptrons (MLPs), activation functions (ReLU, Softmax), backpropagation, and Adam optimizer.",
+        meta: "Neural networks, MLP, ReLU, Softmax, backpropagation, Adam optimizer",
+        sections: [
+          {
+            heading: "Lecture Video Recording",
+            iframeUrl: "https://drive.google.com/file/d/1LO9MC9CnxxIgYrdcLrMLbkRDMXMADQu3/preview"
+          },
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/16ITEwry4saO_rBEEPhzsRswzZ3bOrZfV/preview"
+          }
+        ]
+      },
+      {
+        id: 9,
+        badge: "Lec 9",
+        title: "Decision Trees & Ensemble Learning",
+        preview: "ID3 tree construction (Entropy, Information Gain), regression trees, Random Forests (bagging/OOB), and Boosting (AdaBoost, XGBoost).",
+        meta: "Decision trees, entropy, information gain, Random Forest, AdaBoost, boosting",
+        sections: [
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/19lrZ1Y_sIg9-qGNp3fHBsBkC_K-9dhFB/preview"
+          }
+        ]
+      },
+      {
+        id: 10,
+        badge: "Lec 10",
+        title: "Unsupervised Clustering & PCA",
+        preview: "Centroid-based K-Means clustering, Elbow method, Anomaly Detection systems, and Principal Component Analysis (PCA).",
+        meta: "K-Means, WCSS, elbow method, anomaly detection, PCA, dimensionality reduction",
+        sections: [
+          {
+            heading: "Lecture Video Recording",
+            iframeUrl: "https://drive.google.com/file/d/1-yQDaorA15U4wh-EAzmlirFDdXB4AiWP/preview"
+          },
+          {
+            heading: "Lecture Presentation (Slide)",
+            iframeUrl: "https://drive.google.com/file/d/1TGe9MdS_k2aZ1_M50EUcOVS_tWRR4AL7/preview"
+          }
+        ]
+      }
+    ],
+    examConfigs: [
+      {
+        id: 0,
+        badge: "Lectures 1-4",
+        title: "Exam 1: Regression Foundations & Scaling",
+        desc: "Covers univariate/multivariate linear regression, Gradient Descent, cost functions, feature scaling, and polynomial transformations...",
+        color: "badge-cyan",
+        btnColor: "btn-primary"
+      },
+      {
+        id: 1,
+        badge: "Lectures 5-7",
+        title: "Exam 2: Logistic Regression, Regularization & Evaluation",
+        desc: "Covers classification limits, Sigmoid, log loss, Lasso (L1) vs. Ridge (L2) penalties, validation splits, and learning curves...",
+        color: "badge-purple",
+        btnColor: "btn-primary"
+      },
+      {
+        id: 2,
+        badge: "Lectures 8-10",
+        title: "Exam 3: Neural Networks, Trees & Unsupervised Learning",
+        desc: "Covers multilayer perceptrons, backpropagation, Adam optimization, Entropy/Information Gain, Random Forest/Boosting, K-Means, and PCA...",
+        color: "badge-orange",
+        btnColor: "btn-orange"
+      }
+    ]
+  }
 };
