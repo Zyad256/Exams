@@ -629,7 +629,8 @@ export const subjects = {
         sections: [
           {
             heading: "Lecture Video Recording",
-            iframeUrl: "https://drive.google.com/file/d/114lBFF8wV8zt6usnVYGTlrwjngi7kjrR/preview"
+            // iframeUrl: "https://drive.google.com/file/d/114lBFF8wV8zt6usnVYGTlrwjngi7kjrR/preview"
+            iframeUrl: "https://drive.google.com/file/d/17yR0oBd2c3AqGHo21xWLjW47ydptdwN-/preview"
           },
           {
             heading: "Lecture Presentation (Slide)",
@@ -763,7 +764,8 @@ export const subjects = {
         sections: [
           {
             heading: "Lecture Video Recording",
-            iframeUrl: "https://drive.google.com/file/d/1-yQDaorA15U4wh-EAzmlirFDdXB4AiWP/preview"
+            // iframeUrl: "https://drive.google.com/file/d/1-yQDaorA15U4wh-EAzmlirFDdXB4AiWP/preview"
+            iframeUrl: "https://drive.google.com/file/d/1AN34tN_YEMIBdIWnJaeEe6nxSB1ESzjl/preview"
           },
           {
             heading: "Lecture Presentation (Slide)",
