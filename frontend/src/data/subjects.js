@@ -685,7 +685,8 @@ export const subjects = {
         sections: [
           {
             heading: "Lecture Video Recording",
-            iframeUrl: "https://drive.google.com/file/d/19eg3QkhncvN3svLHl_JAXeX-Nx61oY2O/preview"
+            // iframeUrl: "https://drive.google.com/file/d/19eg3QkhncvN3svLHl_JAXeX-Nx61oY2O/preview"
+            iframeUrl: "https://drive.google.com/file/d/1zmYknCl7is1dnV3djtR6fQwo09AFUeKX/preview"
           },
           {
             heading: "Lecture Presentation (Slide)",
