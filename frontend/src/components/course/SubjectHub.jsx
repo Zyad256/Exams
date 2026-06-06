@@ -156,6 +156,33 @@ export default function SubjectHub() {
                                             <iframe src={section.iframeUrl} frameBorder="0" width="100%" height="100%" allowFullScreen style={{ position: 'absolute', top: 0, left: 0 }}></iframe>
                                         </div>
                                     )}
+                                    {section.externalUrl && (
+                                        <a 
+                                            href={section.externalUrl} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            style={{
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                gap: '0.6rem',
+                                                marginTop: '1rem',
+                                                padding: '0.75rem 1.5rem',
+                                                background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))',
+                                                color: '#fff',
+                                                borderRadius: '10px',
+                                                textDecoration: 'none',
+                                                fontWeight: 600,
+                                                fontSize: '0.92rem',
+                                                boxShadow: '0 4px 15px rgba(99, 102, 241, 0.3)',
+                                                transition: 'transform 0.2s, box-shadow 0.2s'
+                                            }}
+                                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(99, 102, 241, 0.45)'; }}
+                                            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.3)'; }}
+                                        >
+                                            <i className={`fa-solid ${section.externalIcon || 'fa-up-right-from-square'}`}></i>
+                                            {section.externalLabel || 'Open Resource'}
+                                        </a>
+                                    )}
                                 </div>
                             ))}
                         </div>

@@ -646,6 +646,16 @@ export const subjects = {
         meta: "Linear regression, parameters, weights, bias, MSE, cost function",
         sections: [
           {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/747d5da2-a22b-4d57-bf71-a93a20256115/artifact/d54def34-625e-45aa-b161-a8433d8fc1d2?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
+          {
+            heading: "Supplementary: Linear Regression (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/PaFPbb66DxQ"
+          },
+          {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/1sMQJxzt3rS3jfHRgofBl5USe3Vk64Crp/preview"
           }
@@ -659,6 +669,20 @@ export const subjects = {
         meta: "Gradient descent, learning rate, updates, batch gradient descent, convergence",
         sections: [
           {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/747d5da2-a22b-4d57-bf71-a93a20256115/artifact/4ee7515a-8f56-41e8-91cf-1a41f3fb4e81?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
+          {
+            heading: "Supplementary: Gradient Descent (3Blue1Brown)",
+            iframeUrl: "https://www.youtube.com/embed/IHZwWFHWa-w"
+          },
+          {
+            heading: "Supplementary: Gradient Descent Explained (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/sDv4f4s2SB8"
+          },
+          {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/1XRv-h3gkjgWr3wuMjR113ccygGFAwcRX/preview"
           }
@@ -671,6 +695,20 @@ export const subjects = {
         preview: "Multivariate regression, feature scaling (mean normalization, max scale), feature engineering, and polynomial regression.",
         meta: "Multiple features, feature scaling, mean normalization, polynomial regression",
         sections: [
+           {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/747d5da2-a22b-4d57-bf71-a93a20256115/artifact/2c921e7c-4ffd-4e10-a680-08892909fa08?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
+          {
+            heading: "Supplementary: Multiple Linear Regression (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/EkAQAi3a4js"
+          },
+          {
+            heading: "Supplementary: Feature Scaling & Normalization",
+            iframeUrl: "https://www.youtube.com/embed/mnKm3YP56PY"
+          },
           {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/1g4_79dJFWBwH9XdCA7jhPl7zzMMrRiEO/preview"
@@ -690,6 +728,10 @@ export const subjects = {
             iframeUrl: "https://drive.google.com/file/d/1zmYknCl7is1dnV3djtR6fQwo09AFUeKX/preview"
           },
           {
+            heading: "Supplementary: Logistic Regression (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/yIYKR4sgzI8"
+          },
+          {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/1nIpqGzRbvwm7w1kMxgpylj3JMU6nS-AI/preview"
           }
@@ -707,6 +749,10 @@ export const subjects = {
             iframeUrl: "https://drive.google.com/file/d/16qIQ_RidLosHyDEI7bNI9uYDiNMk3v4T/preview"
           },
           {
+            heading: "Supplementary: Regularization (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/Q81RR3yKn30"
+          },
+          {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/1VLyUiLYnQOWUnFYIF12-LaaekYvAULwx/preview"
           }
@@ -719,6 +765,14 @@ export const subjects = {
         preview: "Train/validation/test splits, model selection, baseline performance comparison, and learning curves.",
         meta: "Validation set, evaluation, model selection, baseline, learning curves",
         sections: [
+          {
+            heading: "Supplementary: Cross Validation (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/fSytzGwwBVw"
+          },
+          {
+            heading: "Supplementary: Bias-Variance Tradeoff",
+            iframeUrl: "https://www.youtube.com/embed/EuBBz3bI-aA"
+          },
           {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/193eY3SyLU9LtNOGmfQOJjAClPiWKFL7G/preview"
@@ -737,6 +791,14 @@ export const subjects = {
             iframeUrl: "https://drive.google.com/file/d/1LO9MC9CnxxIgYrdcLrMLbkRDMXMADQu3/preview"
           },
           {
+            heading: "Supplementary: Neural Networks (3Blue1Brown)",
+            iframeUrl: "https://www.youtube.com/embed/aircAruvnKk"
+          },
+          {
+            heading: "Supplementary: Backpropagation (3Blue1Brown)",
+            iframeUrl: "https://www.youtube.com/embed/Ilg3gGewQ5U"
+          },
+          {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/16ITEwry4saO_rBEEPhzsRswzZ3bOrZfV/preview"
           }
@@ -749,6 +811,18 @@ export const subjects = {
         preview: "ID3 tree construction (Entropy, Information Gain), regression trees, Random Forests (bagging/OOB), and Boosting (AdaBoost, XGBoost).",
         meta: "Decision trees, entropy, information gain, Random Forest, AdaBoost, boosting",
         sections: [
+          {
+            heading: "Supplementary: Decision Trees (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/_L39rN6gz7Y"
+          },
+          {
+            heading: "Supplementary: Random Forests Explained",
+            iframeUrl: "https://www.youtube.com/embed/J4Wdy0Wc_xQ"
+          },
+          {
+            heading: "Supplementary: AdaBoost (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/LsK-xG1cLYA"
+          },
           {
             heading: "Lecture Presentation (Slide)",
             iframeUrl: "https://drive.google.com/file/d/19lrZ1Y_sIg9-qGNp3fHBsBkC_K-9dhFB/preview"
@@ -766,6 +840,14 @@ export const subjects = {
             heading: "Lecture Video Recording",
             // iframeUrl: "https://drive.google.com/file/d/1-yQDaorA15U4wh-EAzmlirFDdXB4AiWP/preview"
             iframeUrl: "https://drive.google.com/file/d/1AN34tN_YEMIBdIWnJaeEe6nxSB1ESzjl/preview"
+          },
+          {
+            heading: "Supplementary: K-Means Clustering (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/4b5d3muPQmA"
+          },
+          {
+            heading: "Supplementary: PCA Explained (StatQuest)",
+            iframeUrl: "https://www.youtube.com/embed/FgakZw6K1QQ"
           },
           {
             heading: "Lecture Presentation (Slide)",
