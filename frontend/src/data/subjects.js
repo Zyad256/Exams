@@ -792,6 +792,12 @@ export const subjects = {
         preview: "Perceptron limits, Multi-Layer Perceptrons (MLPs), activation functions (ReLU, Softmax), backpropagation, and Adam optimizer.",
         meta: "Neural networks, MLP, ReLU, Softmax, backpropagation, Adam optimizer",
         sections: [
+           {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/e5ac5fea-c1dd-4a45-b80e-768c2a418f76/artifact/5b9ba75c-7835-4319-8bb4-c29fd94ad0d2?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
           {
             heading: "Lecture Video Recording",
             iframeUrl: "https://drive.google.com/file/d/1LO9MC9CnxxIgYrdcLrMLbkRDMXMADQu3/preview"
