@@ -744,6 +744,12 @@ export const subjects = {
         preview: "Underfitting (bias) and overfitting (variance) diagnostics, L1 Lasso regularization (sparsity), and L2 Ridge regularization.",
         meta: "Overfitting, underfitting, L1 norm, Lasso, L2 norm, Ridge, lambda parameter",
         sections: [
+           {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/71a9eec8-e53b-4546-a3a1-ac30c6a39cb1/artifact/24814d0c-a8b2-42ce-924d-8b92d78fc263?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
           {
             heading: "Lecture Video Recording",
             iframeUrl: "https://drive.google.com/file/d/16qIQ_RidLosHyDEI7bNI9uYDiNMk3v4T/preview"
