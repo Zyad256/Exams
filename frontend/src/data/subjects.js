@@ -765,6 +765,12 @@ export const subjects = {
         preview: "Train/validation/test splits, model selection, baseline performance comparison, and learning curves.",
         meta: "Validation set, evaluation, model selection, baseline, learning curves",
         sections: [
+            {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/e5ac5fea-c1dd-4a45-b80e-768c2a418f76/artifact/7692f843-3184-4639-bfe1-7a05baa02ed0?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
           {
             heading: "Supplementary: Cross Validation (StatQuest)",
             iframeUrl: "https://www.youtube.com/embed/fSytzGwwBVw"
@@ -811,6 +817,12 @@ export const subjects = {
         preview: "ID3 tree construction (Entropy, Information Gain), regression trees, Random Forests (bagging/OOB), and Boosting (AdaBoost, XGBoost).",
         meta: "Decision trees, entropy, information gain, Random Forest, AdaBoost, boosting",
         sections: [
+          {
+            heading: "NotebookLM Video Overview",
+            externalUrl: "https://notebooklm.google.com/notebook/e5ac5fea-c1dd-4a45-b80e-768c2a418f76/artifact/d3d79df1-1548-4f5c-9aa0-ee4cf08684ca?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_1&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_1_",
+            externalIcon: "fa-play",
+            externalLabel: "Watch on NotebookLM"
+          },
           {
             heading: "Supplementary: Decision Trees (StatQuest)",
             iframeUrl: "https://www.youtube.com/embed/_L39rN6gz7Y"
